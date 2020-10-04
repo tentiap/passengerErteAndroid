@@ -1,6 +1,9 @@
 package com.example.pemesanerte;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +13,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.pemesanerte.api.ApiClient;
+import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.register.Register;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edtName, edtUsername, edtEmail, edtPassword, edtContact, edtAddress;
     Button btnRegister;
-    String Name, Username, Email, Password, Contact, Address;
+    String Nama, Username, Email, Password, Kontak, Alamat;
+    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +71,45 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_register:
-                Name = edtName.getText().toString();
+                Nama = edtName.getText().toString();
                 Username = edtUsername.getText().toString();
                 Email = edtEmail.getText().toString();
                 Password = edtPassword.getText().toString();
-                Contact = edtContact.getText().toString();
-                Address = edtAddress.getText().toString();
+                Kontak = edtContact.getText().toString();
+                Alamat = edtAddress.getText().toString();
 
-                register(Name, Username, Email, Password, Contact, Address);
+
+
+                register(Nama, Username, Email, Password, Kontak, Alamat);
                 break;
         }
 
     }
 
-    private void register(String name, String username, String email, String password, String contact, String address) {
-        Intent intentRegister = new Intent(this, LoginActivity.class );
-        startActivity(intentRegister);
+    private void register(String nama, String username, String email, String password, String kontak, String alamat) {
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Register> call = apiInterface.registerResponse(nama, username, email, password, kontak, alamat);
+        call.enqueue(new Callback<Register>() {
+            @Override
+            public void onResponse(Call<Register> call, Response<Register> response) {
+                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+                    Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Intent intentRegister = new Intent(RegisterActivity.this, LoginActivity.class );
+                    startActivity(intentRegister);
+                    finish();
+
+                }else{
+                    Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Register> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }

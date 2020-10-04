@@ -9,47 +9,32 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
-
-    SessionManager sessionManager;
+public class AccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        sessionManager = new SessionManager(MainActivity.this);
-        if(sessionManager.isLoggedIn() == false){
-            moveToLogin();
-        }
+        setContentView(R.layout.activity_account);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.bn_home);
+        bottomNavigationView.setSelectedItemId(R.id.bn_account);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.bn_home:
+                        startActivity(new Intent(AccountActivity.this, MainActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.bn_my_order:
-                        startActivity(new Intent(MainActivity.this, MyOrderActivity.class));
+                        startActivity(new Intent(AccountActivity.this, MyOrderActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.bn_account:
-                        startActivity(new Intent(MainActivity.this, AccountActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
             }
         });
-    }
-
-    private void moveToLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
-        finish();
-
     }
 }
