@@ -12,5 +12,26 @@
     <string name="address">Address</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="kota_asal">Kota Asal</string>
+    <string name="kota_tujuan">Kota Tujuan</string>
+    <string name="jadwal">Jadwal</string>
+    <string name="jumlah_penumpang">Jumlah Penumpang</string>
+    <string name="cari">Cari</string>
+
+    <string-array name="spinner_kota">
+        <item>Bukittinggi</item>
+        <item>Padang</item>
+        <item>Pekanbaru</item>
+    </string-array>
+
+    <string-array name="spinner_jumlah">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
 
 </resources>

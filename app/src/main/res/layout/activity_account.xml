@@ -6,13 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".AccountActivity">
 
-    <TextView
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Account"-->
+<!--        android:textSize="50sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_centerInParent="true"/>-->
+
+    <Button
+        android:id="@+id/btn_login1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Account"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/btn_register1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/btn_login1"
+        android:layout_marginTop="20dp"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 login(Email, Password);
                 break;
             case R.id.tv_register:
-                Intent intentRegister = new Intent(this, RegisterActivity.class);
+                Intent intentRegister = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intentRegister);
         }
 
