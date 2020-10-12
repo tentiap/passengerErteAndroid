@@ -21,7 +21,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        //Soon delete
+//        Soon delete
         btnLogin = findViewById(R.id.btn_login1);
         btnRegister = findViewById(R.id.btn_register1);
 

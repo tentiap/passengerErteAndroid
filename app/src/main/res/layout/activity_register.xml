@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_android"
+    android:background="@drawable/grad"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -23,39 +23,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/register"
-            android:textColor="@color/colorPrimary"
-
-            android:textSize="24sp" />
+            android:text="Register Erte Travel"
+            android:fontFamily="sans-serif-light"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="30dp"
             android:orientation="vertical"
-            android:paddingHorizontal="15dp">
+            android:background="@drawable/box_rounded"
+            android:paddingHorizontal="20dp">
 
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_name"
-                        tools:ignore="VectorDrawableCompat" />
 
                     <EditText
                         android:id="@+id/edt_name"
@@ -64,32 +52,15 @@
                         android:background="@null"
                         android:hint="@string/name"
                         android:inputType="textCapWords"
+                        android:drawableStart="@drawable/ic_name"
+                        android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
-                </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_username"
-                        tools:ignore="VectorDrawableCompat" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
 
                     <EditText
                         android:id="@+id/edt_username"
@@ -99,31 +70,14 @@
                         android:hint="@string/username"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:drawableStart="@drawable/ic_username"
+                        android:drawablePadding="10dp"
                         android:singleLine="true" />
-                </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_email_black_24dp"
-                        tools:ignore="VectorDrawableCompat" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
 
                     <EditText
                         android:id="@+id/edt_email"
@@ -132,32 +86,15 @@
                         android:background="@null"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
+                        android:drawableStart="@drawable/ic_email_black_24dp"
+                        android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
-                </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_lock_black_24dp"
-                        tools:ignore="VectorDrawableCompat"
-                        android:layout_marginEnd="10dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
 
                     <EditText
                         android:id="@+id/edt_password"
@@ -166,18 +103,15 @@
                         android:background="@null"
                         android:hint="@string/password"
                         android:inputType="textPassword"
+                        android:drawableStart="@drawable/ic_lock_black_24dp"
+                        android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -216,30 +150,7 @@
                     </RadioGroup>
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_baseline_phone_android_24"
-                        tools:ignore="VectorDrawableCompat" />
-
-                    <EditText
+                <EditText
                         android:id="@+id/edt_contact"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -247,31 +158,15 @@
                         android:hint="@string/contact"
                         android:inputType="phone"
                         android:maxLines="1"
+                        android:layout_marginTop="10dp"
+                        android:drawableStart="@drawable/ic_baseline_phone_android_24"
+                        android:drawablePadding="10dp"
                         android:singleLine="true" />
-                </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_baseline_home_24"
-                        tools:ignore="VectorDrawableCompat" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
 
                     <EditText
                         android:id="@+id/edt_address"
@@ -280,22 +175,28 @@
                         android:background="@null"
                         android:hint="@string/address"
                         android:inputType="textLongMessage"
+                        android:drawableStart="@drawable/ic_baseline_home_24"
+                        android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_rounded"
+                    android:text="@string/register"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/white_greyish"/>
+
                 </LinearLayout>
-
             </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"
-                android:text="@string/register"
-                android:textColor="@color/white_greyish"/>
-
         </LinearLayout>
-    </LinearLayout>
 </RelativeLayout>
