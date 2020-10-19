@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-//    SessionManager sessionManager;
+    SessionManager sessionManager;
     TextView tvJadwal;
     DatePickerDialog pickerDialog;
     Button btnCari;
@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        sessionManager = new SessionManager(MainActivity.this);
-//        if(sessionManager.isLoggedIn() == false){
-//            moveToLogin();
-//        }
+        sessionManager = new SessionManager(MainActivity.this);
+        if(!sessionManager.isLoggedIn()){
+            moveToLogin();
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_home);
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(cariIntent);
             }
         });
+
     }
 
     private void moveToLogin() {

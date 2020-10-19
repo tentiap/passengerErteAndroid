@@ -17,6 +17,8 @@
     <string name="jadwal">Departure</string>
     <string name="jumlah_penumpang">Number of Passenger(s)</string>
     <string name="cari">Search</string>
+    <string name="satu">1</string>
+    <string name="dua">2</string>
 
     <string-array name="spinner_kota">
         <item>Bukittinggi</item>

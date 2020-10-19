@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     EditText edtName, edtUsername, edtEmail, edtPassword, edtContact, edtAddress;
     Button btnRegister;
-    String Nama, Username, Email, Password, Kontak, Alamat;
+    String Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin;
     ApiInterface apiInterface;
 
     @Override
@@ -38,17 +38,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btnRegister = findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(this);
-
-
-
-//        btnRegister.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(RegisterActivity.this, "Button Register is clicked", Toast.LENGTH_SHORT).show();
-//                Intent backLoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                startActivity(backLoginIntent);
-//            }
-//        });
     }
 
     public void onRadioButtonClicked(View view){
@@ -57,12 +46,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.radio_male:
                 if(checked){
-                    Toast.makeText(this, "Kamu Laki-laki ", Toast.LENGTH_SHORT).show();
+//                    Jenis_Kelamin = "1";
+//                    String Jenis_Kelamin = "1";
+//                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
+//                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
+                    Jenis_Kelamin = getString(R.string.satu);
+//                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.radio_female:
                 if(checked){
-                    Toast.makeText(this, "Kamu Perempuan ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Kamu Perempuan ", Toast.LENGTH_SHORT).show();
+//                    Jenis_Kelamin = "2";
+//                    Jenis_Kelamin = getString(R.string.dua);
+                    Jenis_Kelamin = getString(R.string.dua);
+//                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
         }
     }
@@ -78,18 +77,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Kontak = edtContact.getText().toString();
                 Alamat = edtAddress.getText().toString();
 
-
-
-                register(Nama, Username, Email, Password, Kontak, Alamat);
+                register(Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin);
                 break;
         }
-
     }
 
-    private void register(String nama, String username, String email, String password, String kontak, String alamat) {
+    private void register(String nama, String username, String email, String password, String kontak, String alamat, String jenis_kelamin) {
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Register> call = apiInterface.registerResponse(nama, username, email, password, kontak, alamat);
+        Call<Register> call = apiInterface.registerResponse(nama, username, email, password, kontak, alamat, jenis_kelamin);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {

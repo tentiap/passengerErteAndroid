@@ -24,7 +24,7 @@ public interface ApiInterface {
             @Field("username") String username,
             @Field("email") String email,
             @Field("password") String password,
-//            @Field("jenis_kelamin") String jenis_kelamin,
+            @Field("jenis_kelamin") String jenis_kelamin,
             @Field("kontak") String kontak,
             @Field("alamat") String alamat
     );

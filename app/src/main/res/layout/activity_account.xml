@@ -108,6 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_email"
                     android:fontFamily="sans-serif-light"
                     android:text="pemesan1@g.c"
                     android:textColor="#000000"
@@ -137,6 +138,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_phone"
                     android:fontFamily="sans-serif-light"
                     android:text="089878908909"
                     android:textColor="#000000"
@@ -167,6 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+                    android:id="@+id/tv_gender"
                     android:text="Male"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -196,6 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+                    android:id="@+id/tv_address"
                     android:text="@string/jalan"
                     android:textColor="#000000"
                     android:textSize="18sp" />

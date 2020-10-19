@@ -8,18 +8,52 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.pemesanerte.model.register.Register;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister;
+    SessionManager sessionManager;
+    TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress;
+//    Button btnLogout;
+    Button btnLogin, btnRegister, btnLogout;
+    String name, username, email, phone, gender, address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+        //Soon delete maybe
+        sessionManager = new SessionManager(AccountActivity.this);
+
+        tvName = findViewById(R.id.tv_name);
+        tvUsername = findViewById(R.id.tv_username);
+        tvEmail = findViewById(R.id.tv_email);
+        tvPhone = findViewById(R.id.tv_phone);
+        tvGender = findViewById(R.id.tv_gender);
+        tvAddress = findViewById(R.id.tv_address);
+
+        name = sessionManager.getUserDetail().get(SessionManager.NAMA);
+//        username = sessionManager.getUserDetail().get(SessionManager.);
+        email = sessionManager.getUserDetail().get(SessionManager.EMAIL);
+
+        tvName.setText(name);
+        tvEmail.setText(email);
+
+        btnLogout = findViewById(R.id.btn_logout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManager.logoutSession();
+                moveToLogin();
+
+            }
+        });
 
 //        Soon delete
         btnLogin = findViewById(R.id.btn_login1);
@@ -61,5 +95,13 @@ public class AccountActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void moveToLogin() {
+        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        finish();
+
     }
 }

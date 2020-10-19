@@ -22,7 +22,7 @@ public class RegisterData {
 	@SerializedName("created_at")
 	private String createdAt;
 
-	@SerializedName("jenis_kelamin")
+	@SerializedName("jenisKelamin")
 	private String jenisKelamin;
 
 	@SerializedName("email")
