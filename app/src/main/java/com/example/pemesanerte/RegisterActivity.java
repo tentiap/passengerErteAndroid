@@ -48,20 +48,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(checked){
 //                    Jenis_Kelamin = "1";
 //                    String Jenis_Kelamin = "1";
+                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
 //                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
-//                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
-                    Jenis_Kelamin = getString(R.string.satu);
-//                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
-
+//                    Jenis_Kelamin = getString(R.string.satu);
+                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.radio_female:
                 if(checked){
-//                    Toast.makeText(this, "Kamu Perempuan ", Toast.LENGTH_SHORT).show();
-//                    Jenis_Kelamin = "2";
-//                    Jenis_Kelamin = getString(R.string.dua);
-                    Jenis_Kelamin = getString(R.string.dua);
-//                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
+                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
         }
     }
@@ -78,11 +74,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Alamat = edtAddress.getText().toString();
 
                 register(Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin);
+//                register(Nama, Username, Email, Password, Kontak, Alamat);
                 break;
         }
     }
 
     private void register(String nama, String username, String email, String password, String kontak, String alamat, String jenis_kelamin) {
+//    private void register(String nama, String username, String email, String password, String kontak, String alamat) {
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Register> call = apiInterface.registerResponse(nama, username, email, password, kontak, alamat, jenis_kelamin);
@@ -103,9 +101,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFailure(Call<Register> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-
 
     }
 }

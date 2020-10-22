@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.pemesanerte.model.register.Register;
+//import com.example.pemesanerte.model.register.Register;
+import com.example.pemesanerte.LoginActivity;
+import com.example.pemesanerte.model.login.LoginData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountActivity extends AppCompatActivity {
@@ -38,11 +40,19 @@ public class AccountActivity extends AppCompatActivity {
         tvAddress = findViewById(R.id.tv_address);
 
         name = sessionManager.getUserDetail().get(SessionManager.NAMA);
-//        username = sessionManager.getUserDetail().get(SessionManager.);
         email = sessionManager.getUserDetail().get(SessionManager.EMAIL);
+        username = sessionManager.getUserDetail().get(SessionManager.USERNAME);
+        phone = sessionManager.getUserDetail().get(SessionManager.KONTAK);
+//        gender = sessionManager.getUserDetail().get(SessionManager.JENIS_KELAMIN);
+        address = sessionManager.getUserDetail().get(SessionManager.ALAMAT);
+
 
         tvName.setText(name);
+        tvUsername.setText(username);
         tvEmail.setText(email);
+        tvPhone.setText(phone);
+//        tvGender.setText(gender);
+        tvAddress.setText(address);
 
         btnLogout = findViewById(R.id.btn_logout);
 
@@ -56,24 +66,24 @@ public class AccountActivity extends AppCompatActivity {
         });
 
 //        Soon delete
-        btnLogin = findViewById(R.id.btn_login1);
-        btnRegister = findViewById(R.id.btn_register1);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentLogin = new Intent(AccountActivity.this, LoginActivity.class);
-                startActivity(intentLogin);
-            }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentRegister = new Intent(AccountActivity.this, RegisterActivity.class);
-                startActivity(intentRegister);
-            }
-        });
+//        btnLogin = findViewById(R.id.btn_login1);
+//        btnRegister = findViewById(R.id.btn_register1);
+//
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentLogin = new Intent(AccountActivity.this, LoginActivity.class);
+//                startActivity(intentLogin);
+//            }
+//        });
+//
+//        btnRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentRegister = new Intent(AccountActivity.this, RegisterActivity.class);
+//                startActivity(intentRegister);
+//            }
+//        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_account);

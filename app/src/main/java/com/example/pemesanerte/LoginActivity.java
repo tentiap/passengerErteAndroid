@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     LoginData loginData = response.body().getLoginData();
                     sessionManager.createLoginSession(loginData);
 
-                    Toast.makeText(LoginActivity.this, response.body().getLoginData().getEmail(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Intent intentLogin = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intentLogin);
                     finish();

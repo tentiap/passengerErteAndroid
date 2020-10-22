@@ -19,7 +19,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
-    TextView tvJadwal;
+    TextView tvWelcome, tvJadwal;
     DatePickerDialog pickerDialog;
     Button btnCari;
 
@@ -55,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tvJadwal = findViewById(R.id.tv_jadwal);
+        tvWelcome = findViewById(R.id.tv_welcome);
         btnCari = findViewById(R.id.btn_cari);
+
+        tvWelcome.setText("Welcome, " + sessionManager.getUserDetail().get(SessionManager.NAMA) + "!");
 
         tvJadwal.setOnClickListener(new View.OnClickListener() {
             @Override

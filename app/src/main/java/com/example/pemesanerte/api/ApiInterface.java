@@ -1,11 +1,13 @@
 package com.example.pemesanerte.api;
 
+import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.register.Register;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -27,6 +29,11 @@ public interface ApiInterface {
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("kontak") String kontak,
             @Field("alamat") String alamat
+    );
+
+    @GET("history/{id_users_pemesan}")
+    Call<History> historyResponse(
+
     );
 
 

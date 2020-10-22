@@ -15,17 +15,29 @@
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="@string/erte"
+            android:text="@string/welcome"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/tv_where"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/tv_welcome"
+            android:text="@string/where"
+            android:textStyle="italic"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 

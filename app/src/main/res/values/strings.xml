@@ -10,8 +10,8 @@
     <string name="username">Username</string>
     <string name="contact">Phone Number</string>
     <string name="address">Address</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="male">Laki-laki</string>
+    <string name="female">Perempuan</string>
     <string name="kota_asal">From</string>
     <string name="kota_tujuan">To</string>
     <string name="jadwal">Departure</string>
@@ -19,6 +19,7 @@
     <string name="cari">Search</string>
     <string name="satu">1</string>
     <string name="dua">2</string>
+    <string name="welcome">Welcome</string>
 
     <string-array name="spinner_kota">
         <item>Bukittinggi</item>
@@ -38,5 +39,6 @@
 
     <string name="jalan">Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas,
         Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</string>
+    <string name="where">Where will you go?</string>
 
 </resources>

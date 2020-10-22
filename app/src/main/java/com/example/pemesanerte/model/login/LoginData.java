@@ -23,7 +23,7 @@ public class LoginData {
 	private Object createdAt;
 
 	@SerializedName("jenis_kelamin")
-	private int jenisKelamin;
+	private String jenisKelamin;
 
 	@SerializedName("email")
 	private String email;
@@ -82,11 +82,11 @@ public class LoginData {
 		return createdAt;
 	}
 
-	public void setJenisKelamin(int jenisKelamin){
+	public void setJenisKelamin(String jenisKelamin){
 		this.jenisKelamin = jenisKelamin;
 	}
 
-	public int getJenisKelamin(){
+	public String getJenisKelamin(){
 		return jenisKelamin;
 	}
 
