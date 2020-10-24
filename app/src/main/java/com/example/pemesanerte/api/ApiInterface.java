@@ -9,6 +9,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -31,10 +33,13 @@ public interface ApiInterface {
             @Field("alamat") String alamat
     );
 
-    @GET("history/{id_users_pemesan}")
-    Call<History> historyResponse(
-
-    );
+//    @GET("history/{id_users_pemesan}")
+//    Call<History> historyResponse(
+//            @Path("id_users_pemesan") String id_users_pemesan,
+//            @Query()
+//
+//
+//    );
 
 
 }

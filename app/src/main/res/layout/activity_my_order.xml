@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/grad"
+        android:id="@+id/rl_order"
         android:paddingBottom="20dp">
 
         <TextView
@@ -32,6 +33,19 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="32sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/rl_order"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_cardview_history" />
+
     </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
