@@ -2,19 +2,37 @@ package com.example.pemesanerte;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.pemesanerte.adapter.HistoryAdapter;
+import com.example.pemesanerte.model.history.HistoryData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
+import static java.lang.System.in;
+
 public class MyOrderActivity extends AppCompatActivity {
+    private RecyclerView rvHistory;
+    private ArrayList<HistoryData> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
+
+        rvHistory = findViewById(R.id.rv_history);
+        rvHistory.setHasFixedSize(true);
+
+        list.addAll(getListHistory());
+        showRecyclerList();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_my_order);
@@ -37,4 +55,42 @@ public class MyOrderActivity extends AppCompatActivity {
             }
         });
     }
+
+    public ArrayList<HistoryData> getListHistory() {
+//        String[] dataIdPesanan = getResources().getStringArray(R.array.id_pesanan);
+        String[] dataAsal = getResources().getStringArray(R.array.kota_asal);
+        String[] dataTujuan = getResources().getStringArray(R.array.kota_tujuan);
+        String[] dataJadwal = getResources().getStringArray(R.array.jadwal_trip);
+        String[] dataJam = getResources().getStringArray(R.array.jadwal_trip);
+
+        ArrayList<HistoryData> listHistory = new ArrayList<>();
+        for (int i = 0; i < dataAsal.length; i++) {
+            HistoryData historyData = new HistoryData();
+//            historyData.setIdPesanan(dataIdPesanan[i]);
+            historyData.setIdKotaAsal(dataAsal[i]);
+            historyData.setIdKotaTujuan(dataTujuan[i]);
+            historyData.setJadwal(dataJadwal[i]);
+            historyData.setJadwal(dataJam[i]);
+
+            listHistory.add(historyData);
+        }
+
+        return listHistory;
+    }
+
+    private void showRecyclerList() {
+        rvHistory.setLayoutManager(new LinearLayoutManager(this));
+        HistoryAdapter historyAdapter = new HistoryAdapter(list);
+        rvHistory.setAdapter(historyAdapter);
+
+        historyAdapter.setOnItemClickCallback(new HistoryAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(HistoryData data) {
+                Toast.makeText(MyOrderActivity.this, "Kamu memilih " + data.getJadwal(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
 }

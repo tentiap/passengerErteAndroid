@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class HistoryData implements Parcelable {
+//public class HistoryData {
 
 	@SerializedName("id_users_feeder")
 	private String idUsersFeeder;
@@ -73,7 +74,7 @@ public class HistoryData implements Parcelable {
 	@SerializedName("status")
 	private int status;
 
-	protected HistoryData(Parcel in) {
+	public HistoryData(Parcel in) {
 		idUsersFeeder = in.readString();
 		noHp = in.readString();
 		tanggalPesan = in.readString();
@@ -94,6 +95,10 @@ public class HistoryData implements Parcelable {
 		idUsersPemesan = in.readString();
 		idDetailPesanan = in.readInt();
 		status = in.readInt();
+	}
+
+	public HistoryData(){
+
 	}
 
 	@Override
@@ -125,7 +130,7 @@ public class HistoryData implements Parcelable {
 		return 0;
 	}
 
-	public static final Creator<HistoryData> CREATOR = new Creator<HistoryData>() {
+	public static final Parcelable.Creator<HistoryData> CREATOR = new Creator<HistoryData>() {
 		@Override
 		public HistoryData createFromParcel(Parcel in) {
 			return new HistoryData(in);
