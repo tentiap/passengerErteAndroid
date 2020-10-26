@@ -80,12 +80,15 @@ public class MyOrderActivity extends AppCompatActivity {
 
     private void showRecyclerList() {
         rvHistory.setLayoutManager(new LinearLayoutManager(this));
-        HistoryAdapter historyAdapter = new HistoryAdapter(list);
+        final HistoryAdapter historyAdapter = new HistoryAdapter(list);
         rvHistory.setAdapter(historyAdapter);
 
         historyAdapter.setOnItemClickCallback(new HistoryAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(HistoryData data) {
+                Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
+                detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
+                startActivity(detailHistoryIntent);
                 Toast.makeText(MyOrderActivity.this, "Kamu memilih " + data.getJadwal(), Toast.LENGTH_SHORT).show();
             }
         });

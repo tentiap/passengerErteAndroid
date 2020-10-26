@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class HistoryData implements Parcelable {
-//public class HistoryData {
 
 	@SerializedName("id_users_feeder")
 	private String idUsersFeeder;
