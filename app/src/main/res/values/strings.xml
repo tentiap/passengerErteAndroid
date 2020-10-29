@@ -102,4 +102,48 @@
         <item>Bukittinggi</item>
     </string-array>
 
+    <string-array name="array_name">
+        <item>Takumi Kitamura</item>
+        <item>Takumi Kitamura</item>
+        <item>Takumi Kitamura</item>
+    </string-array>
+
+    <string-array name="array_gender">
+        <item>(Laki-laki)</item>
+        <item>(Perempuan)</item>
+        <item>(Laki-laki)</item>
+    </string-array>
+
+    <string-array name="array_asal">
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+    </string-array>
+
+    <string-array name="array_tujuan">
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+        <item>From: Jurusan Sistem Informasi, Fakultas Teknologi Informasi, Universitas Andalas, Limau Manis, Pauh, Limau Manis, Kec. Pauh, Kota Padang, Sumatera Barat 25163</item>
+    </string-array>
+
+    <string-array name="array_phone">
+        <item>Phone: 089878908989</item>
+        <item>Phone: 089878908989</item>
+        <item>Phone: 089878908989</item>
+    </string-array>
+
+    <string-array name="array_cost">
+        <item>Additional Cost: - </item>
+        <item>Additional Cost: - </item>
+        <item>Additional Cost: - </item>
+    </string-array>
+
+    <string-array name="array_seat">
+        <item>Seat 1</item>
+        <item>Seat 2</item>
+        <item>Seat 3</item>
+    </string-array>
+
+
+
 </resources>
