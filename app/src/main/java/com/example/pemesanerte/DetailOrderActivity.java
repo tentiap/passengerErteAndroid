@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.adapter.HistoryAdapter;
 import com.example.pemesanerte.model.history.HistoryData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,11 @@ public class DetailOrderActivity extends AppCompatActivity {
     public static final String EXTRA_HISTORY_DATA = "extra_history_data";
     private RecyclerView rvDetailHistory;
     private ArrayList<HistoryData> list = new ArrayList<>();
+
+    FloatingActionButton fb1, fb2, fb3;
+    TextView tvEdit, tvAddMore;
+
+    Boolean isAllFabsVisible;
 
 
     @Override
@@ -42,6 +49,57 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         list.addAll(getDetailHistory());
         showRecyclerDetail();
+
+        fb1 = findViewById(R.id.floating_button);
+        fb2 = findViewById(R.id.fb_edit);
+        fb3 = findViewById(R.id.fb_add_passenger);
+
+        tvEdit = findViewById(R.id.edit_data_text);
+        tvAddMore = findViewById(R.id.add_more_passenger_text);
+
+        fb2.setVisibility(View.GONE);
+        fb3.setVisibility(View.GONE);
+        tvEdit.setVisibility(View.GONE);
+        tvAddMore.setVisibility(View.GONE);
+
+        isAllFabsVisible = false;
+
+        fb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isAllFabsVisible){
+                    fb2.show();
+                    fb3.show();
+                    tvEdit.setVisibility(View.VISIBLE);
+                    tvAddMore.setVisibility(View.VISIBLE);
+
+                    isAllFabsVisible = true;
+                }else{
+                    fb2.hide();
+                    fb3.hide();
+                    tvEdit.setVisibility(View.GONE);
+                    tvAddMore.setVisibility(View.GONE);
+
+                    isAllFabsVisible = false;
+                }
+            }
+        });
+
+        fb2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(DetailOrderActivity.this, "Edit Data Passenger(s)", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        fb3.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(DetailOrderActivity.this, "Add More Passenger(s)", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public ArrayList<HistoryData> getDetailHistory() {
