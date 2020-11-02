@@ -165,5 +165,20 @@
         <item>Seat 3</item>
     </string-array>
 
+    <string-array name="array_sopir">
+        <item>Sopir Satu</item>
+        <item>Belum Ada Sopir</item>
+    </string-array>
+
+    <string-array name="array_trip">
+        <item>T1</item>
+        <item>T2</item>
+    </string-array>
+
+    <string-array name="array_jam">
+        <item>14.00</item>
+        <item>16.00</item>
+    </string-array>
+
 
 </resources>

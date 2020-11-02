@@ -8,24 +8,104 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/grad"
-        android:id="@+id/rl_order"
+        android:id="@+id/rl_select"
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_select_trip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="My Order"
+            android:text="Select Trip"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center_horizontal"
+           android:layout_marginTop="15dp"
+           android:layout_below="@id/tv_select_trip">
+
+           <TextView
+               android:id="@+id/tv_select_from"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Padang"
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/line1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=" | "
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/tv_select_to"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Bukittinggi"
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/line2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=" | "
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/tv_select_tanggal"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="2 November 2020"
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/line3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=" | "
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+           <TextView
+               android:id="@+id/tv_select_jumlah"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="2 Passenger(s)"
+               android:textColor="@android:color/white"
+               android:textSize="14sp" />
+
+       </LinearLayout>
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/rl_select"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_select_trip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_select_trip" />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

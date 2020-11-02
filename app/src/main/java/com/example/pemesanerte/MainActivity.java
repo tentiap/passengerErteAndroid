@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cariIntent = new Intent(MainActivity.this, MyOrderActivity.class );
+                Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
                 startActivity(cariIntent);
             }
         });
