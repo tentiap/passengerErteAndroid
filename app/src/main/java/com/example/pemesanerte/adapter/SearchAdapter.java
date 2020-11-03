@@ -21,7 +21,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         this.listSearch = list;
     }
 
-    private onItemClickCallback onItemClickCallback;
+    private OnItemClickCallback onItemClickCallback;
+
     public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback){
         this.onItemClickCallback = onItemClickCallback;
     }
