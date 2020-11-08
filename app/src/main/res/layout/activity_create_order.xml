@@ -116,10 +116,10 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_select_trip"
+            android:id="@+id/rv_create_order"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_select_trip" />
+            tools:listitem="@layout/item_create_order" />
 
     </RelativeLayout>
 

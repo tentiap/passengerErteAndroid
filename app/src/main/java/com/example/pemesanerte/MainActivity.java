@@ -10,18 +10,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pemesanerte.model.search.InputSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
     TextView tvWelcome, tvJadwal;
+    Spinner spinnerAsal, spinnerTujuan, spinnerJumlahPenumpang;
     DatePickerDialog pickerDialog;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang;
     Button btnCari;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +67,16 @@ public class MainActivity extends AppCompatActivity {
         tvJadwal = findViewById(R.id.tv_jadwal);
         tvWelcome = findViewById(R.id.tv_welcome);
         btnCari = findViewById(R.id.btn_cari);
+        spinnerAsal = findViewById(R.id.spinner_asal);
+        spinnerTujuan = findViewById(R.id.spinner_tujuan);
+        spinnerJumlahPenumpang = findViewById(R.id.spiner_jumlah_penumpang);
 
         tvWelcome.setText("Welcome, " + sessionManager.getUserDetail().get(SessionManager.NAMA) + "!");
 
         tvJadwal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                selectDate();
                 final Calendar calendar = Calendar.getInstance();
                 final int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
@@ -72,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int years, int months, int dayS) {
                         tvJadwal.setText(years + "-" + (months + 1) + "-" + dayS );
+//                        Tanggal = years + "-" + (months + 1) + "-" + dayS;
+                        Tanggal = dayS+ " " +months+ " " +years;
                     }
                 }, year, month, day);
                 pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -82,7 +98,20 @@ public class MainActivity extends AppCompatActivity {
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Asal = spinnerAsal.getSelectedItem().toString();
+                Tujuan = spinnerTujuan.getSelectedItem().toString();
+                JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
+
+//                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Tanggal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_SHORT).show();
+                InputSearch inputSearch = new InputSearch();
+                inputSearch.setFrom(Asal);
+                inputSearch.setTo(Tujuan);
+                inputSearch.setDate(Tanggal);
+
+                inputSearch.setTotal(JumlahPenumpang);
+
                 Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
+                cariIntent.putExtra(SelectTripActivity.EXTRA_INPUT_SEARCH, inputSearch);
                 startActivity(cariIntent);
             }
         });
@@ -96,4 +125,21 @@ public class MainActivity extends AppCompatActivity {
         finish();
 
     }
+
+//    private void selectDate() {
+//        final Calendar calendar = Calendar.getInstance();
+//        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        int month = calendar.get(Calendar.MONTH);
+//        int year = calendar.get(Calendar.YEAR);
+//
+//        pickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker datePicker, int years, int months, int dayS) {
+//                tvJadwal.setText(years + "-" + (months + 1) + "-" + dayS );
+//                Tanggal = years + "-" + (months + 1) + "-" + dayS;
+//            }
+//        }, year, month, day);
+//        pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+//        pickerDialog.show();
+//    }
 }

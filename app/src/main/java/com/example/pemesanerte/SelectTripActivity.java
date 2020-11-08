@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pemesanerte.adapter.SearchAdapter;
+import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,17 +21,32 @@ import java.util.ArrayList;
 public class SelectTripActivity extends AppCompatActivity {
     private RecyclerView rvSelectTrip;
     private ArrayList<Search> list = new ArrayList<>();
+    public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
+
+    TextView tvFrom, tvTo, tvDate, tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_trip);
 
+        tvFrom = findViewById(R.id.tv_select_from);
+        tvTo = findViewById(R.id.tv_select_to);
+        tvDate = findViewById(R.id.tv_select_tanggal);
+        tvTotal = findViewById(R.id.tv_select_jumlah);
+
+        InputSearch inputSearch = getIntent().getParcelableExtra(EXTRA_INPUT_SEARCH);
+        tvFrom.setText(inputSearch.getFrom());
+        tvTo.setText(inputSearch.getTo());
+        tvDate.setText(inputSearch.getDate());
+        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
+
         rvSelectTrip = findViewById(R.id.rv_select_trip);
         rvSelectTrip.setHasFixedSize(true);
 
         list.addAll(getListSearch());
         showRecyclerList();
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_home);
