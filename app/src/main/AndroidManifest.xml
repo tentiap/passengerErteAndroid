@@ -11,7 +11,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".CreateOrderActivity"></activity>
-        <activity android:name=".SelectTripActivity" />
+
+        <activity
+            android:name=".SelectTripActivity"
+            android:theme="@style/AppThemeActionBar"/>
+
         <activity android:name=".DetailOrderActivity" />
         <activity android:name=".AccountActivity" />
         <activity android:name=".MyOrderActivity" />

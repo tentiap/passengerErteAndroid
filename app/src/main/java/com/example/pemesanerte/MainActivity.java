@@ -77,17 +77,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                selectDate();
+                final String[] monthName = {"January", "February",
+                        "March", "April", "May", "June", "July",
+                        "August", "September", "October", "November",
+                        "December"};
+
                 final Calendar calendar = Calendar.getInstance();
                 final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
+                final int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
                 pickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int years, int months, int dayS) {
                         tvJadwal.setText(years + "-" + (months + 1) + "-" + dayS );
+                        final String month_name = monthName[months];
 //                        Tanggal = years + "-" + (months + 1) + "-" + dayS;
-                        Tanggal = dayS+ " " +months+ " " +years;
+                        Tanggal = dayS+ " " +month_name+ " " +years;
                     }
                 }, year, month, day);
                 pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);

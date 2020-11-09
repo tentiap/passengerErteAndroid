@@ -1,12 +1,19 @@
 package com.example.pemesanerte;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,16 +37,26 @@ public class SelectTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_trip);
 
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setTitle("Select Trip");
+//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Select Trip</font>"));
+
         tvFrom = findViewById(R.id.tv_select_from);
         tvTo = findViewById(R.id.tv_select_to);
         tvDate = findViewById(R.id.tv_select_tanggal);
         tvTotal = findViewById(R.id.tv_select_jumlah);
 
         InputSearch inputSearch = getIntent().getParcelableExtra(EXTRA_INPUT_SEARCH);
-        tvFrom.setText(inputSearch.getFrom());
-        tvTo.setText(inputSearch.getTo());
-        tvDate.setText(inputSearch.getDate());
-        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
+//        tvFrom.setText(inputSearch.getFrom());
+//        tvTo.setText(inputSearch.getTo());
+//        tvDate.setText(inputSearch.getDate());
+//        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Select Trip");
+        getSupportActionBar().setSubtitle(inputSearch.getFrom()+ " | " +inputSearch.getTo()+ inputSearch.getDate()+ " | " +inputSearch.getTotal());
 
         rvSelectTrip = findViewById(R.id.rv_select_trip);
         rvSelectTrip.setHasFixedSize(true);
@@ -70,6 +87,17 @@ public class SelectTripActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public ArrayList<Search> getListSearch() {
