@@ -30,7 +30,7 @@ public class SelectTripActivity extends AppCompatActivity {
     private ArrayList<Search> list = new ArrayList<>();
     public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
 
-    TextView tvFrom, tvTo, tvDate, tvTotal;
+//    TextView tvFrom, tvTo, tvDate, tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,10 @@ public class SelectTripActivity extends AppCompatActivity {
 //        getSupportActionBar().setTitle("Select Trip");
 //        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Select Trip</font>"));
 
-        tvFrom = findViewById(R.id.tv_select_from);
-        tvTo = findViewById(R.id.tv_select_to);
-        tvDate = findViewById(R.id.tv_select_tanggal);
-        tvTotal = findViewById(R.id.tv_select_jumlah);
+//        tvFrom = findViewById(R.id.tv_select_from);
+//        tvTo = findViewById(R.id.tv_select_to);
+//        tvDate = findViewById(R.id.tv_select_tanggal);
+//        tvTotal = findViewById(R.id.tv_select_jumlah);
 
         InputSearch inputSearch = getIntent().getParcelableExtra(EXTRA_INPUT_SEARCH);
 //        tvFrom.setText(inputSearch.getFrom());
@@ -56,7 +56,8 @@ public class SelectTripActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Select Trip");
-        getSupportActionBar().setSubtitle(inputSearch.getFrom()+ " | " +inputSearch.getTo()+ inputSearch.getDate()+ " | " +inputSearch.getTotal());
+        getSupportActionBar().setSubtitle(inputSearch.getFrom()+ " | " +inputSearch.getTo()+ " | "
+                +inputSearch.getDate()+ " | " +inputSearch.getTotal()+ " Passenger(s)");
 
         rvSelectTrip = findViewById(R.id.rv_select_trip);
         rvSelectTrip.setHasFixedSize(true);

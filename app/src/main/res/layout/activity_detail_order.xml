@@ -6,34 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".DetailOrderActivity">
 
-    <RelativeLayout
-        android:id="@+id/rellay_hstry"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/grad"
-        android:paddingBottom="20dp">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/rellay_hstry"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:background="@drawable/grad"-->
+<!--        android:paddingBottom="20dp">-->
 
 
-        <TextView
-            android:id="@+id/tv_detail_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            android:text="@string/detail_order" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_detail_order"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginTop="15sp"-->
+<!--            android:fontFamily="sans-serif-light"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="32sp"-->
+<!--            android:text="@string/detail_order" />-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <LinearLayout
         android:id="@+id/rellay_hstry2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rellay_hstry"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
         android:layout_marginTop="15dp">
@@ -58,6 +57,7 @@
                     android:gravity="left"
                     android:text="Id Order: P1"
                     android:textColor="#000000"
+                    android:textStyle="bold"
                     android:textSize="18sp" />
 
                 <TextView
@@ -67,6 +67,7 @@
                     android:fontFamily="sans-serif-light"
                     android:gravity="right"
                     android:text="Id Trip: T1"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -83,6 +84,7 @@
                     android:fontFamily="sans-serif-light"
                     android:gravity="left"
                     android:text="From: Bukittinggi"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -93,6 +95,7 @@
                     android:fontFamily="sans-serif-light"
                     android:gravity="right"
                     android:text="To: Padang"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -109,6 +112,7 @@
                     android:fontFamily="sans-serif-light"
                     android:gravity="left"
                     android:text="20 Oct 2020"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -119,6 +123,7 @@
                     android:fontFamily="sans-serif-light"
                     android:gravity="right"
                     android:text="15:20 WIB"
+                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>

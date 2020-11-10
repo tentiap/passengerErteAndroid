@@ -33,6 +33,10 @@ public class DetailOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_order);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Detail Order");
+
         rvDetailHistory = findViewById(R.id.rv_detail_history);
         rvDetailHistory.setHasFixedSize(true);
 
@@ -100,6 +104,17 @@ public class DetailOrderActivity extends AppCompatActivity {
                         Toast.makeText(DetailOrderActivity.this, "Add More Passenger(s)", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public ArrayList<HistoryData> getDetailHistory() {

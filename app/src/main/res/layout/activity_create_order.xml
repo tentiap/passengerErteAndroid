@@ -13,26 +13,25 @@
         android:id="@+id/rl_create"
         android:paddingBottom="20dp">
 
-        <TextView
-            android:id="@+id/tv_create_passengers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-light"
-            android:text="Add Passenger(s)"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="32sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_create_passengers"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginTop="15sp"-->
+<!--            android:fontFamily="sans-serif-light"-->
+<!--            android:text="Add Passenger(s)"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="32sp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/tv_create_passengers">
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/tv_create_from"
@@ -40,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Padang"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/line11"
@@ -48,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text=" | "
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_create_to"
@@ -56,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bukittinggi"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/line22"
@@ -64,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text=" | "
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_create_tanggal"
@@ -72,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="2 November 2020"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/line33"
@@ -80,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text=" | "
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_create_jam"
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="16.30"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/line31"
@@ -96,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:text=" | "
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_create_jumlah"
@@ -104,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="2 Passenger(s)"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
