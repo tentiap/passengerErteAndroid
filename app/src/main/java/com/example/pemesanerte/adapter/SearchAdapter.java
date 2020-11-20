@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pemesanerte.R;
-import com.example.pemesanerte.model.history.HistoryData;
 import com.example.pemesanerte.model.search.Search;
 
 import java.util.ArrayList;

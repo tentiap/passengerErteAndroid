@@ -1,4 +1,4 @@
-package com.example.pemesanerte;
+package com.example.pemesanerte.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 //import com.example.pemesanerte.model.register.Register;
-import com.example.pemesanerte.LoginActivity;
-import com.example.pemesanerte.model.login.LoginData;
+import com.example.pemesanerte.R;
+import com.example.pemesanerte.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountActivity extends AppCompatActivity {

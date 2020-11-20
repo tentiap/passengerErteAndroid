@@ -10,23 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.MyOrderActivity"></activity>
         <activity
-            android:name=".CreateOrderActivity"
-            android:theme="@style/AppThemeActionBar"/>
-
+            android:name=".activity.CreateOrderActivity"
+            android:theme="@style/AppThemeActionBar" />
         <activity
-            android:name=".SelectTripActivity"
-            android:theme="@style/AppThemeActionBar"/>
-
+            android:name=".activity.SelectTripActivity"
+            android:theme="@style/AppThemeActionBar" />
         <activity
-            android:name=".DetailOrderActivity"
-            android:theme="@style/AppThemeActionBar"/>
-
-        <activity android:name=".AccountActivity" />
-        <activity android:name=".MyOrderActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".activity.DetailOrderActivity"
+            android:theme="@style/AppThemeActionBar" />
+        <activity android:name=".activity.AccountActivity" />
+        <activity android:name=".activity.KacauMyOrderActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,8 +32,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

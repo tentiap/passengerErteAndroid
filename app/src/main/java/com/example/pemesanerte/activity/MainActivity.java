@@ -1,4 +1,4 @@
-package com.example.pemesanerte;
+package com.example.pemesanerte.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,16 +12,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.pemesanerte.R;
+import com.example.pemesanerte.SessionManager;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,10 +74,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                selectDate();
-                final String[] monthName = {"January", "February",
-                        "March", "April", "May", "June", "July",
-                        "August", "September", "October", "November",
-                        "December"};
+//                final String[] monthName = {"January", "February",
+//                        "March", "April", "May", "June", "July",
+//                        "August", "September", "October", "November",
+//                        "December"};
+
+                final String[] monthName = {"Jan", "Feb",
+                        "Mar", "Apr", "May", "Jun", "Jul",
+                        "Aug", "Sep", "Oct", "Nov",
+                        "Dec"};
+
 
                 final Calendar calendar = Calendar.getInstance();
                 final int day = calendar.get(Calendar.DAY_OF_MONTH);

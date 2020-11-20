@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class History{
 
 	@SerializedName("data")
-	private List<History> data;
+	private List<HistoryData> data;
 
 	@SerializedName("message")
 	private String message;
@@ -14,11 +14,11 @@ public class History{
 	@SerializedName("status")
 	private boolean status;
 
-	public void setData(List<History> data){
+	public void setData(List<HistoryData> data){
 		this.data = data;
 	}
 
-	public List<History> getData(){
+	public List<HistoryData> getData(){
 		return data;
 	}
 

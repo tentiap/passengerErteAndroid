@@ -1,4 +1,4 @@
-package com.example.pemesanerte;
+package com.example.pemesanerte.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.pemesanerte.R;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.register.Register;
