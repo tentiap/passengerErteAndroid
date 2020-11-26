@@ -1,23 +1,28 @@
 package com.example.pemesanerte.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pemesanerte.R;
+import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryHolder> {
+    private Context ctx;
+    private List<DetailHistoryData> listDetailHistory;
 
-    private ArrayList<HistoryData> listDetailHistory;
-    public DetailHistoryAdapter(ArrayList<HistoryData> list) {
-        this.listDetailHistory = list;
+    public DetailHistoryAdapter(Context ctx, List<DetailHistoryData> listDetailHistory) {
+       this.ctx = ctx;
+       this.listDetailHistory = listDetailHistory;
     }
 
 
@@ -31,14 +36,15 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
     @Override
     public void onBindViewHolder(@NonNull final DetailHistoryHolder detailHolder, int position) {
 //        HistoryData detailHistoryData = listDetailHistory.get(position);
+        DetailHistoryData detailHistoryData = listDetailHistory.get(position);
 //
-//        detailHolder.tvPassengerName.setText(detailHistoryData.getNamaPenumpang());
-//        detailHolder.tvPassengerGender.setText(detailHistoryData.getJenisKelamin());
-//        detailHolder.tvPassengerAsal.setText(detailHistoryData.getDetailAsal());
-//        detailHolder.tvPassengerTujuan.setText(detailHistoryData.getDetailTujuan());
-//        detailHolder.tvPassengerKontak.setText(detailHistoryData.getNoHp());
-////        detailHolder.tvPassengerBiaya.setText(detailHistoryData.getBiayaTambahan());
-//        detailHolder.tvPassengerSeat.setText(detailHistoryData.getIdSeat());
+        detailHolder.tvPassengerName.setText(detailHistoryData.getNamaPenumpang());
+        detailHolder.tvPassengerGender.setText(detailHistoryData.getJenisKelamin());
+        detailHolder.tvPassengerAsal.setText(detailHistoryData.getDetailAsal());
+        detailHolder.tvPassengerTujuan.setText(detailHistoryData.getDetailTujuan());
+        detailHolder.tvPassengerKontak.setText(detailHistoryData.getNoHp());
+        detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
+        detailHolder.tvPassengerSeat.setText(detailHistoryData.getIdSeat());
 
     }
 
@@ -52,8 +58,10 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
 
     public class DetailHistoryHolder extends RecyclerView.ViewHolder {
         TextView tvPassengerName, tvPassengerGender, tvPassengerAsal, tvPassengerTujuan, tvPassengerKontak, tvPassengerBiaya, tvPassengerSeat;
+
         public DetailHistoryHolder(@NonNull View view) {
             super(view);
+
             tvPassengerName = itemView.findViewById(R.id.tv_passenger_name);
             tvPassengerGender = itemView.findViewById(R.id.tv_passenger_gender);
             tvPassengerAsal = itemView.findViewById(R.id.tv_passenger_asal);

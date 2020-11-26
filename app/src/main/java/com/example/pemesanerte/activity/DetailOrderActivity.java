@@ -3,25 +3,36 @@ package com.example.pemesanerte.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
-import com.example.pemesanerte.adapter.HistoryAdapter;
-import com.example.pemesanerte.model.history.HistoryData;
+import com.example.pemesanerte.api.ApiClient;
+import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.detailHistory.DetailHistory;
+import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DetailOrderActivity extends AppCompatActivity {
     public static final String EXTRA_ID_PESANAN = "extra_id_pesanan";
     private RecyclerView rvDetailHistory;
-    private ArrayList<HistoryData> list = new ArrayList<>();
+    private List<DetailHistoryData> list = new ArrayList<>();
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
+    String idPesanan;
 
     FloatingActionButton fb1, fb2, fb3;
     TextView tvEdit, tvAddMore;
@@ -39,7 +50,9 @@ public class DetailOrderActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Detail Order");
 
         rvDetailHistory = findViewById(R.id.rv_detail_history);
-        rvDetailHistory.setHasFixedSize(true);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh1);
+        progressBar = findViewById(R.id.progress_bar1);
+//        rvDetailHistory.setHasFixedSize(true);
 
         TextView tvFrom = findViewById(R.id.tv_from);
         TextView tvTo = findViewById(R.id.tv_to);
@@ -49,13 +62,22 @@ public class DetailOrderActivity extends AppCompatActivity {
 //        tvFrom.setText("From: " + historyData.getIdKotaAsal());
 //        tvTo.setText("To: " + historyData.getIdKotaTujuan());
 //        tvJadwal.setText(historyData.getJadwal());
-        String selectedIdPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
-        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +selectedIdPesanan, Toast.LENGTH_SHORT).show();
+        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
+        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
 //        String text = "Asal : " + historyData.getIdKotaAsal() + ",\nTujuan : " + historyData.getIdKotaTujuan() + ",\nJadwal : " + historyData.getJadwal();
 //        tvPrcllble.setText(text);
 
 //        list.addAll(getDetailHistory());
-//        showRecyclerDetail();
+        showRecyclerDetail(idPesanan);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                showRecyclerDetail(idPesanan);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         fb1 = findViewById(R.id.floating_button);
         fb2 = findViewById(R.id.fb_edit);
@@ -147,7 +169,38 @@ public class DetailOrderActivity extends AppCompatActivity {
 //        return listHistory;
 //    }
 
-    private void showRecyclerDetail() {
+    private void showRecyclerDetail(String idPesanan) {
+        progressBar.setVisibility(View.VISIBLE);
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<DetailHistory> detailHistoryCall = apiInterface.detailResponse(idPesanan);
+        detailHistoryCall.enqueue(new Callback<DetailHistory>() {
+            @Override
+            public void onResponse(Call<DetailHistory> call, Response<DetailHistory> response) {
+                if(response.body() != null && response.isSuccessful() && response.body().isStatus()) {
+                    rvDetailHistory.setLayoutManager(new LinearLayoutManager(DetailOrderActivity.this));
+                    String message = response.body().getMessage();
+                    Toast.makeText(DetailOrderActivity.this, message, Toast.LENGTH_SHORT).show();
+                    list = response.body().getData();
+
+                    final DetailHistoryAdapter detailHistoryAdapter = new DetailHistoryAdapter(DetailOrderActivity.this, list);
+                    rvDetailHistory.setAdapter(detailHistoryAdapter);
+                    detailHistoryAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
+                }else {
+                    String message = response.body().getMessage();
+                    Toast.makeText(DetailOrderActivity.this, message, Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DetailHistory> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(DetailOrderActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 //        rvDetailHistory.setLayoutManager(new LinearLayoutManager(this));
 //        final DetailHistoryAdapter detailHistoryAdapter = new DetailHistoryAdapter(list);
 //        rvDetailHistory.setAdapter(detailHistoryAdapter);

@@ -1,6 +1,7 @@
 package com.example.pemesanerte.api;
 
 //import com.example.pemesanerte.model.history.History;
+import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.register.Register;
@@ -45,6 +46,11 @@ public interface ApiInterface {
     @GET("history/{id_users_pemesan}")
     Call<History> historyResponse(
             @Path("id_users_pemesan") String id_users_pemesan
+    );
+
+    @GET("detail/{id_pesanan}")
+    Call<DetailHistory> detailResponse(
+            @Path("id_pesanan") String id_pesanan
     );
 
 
