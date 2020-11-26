@@ -20,13 +20,14 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
+import com.example.pemesanerte.model.history.HistoryData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailOrderActivity extends AppCompatActivity {
-    public static final String EXTRA_ID_PESANAN = "extra_id_pesanan";
+    public static final String EXTRA_HISTORY_DATA = "extra_history_data";
     private RecyclerView rvDetailHistory;
     private List<DetailHistoryData> list = new ArrayList<>();
 
@@ -45,30 +46,20 @@ public class DetailOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_order);
 
+        HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
+        idPesanan = historyData.getIdPesanan();
+        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Detail Order");
+        getSupportActionBar().setTitle("Detail Order " + idPesanan);
+        getSupportActionBar().setSubtitle(historyData.getIdKotaAsal()+ " | " +historyData.getIdKotaTujuan()+ " | "
+                +historyData.getTanggal()+ " | " +historyData.getJadwal());
 
         rvDetailHistory = findViewById(R.id.rv_detail_history);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh1);
         progressBar = findViewById(R.id.progress_bar1);
 //        rvDetailHistory.setHasFixedSize(true);
-
-        TextView tvFrom = findViewById(R.id.tv_from);
-        TextView tvTo = findViewById(R.id.tv_to);
-        TextView tvJadwal = findViewById(R.id.tv_date);
-//        TextView tvPrcllble = findViewById(R.id.tv_prcllble);
-//        HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
-//        tvFrom.setText("From: " + historyData.getIdKotaAsal());
-//        tvTo.setText("To: " + historyData.getIdKotaTujuan());
-//        tvJadwal.setText(historyData.getJadwal());
-        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
-        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
-//        String text = "Asal : " + historyData.getIdKotaAsal() + ",\nTujuan : " + historyData.getIdKotaTujuan() + ",\nJadwal : " + historyData.getJadwal();
-//        tvPrcllble.setText(text);
-
-//        list.addAll(getDetailHistory());
-        showRecyclerDetail(idPesanan);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -78,6 +69,34 @@ public class DetailOrderActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+//        TextView tvIdPesanan = findViewById(R.id.tv_id_order);
+//        TextView tvIdTrip = findViewById(R.id.tv_id_trip);
+//        TextView tvFrom = findViewById(R.id.tv_from);
+//        TextView tvTo = findViewById(R.id.tv_to);
+//        TextView tvJadwal = findViewById(R.id.tv_date);
+//        TextView tvWaktu = findViewById(R.id.tv_time);
+//        TextView tvPrcllble = findViewById(R.id.tv_prcllble);
+//        HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
+//
+//        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
+
+
+//        tvIdPesanan.setText("Id Order: " +idPesanan);
+//        tvIdTrip.setText("Id Trip: " +historyData.getIdTrip());
+//        tvFrom.setText(historyData.getIdKotaAsal());
+//        tvTo.setText(historyData.getIdKotaTujuan());
+//        tvJadwal.setText(historyData.getTanggal());
+//        tvWaktu.setText(historyData.getJadwal());
+
+
+//        String text = "Asal : " + historyData.getIdKotaAsal() + ",\nTujuan : " + historyData.getIdKotaTujuan() + ",\nJadwal : " + historyData.getJadwal();
+//        tvPrcllble.setText(text);
+
+//        list.addAll(getDetailHistory());
+        showRecyclerDetail(idPesanan);
+
+
 
         fb1 = findViewById(R.id.floating_button);
         fb2 = findViewById(R.id.fb_edit);

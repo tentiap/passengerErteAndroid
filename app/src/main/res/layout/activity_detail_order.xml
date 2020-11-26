@@ -29,112 +29,230 @@
 
 <!--    </RelativeLayout>-->
 
-    <LinearLayout
-        android:id="@+id/rellay_hstry2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginTop="15dp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/rellay_hstry2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="27dp"-->
+<!--        android:layout_marginRight="27dp"-->
+<!--        android:layout_marginTop="15dp">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:orientation="vertical">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:id="@+id/tv_id_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="left"
-                    android:text="Id Order: P1"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_order"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Id Order: P1"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="18sp" />-->
 
-                <TextView
-                    android:id="@+id/tv_id_trip"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right"
-                    android:text="Id Trip: T1"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_trip"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="right"-->
+<!--                    android:text="Id Trip: T1"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:id="@+id/tv_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="left"
-                    android:text="From: Bukittinggi"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_from"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="From: Bukittinggi"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
 
-                <TextView
-                    android:id="@+id/tv_to"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right"
-                    android:text="To: Padang"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_to"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="right"-->
+<!--                    android:text="To: Padang"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="left"
-                    android:text="20 Oct 2020"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_date"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="20 Oct 2020"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
 
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="right"
-                    android:text="15:20 WIB"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-            </LinearLayout>
-        </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_time"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:gravity="right"-->
+<!--                    android:text="15:20 WIB"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/grad"-->
+<!--        android:id="@+id/rellay_hstry2"-->
+<!--        android:paddingBottom="20dp">-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_create_passengers"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_centerVertical="true"-->
+        <!--            android:layout_marginTop="15sp"-->
+        <!--            android:fontFamily="sans-serif-light"-->
+        <!--            android:text="Add Passenger(s)"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="32sp" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:layout_marginTop="15dp">-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/tv_id_order"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="P1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="14sp" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/line11"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text=" | "&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="14sp" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/tv_id_trip"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="T1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="14sp" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/line22"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text=" | "&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="14sp" />&ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_from"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Bukittinggi"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/line33"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" | "-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_to"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Padang"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/line31"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" | "-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="12 Nov 2020"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/line32"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" | "-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_time"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="20:20"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </RelativeLayout>-->
 
     <LinearLayout
         android:id="@+id/rellay_hstry3"
         android:layout_width="match_parent"
-        android:layout_below="@id/rellay_hstry2"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

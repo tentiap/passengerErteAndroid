@@ -1,12 +1,15 @@
 package com.example.pemesanerte.model.history;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class HistoryData {
+public class HistoryData implements Parcelable {
 
 	@SerializedName("jadwal")
 	private String jadwal;
@@ -44,19 +47,66 @@ public class HistoryData {
 	@SerializedName("id_users_sopir")
 	private String idUsersSopir;
 
+	protected HistoryData(Parcel in) {
+		jadwal = in.readString();
+		idPesanan = in.readString();
+		updatedAt = in.readString();
+		idKotaAsal = in.readString();
+		idUsersOperator = in.readString();
+		tanggalPesan = in.readString();
+		createdAt = in.readString();
+		idKotaTujuan = in.readString();
+		idTrip = in.readString();
+		idUsersPemesan = in.readString();
+		idUsersSopir = in.readString();
+	}
+
+	public static final Creator<HistoryData> CREATOR = new Creator<HistoryData>() {
+		@Override
+		public HistoryData createFromParcel(Parcel in) {
+			return new HistoryData(in);
+		}
+
+		@Override
+		public HistoryData[] newArray(int size) {
+			return new HistoryData[size];
+		}
+	};
+
 	public void setJadwal(String jadwal){
 		this.jadwal = jadwal;
 	}
 
 	public String getJadwal(){
-		return jadwal;
+//		return jadwal;
 //		SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
 //		return sfd.format(jadwal);
+
+		String[] tanggal = jadwal.split(" ");
+		String time =  tanggal[1];
+
+		String[] jam = time.split(":");
+		return jam[0]+":"+jam[1];
 
 //		DateFormat outputFormatter1 = new SimpleDateFormat("dd-MMM-yyyy");
 //		String output1 = outputFormatter1.format(jadwal);
 //		return output1;
 	}
+
+	public String getTanggal(){
+		String[] date = jadwal.split(" ");
+		String tgl =  date[0];
+		String[] tanggal = tgl.split("-");
+
+		final String[] monthName = {"January", "February",
+                        "March", "April", "May", "June", "July",
+                        "August", "September", "October", "November",
+                        "December"};
+		Integer months = Integer.parseInt(tanggal[1]);
+		return tanggal[2] +" "+monthName[months - 1]+ " "+tanggal[0];
+	}
+
+
 
 	public void setIdPesanan(String idPesanan){
 		this.idPesanan = idPesanan;
@@ -84,9 +134,21 @@ public class HistoryData {
 //			return "Bukittinggi";
 //		}else if(idKotaAsal == "K2"){
 //			return "Padang";
-//		}else if (idKotaAsal == "K3"){
+//		}else{
 //			return "Pekanbaru";
 //		}
+//		return idKotaAsal;
+		switch (idKotaAsal){
+			case "K1":
+				idKotaAsal = "Bukittinggi";
+				break;
+			case "K2":
+				idKotaAsal = "Padang";
+				break;
+			case "K3":
+				idKotaAsal = "Pekanbaru";
+				break;
+		}
 		return idKotaAsal;
 	}
 
@@ -103,7 +165,7 @@ public class HistoryData {
 	}
 
 	public String getTanggalPesan(){
-		return tanggalPesan;
+		return "Date order: " +tanggalPesan;
 	}
 
 	public void setCreatedAt(String createdAt){
@@ -119,6 +181,31 @@ public class HistoryData {
 	}
 
 	public String getIdKotaTujuan(){
+//		if(idKotaTujuan == "K1") {
+//			return "Bukittinggi";
+//		}else if(idKotaTujuan == "K2"){
+//			return "Padang";
+//		}else{
+//			return "Pekanbaru";
+//		}
+//		if (idKotaAsal == "K1"){
+//			return "Bukittinggi";
+//		}else if (idKotaAsal == "K2"){
+//			return "Padang";
+//		}else{
+//			return "Pekanbaru";
+//		}
+		switch (idKotaTujuan){
+			case "K1":
+				idKotaTujuan = "Bukittinggi";
+				break;
+			case "K2":
+				idKotaTujuan = "Padang";
+				break;
+			case "K3":
+				idKotaTujuan = "Pekanbaru";
+				break;
+		}
 		return idKotaTujuan;
 	}
 
@@ -157,4 +244,24 @@ public class HistoryData {
 	public HistoryData(){
 
     }
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(jadwal);
+		parcel.writeString(idPesanan);
+		parcel.writeString(updatedAt);
+		parcel.writeString(idKotaAsal);
+		parcel.writeString(idUsersOperator);
+		parcel.writeString(tanggalPesan);
+		parcel.writeString(createdAt);
+		parcel.writeString(idKotaTujuan);
+		parcel.writeString(idTrip);
+		parcel.writeString(idUsersPemesan);
+		parcel.writeString(idUsersSopir);
+	}
 }

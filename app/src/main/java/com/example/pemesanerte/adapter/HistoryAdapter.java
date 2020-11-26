@@ -48,8 +48,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         holder.tvIdPesanan.setText(historyData.getIdPesanan());
         holder.tvAsal.setText(historyData.getIdKotaAsal());
         holder.tvTujuan.setText(historyData.getIdKotaTujuan());
-        holder.tvJadwal.setText(historyData.getJadwal());
+        holder.tvJadwal.setText(historyData.getTanggal());
         holder.tvJam.setText(historyData.getJadwal());
+        holder.tvPesan.setText(historyData.getTanggalPesan());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +67,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     }
 
     public class HistoryHolder extends RecyclerView.ViewHolder {
-        TextView tvIdPesanan, tvAsal, tvTujuan, tvJadwal, tvJam;
+        TextView tvIdPesanan, tvAsal, tvTujuan, tvJadwal, tvJam, tvPesan;
 
         public HistoryHolder(@NonNull View view) {
             super(view);
@@ -76,6 +77,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
             tvTujuan = itemView.findViewById(R.id.tv_item_tujuan);
             tvJadwal = itemView.findViewById(R.id.tv_item_jadwal);
             tvJam = itemView.findViewById(R.id.tv_item_jam);
+            tvPesan = itemView.findViewById(R.id.tv_item_tanggal_pesan);
 
         }
     }

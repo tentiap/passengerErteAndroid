@@ -74,7 +74,12 @@ public class DetailHistoryData {
 	}
 
 	public String getNoHp(){
-		return "Phone: " +noHp;
+		if (noHp == null){
+			return "Phone: - ";
+		}else{
+			return "Phone: " +noHp;
+		}
+
 	}
 
 	public void setDetailTujuan(String detailTujuan){
@@ -130,7 +135,12 @@ public class DetailHistoryData {
 	}
 
 	public Object getBiayaTambahan(){
-		return "Additional cost(s): " +biayaTambahan;
+		if (biayaTambahan == null){
+			return "Additional cost(s): - ";
+		}else{
+			return "Additional cost(s): " +biayaTambahan;
+		}
+
 	}
 
 	public void setIdUsersSopir(String idUsersSopir){
@@ -209,7 +219,17 @@ public class DetailHistoryData {
 		this.status = status;
 	}
 
-	public int getStatus(){
-		return status;
+	public String getStatus(){
+		if (status == 1){
+			return "Status: Booking ";
+		}else if (status == 2){
+			return "Status: Picked Up";
+		}else if (status == 3){
+			return "Status: On Going";
+		}else if (status == 4){
+			return "Status: Arrived";
+		}else{
+			return "Status: Cancelled";
+		}
 	}
 }

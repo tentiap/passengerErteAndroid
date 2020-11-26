@@ -84,6 +84,17 @@
             tools:text="@array/array_cost" />
 
         <TextView
+            android:id="@+id/tv_passenger_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_below="@id/tv_passenger_biaya"
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Status: " />
+
+        <TextView
             android:id="@+id/tv_passenger_seat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

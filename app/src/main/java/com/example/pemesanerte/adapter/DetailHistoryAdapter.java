@@ -43,8 +43,15 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
         detailHolder.tvPassengerAsal.setText(detailHistoryData.getDetailAsal());
         detailHolder.tvPassengerTujuan.setText(detailHistoryData.getDetailTujuan());
         detailHolder.tvPassengerKontak.setText(detailHistoryData.getNoHp());
-        detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
+//        if (detailHistoryData.getBiayaTambahan() == null ){
+//            detailHolder.tvPassengerBiaya.setText("-");
+//        }
+//        else{
+            detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
+//        }
+
         detailHolder.tvPassengerSeat.setText(detailHistoryData.getIdSeat());
+        detailHolder.tvPassengerStatus.setText(String.valueOf(detailHistoryData.getStatus()));
 
     }
 
@@ -57,7 +64,8 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
 //    }
 
     public class DetailHistoryHolder extends RecyclerView.ViewHolder {
-        TextView tvPassengerName, tvPassengerGender, tvPassengerAsal, tvPassengerTujuan, tvPassengerKontak, tvPassengerBiaya, tvPassengerSeat;
+        TextView tvPassengerName, tvPassengerGender, tvPassengerAsal, tvPassengerTujuan, tvPassengerKontak,
+                tvPassengerBiaya, tvPassengerSeat, tvPassengerStatus;
 
         public DetailHistoryHolder(@NonNull View view) {
             super(view);
@@ -69,6 +77,7 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
             tvPassengerKontak = itemView.findViewById(R.id.tv_passenger_kontak);
             tvPassengerBiaya = itemView.findViewById(R.id.tv_passenger_biaya);
             tvPassengerSeat = itemView.findViewById(R.id.tv_passenger_seat);
+            tvPassengerStatus = itemView.findViewById(R.id.tv_passenger_status);
         }
     }
 }

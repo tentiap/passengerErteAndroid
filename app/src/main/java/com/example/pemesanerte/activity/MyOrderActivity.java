@@ -115,11 +115,8 @@ public class MyOrderActivity extends AppCompatActivity {
                         public void onItemClicked(HistoryData data) {
                             Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
 //                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, (Parcelable) data);
-                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_PESANAN, data.getIdPesanan());
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_TRIP, data.getIdTrip());
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_ASAL, data.getIdKotaAsal());
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_TUJUAN, data.getIdKotaTujuan());
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_JADWAL, data.getJadwal());
+                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
+//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_PESANAN, data.getIdPesanan());
                             startActivity(detailHistoryIntent);
                             Toast.makeText(MyOrderActivity.this, "You select " + data.getIdPesanan(), Toast.LENGTH_SHORT).show();
                         }
