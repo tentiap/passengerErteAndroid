@@ -54,7 +54,7 @@
 //        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 //        bottomNavigationView.setSelectedItemId(R.id.bn_my_order);
 //        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
+//            @Overrides
 //            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                switch (item.getItemId()){
 //                    case R.id.bn_home:

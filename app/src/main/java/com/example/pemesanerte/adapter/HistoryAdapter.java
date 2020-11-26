@@ -23,6 +23,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         this.listHistory = listHistory;
     }
 
+
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
+
     @NonNull
     @Override
     public HistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +42,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final HistoryHolder holder, int position) {
         HistoryData historyData = listHistory.get(position);
 
         holder.tvIdPesanan.setText(historyData.getIdPesanan());
@@ -42,6 +50,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         holder.tvTujuan.setText(historyData.getIdKotaTujuan());
         holder.tvJadwal.setText(historyData.getJadwal());
         holder.tvJam.setText(historyData.getJadwal());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickCallback.onItemClicked(listHistory.get(holder.getAdapterPosition()));
+            }
+        });
 
     }
 
@@ -53,8 +68,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     public class HistoryHolder extends RecyclerView.ViewHolder {
         TextView tvIdPesanan, tvAsal, tvTujuan, tvJadwal, tvJam;
 
-        public HistoryHolder(@NonNull View itemView) {
-            super(itemView);
+        public HistoryHolder(@NonNull View view) {
+            super(view);
 
             tvIdPesanan = itemView.findViewById(R.id.tv_id_pesanan);
             tvAsal = itemView.findViewById(R.id.tv_item_asal);
@@ -62,7 +77,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
             tvJadwal = itemView.findViewById(R.id.tv_item_jadwal);
             tvJam = itemView.findViewById(R.id.tv_item_jam);
 
-
         }
     }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(HistoryData data);
+    }
+
+
 }

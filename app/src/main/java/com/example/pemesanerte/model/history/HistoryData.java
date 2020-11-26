@@ -2,6 +2,10 @@ package com.example.pemesanerte.model.history;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class HistoryData {
 
 	@SerializedName("jadwal")
@@ -46,6 +50,12 @@ public class HistoryData {
 
 	public String getJadwal(){
 		return jadwal;
+//		SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+//		return sfd.format(jadwal);
+
+//		DateFormat outputFormatter1 = new SimpleDateFormat("dd-MMM-yyyy");
+//		String output1 = outputFormatter1.format(jadwal);
+//		return output1;
 	}
 
 	public void setIdPesanan(String idPesanan){
@@ -143,4 +153,8 @@ public class HistoryData {
 	public String getIdUsersSopir(){
 		return idUsersSopir;
 	}
+
+	public HistoryData(){
+
+    }
 }

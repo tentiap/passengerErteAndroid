@@ -11,6 +11,7 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -31,8 +32,8 @@ import java.util.List;
 
 public class MyOrderActivity extends AppCompatActivity {
     private RecyclerView rvHistory;
-    private RecyclerView.Adapter historyAdapter;
-    private RecyclerView.LayoutManager lmHistory;
+//    private HistoryAdapter historyAdapter;
+//    private RecyclerView.LayoutManager lmHistory;
     private List<HistoryData> listData = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
@@ -45,8 +46,8 @@ public class MyOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_order);
 
         rvHistory = findViewById(R.id.rv_history);
-        lmHistory = new LinearLayoutManager(MyOrderActivity.this, LinearLayoutManager.VERTICAL, false);
-        rvHistory.setLayoutManager(lmHistory);
+//        lmHistory = new LinearLayoutManager(MyOrderActivity.this, LinearLayoutManager.VERTICAL, false);
+//        rvHistory.setLayoutManager(lmHistory);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         progressBar = findViewById(R.id.progress_bar);
 
@@ -95,13 +96,34 @@ public class MyOrderActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<History> call, Response<History> response) {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()) {
+                    rvHistory.setLayoutManager(new LinearLayoutManager(MyOrderActivity.this));
                     String message = response.body().getMessage();
                     Toast.makeText(MyOrderActivity.this, message, Toast.LENGTH_SHORT).show();
-
                     listData = response.body().getData();
-                    historyAdapter = new HistoryAdapter(MyOrderActivity.this, listData);
+
+                    final HistoryAdapter historyAdapter = new HistoryAdapter(MyOrderActivity.this, listData);
                     rvHistory.setAdapter(historyAdapter);
                     historyAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
+//                    historyAdapter = new HistoryAdapter(MyOrderActivity.this, listData);
+//                    rvHistory.setAdapter(historyAdapter);
+//                    historyAdapter.notifyDataSetChanged();
+//                    progressBar.setVisibility(View.INVISIBLE);
+//
+                    historyAdapter.setOnItemClickCallback(new HistoryAdapter.OnItemClickCallback() {
+                        @Override
+                        public void onItemClicked(HistoryData data) {
+                            Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
+//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, (Parcelable) data);
+                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_PESANAN, data.getIdPesanan());
+                            startActivity(detailHistoryIntent);
+                            Toast.makeText(MyOrderActivity.this, "You select " + data.getIdPesanan(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }else{
+                    String message = response.body().getMessage();
+                    Toast.makeText(MyOrderActivity.this, message, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
