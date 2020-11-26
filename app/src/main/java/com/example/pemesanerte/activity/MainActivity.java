@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.SessionManager;
@@ -119,9 +120,16 @@ public class MainActivity extends AppCompatActivity {
 
                 inputSearch.setTotal(JumlahPenumpang);
 
-                Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
-                cariIntent.putExtra(SelectTripActivity.EXTRA_INPUT_SEARCH, inputSearch);
-                startActivity(cariIntent);
+                if (Tanggal == null){
+                    Toast.makeText(MainActivity.this, "Please select date", Toast.LENGTH_SHORT).show();
+                }else if(Asal == Tujuan) {
+                    Toast.makeText(MainActivity.this, "Asal tidak boleh sama dengan Tujuan", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
+                    cariIntent.putExtra(SelectTripActivity.EXTRA_INPUT_SEARCH, inputSearch);
+                    startActivity(cariIntent);
+                }
+                
             }
         });
 
