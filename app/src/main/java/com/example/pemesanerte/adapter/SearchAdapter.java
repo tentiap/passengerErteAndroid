@@ -1,23 +1,26 @@
 package com.example.pemesanerte.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pemesanerte.R;
-import com.example.pemesanerte.model.search.Search;
+import com.example.pemesanerte.model.search.SearchData;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHolder> {
+    private Context ctx;
+    private List<SearchData> listSearch;
 
-    private ArrayList<Search> listSearch;
-    public SearchAdapter(ArrayList<Search> list) {
-        this.listSearch = list;
+    public SearchAdapter(Context ctx, List<SearchData> listSearch) {
+        this.ctx = ctx;
+        this.listSearch = listSearch;
     }
 
     private OnItemClickCallback onItemClickCallback;
@@ -36,11 +39,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
     @Override
     public void onBindViewHolder(@NonNull final SearchHolder holder, int position) {
-        Search search = listSearch.get(position);
+        SearchData searchData = listSearch.get(position);
 
-        holder.tvIdSelectTrip.setText(search.getIdTrip());
-        holder.tvSelectJam.setText(search.getJadwal());
-        holder.tvSelectSopir.setText(search.getNama());
+        holder.tvIdSelectTrip.setText(searchData.getIdTrip());
+        holder.tvSelectJam.setText(searchData.getJadwal());
+        holder.tvSelectSopir.setText(searchData.getNama());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     }
 
     public interface OnItemClickCallback {
-        void onItemClicked(Search data);
+        void onItemClicked(SearchData data);
     }
 }

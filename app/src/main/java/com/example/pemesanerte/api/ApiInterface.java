@@ -5,6 +5,7 @@ import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.register.Register;
+import com.example.pemesanerte.model.search.Search;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -51,6 +52,14 @@ public interface ApiInterface {
     @GET("detail/{id_pesanan}")
     Call<DetailHistory> detailResponse(
             @Path("id_pesanan") String id_pesanan
+    );
+
+    @POST("search/{id_kota_asal}/{id_kota_tujuan}/{jadwal}/{jumlah_penumpang}")
+    Call<Search> searchResponse(
+            @Path("id_kota_asal") String id_kota_asal,
+            @Path("id_kota_tujuan") String id_kota_tujuan,
+            @Path("jadwal") String jadwal,
+            @Path("jumlah_penumpang") String jumlah_penumpang
     );
 
 

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvWelcome, tvJadwal;
     Spinner spinnerAsal, spinnerTujuan, spinnerJumlahPenumpang;
     DatePickerDialog pickerDialog;
-    String Asal, Tujuan, Tanggal, JumlahPenumpang;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan;
     Button btnCari;
 
 
@@ -111,13 +111,14 @@ public class MainActivity extends AppCompatActivity {
                 Asal = spinnerAsal.getSelectedItem().toString();
                 Tujuan = spinnerTujuan.getSelectedItem().toString();
                 JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
+                Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
 
 //                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Tanggal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_SHORT).show();
                 InputSearch inputSearch = new InputSearch();
                 inputSearch.setFrom(Asal);
                 inputSearch.setTo(Tujuan);
                 inputSearch.setDate(Tanggal);
-
+                inputSearch.setPemesan(Pemesan);
                 inputSearch.setTotal(JumlahPenumpang);
 
                 if (Tanggal == null){
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
                     cariIntent.putExtra(SelectTripActivity.EXTRA_INPUT_SEARCH, inputSearch);
                     startActivity(cariIntent);
+//                    Toast.makeText(MainActivity.this, Pemesan, Toast.LENGTH_SHORT).show();
                 }
                 
             }
