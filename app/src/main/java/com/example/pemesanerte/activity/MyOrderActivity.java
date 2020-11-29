@@ -32,9 +32,8 @@ import java.util.List;
 
 public class MyOrderActivity extends AppCompatActivity {
     private RecyclerView rvHistory;
-//    private HistoryAdapter historyAdapter;
-//    private RecyclerView.LayoutManager lmHistory;
     private List<HistoryData> listData = new ArrayList<>();
+
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
     SessionManager sessionManager;

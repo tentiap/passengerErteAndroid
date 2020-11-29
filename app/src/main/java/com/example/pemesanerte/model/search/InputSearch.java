@@ -10,6 +10,9 @@ public class InputSearch implements Parcelable {
     private String date;
     private String total;
     private String pemesan;
+    private String jadwal;
+    private String asal;
+    private String tujuan;
 
     protected InputSearch(Parcel in) {
         from = in.readString();
@@ -17,6 +20,9 @@ public class InputSearch implements Parcelable {
         date = in.readString();
         total = in.readString();
         pemesan = in.readString();
+        jadwal = in.readString();
+        asal = in.readString();
+        tujuan = in.readString();
     }
 
     public InputSearch(){
@@ -43,12 +49,36 @@ public class InputSearch implements Parcelable {
         this.from = from;
     }
 
+    public String getAsal() {
+        return asal;
+    }
+
+    public void setAsal(String asal) {
+        this.asal = asal;
+    }
+
+    public String getTujuan() {
+        return tujuan;
+    }
+
+    public void setTujuan(String tujuan) {
+        this.tujuan = tujuan;
+    }
+
     public String getPemesan() {
         return pemesan;
     }
 
     public void setPemesan(String pemesan) {
         this.pemesan = pemesan;
+    }
+
+    public String getJadwal() {
+        return jadwal;
+    }
+
+    public void setJadwal(String jadwal) {
+        this.jadwal = jadwal;
     }
 
     public String getTo() {
@@ -87,5 +117,8 @@ public class InputSearch implements Parcelable {
         parcel.writeString(date);
         parcel.writeString(total);
         parcel.writeString(pemesan);
+        parcel.writeString(jadwal);
+        parcel.writeString(asal);
+        parcel.writeString(tujuan);
     }
 }

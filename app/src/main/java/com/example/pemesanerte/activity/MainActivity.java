@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvWelcome, tvJadwal;
     Spinner spinnerAsal, spinnerTujuan, spinnerJumlahPenumpang;
     DatePickerDialog pickerDialog;
-    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, monthss;
     Button btnCari;
 
 
@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
                         final String month_name = monthName[months];
 //                        Tanggal = years + "-" + (months + 1) + "-" + dayS;
                         Tanggal = dayS+ " " +month_name+ " " +years;
+                        if (months < 10){
+                           monthss = "0" + (months + 1);
+                        } else {
+                            monthss = String.valueOf(months + 1);
+                        }
+                        Jadwal = years + "-" + (monthss) + "-" + dayS;
                     }
                 }, year, month, day);
                 pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -120,6 +126,24 @@ public class MainActivity extends AppCompatActivity {
                 inputSearch.setDate(Tanggal);
                 inputSearch.setPemesan(Pemesan);
                 inputSearch.setTotal(JumlahPenumpang);
+                inputSearch.setJadwal(Jadwal);
+
+//                if(Asal == "Bukittinggi"){
+//                    inputSearch.setAsal("K1");
+//                }else if(Asal == "Padang"){
+//                    inputSearch.setAsal("K2");
+//                }else if (Asal == "Pekanbaru"){
+//                    inputSearch.setAsal("K3");
+//                }
+//
+//                if(Tujuan == "Bukittinggi"){
+//                    inputSearch.setTujuan("K1");
+//                }else if(Tujuan == "Padang"){
+//                    inputSearch.setTujuan("K2");
+//                }else if (Tujuan == "Pekanbaru"){
+//                    inputSearch.setTujuan("K3");
+//                }
+
 
                 if (Tanggal == null){
                     Toast.makeText(MainActivity.this, "Please select date", Toast.LENGTH_SHORT).show();

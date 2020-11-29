@@ -54,7 +54,7 @@ public interface ApiInterface {
             @Path("id_pesanan") String id_pesanan
     );
 
-    @POST("search/{id_kota_asal}/{id_kota_tujuan}/{jadwal}/{jumlah_penumpang}")
+    @GET("search/{id_kota_asal}/{id_kota_tujuan}/{jadwal}/{jumlah_penumpang}")
     Call<Search> searchResponse(
             @Path("id_kota_asal") String id_kota_asal,
             @Path("id_kota_tujuan") String id_kota_tujuan,

@@ -30,11 +30,13 @@ import java.util.List;
 
 public class SelectTripActivity extends AppCompatActivity {
     private RecyclerView rvSelectTrip;
-    private List<SearchData> list = new ArrayList<>();
+    private List<SearchData> listData = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
     public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
+
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan;
 
 //    TextView tvFrom, tvTo, tvDate, tvTotal;
 
@@ -43,27 +45,20 @@ public class SelectTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_trip);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setTitle("Select Trip");
-//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Select Trip</font>"));
+        rvSelectTrip = findViewById(R.id.rv_select_trip);
 
-//        tvFrom = findViewById(R.id.tv_select_from);
-//        tvTo = findViewById(R.id.tv_select_to);
-//        tvDate = findViewById(R.id.tv_select_tanggal);
-//        tvTotal = findViewById(R.id.tv_select_jumlah);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh2);
+        progressBar = findViewById(R.id.progress_bar2);
 
         InputSearch inputSearch = getIntent().getParcelableExtra(EXTRA_INPUT_SEARCH);
-//        tvFrom.setText(inputSearch.getFrom());
-//        tvTo.setText(inputSearch.getTo());
-//        tvDate.setText(inputSearch.getDate());
-//        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
-
-        String Asal = inputSearch.getFrom();
-        String Tujuan = inputSearch.getTo();
-        String Tanggal = inputSearch.getDate();
-        String JumlahPenumpang = inputSearch.getTotal();
-        String Pemesan = inputSearch.getPemesan();
+        Asal = inputSearch.getFrom();
+        Tujuan = inputSearch.getTo();
+        Tanggal = inputSearch.getDate();
+        JumlahPenumpang = inputSearch.getTotal();
+        Pemesan = inputSearch.getPemesan();
+        Jadwal = inputSearch.getJadwal();
+        kAsal = inputSearch.getAsal();
+        kTujuan = inputSearch.getTujuan();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -71,24 +66,54 @@ public class SelectTripActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle(Asal+ " | " +Tujuan+ " | "
                 +Tanggal+ " | " +JumlahPenumpang+ " Passenger(s)");
 
-        rvSelectTrip = findViewById(R.id.rv_select_trip);
-        rvSelectTrip.setHasFixedSize(true);
 
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh2);
-        progressBar = findViewById(R.id.progress_bar2);
+//        if(Asal == "Bukittinggi"){
+//            kAsal = "K1";}
+////        }else if(Asal == "Padang"){
+////            kAsal = "K2";
+////        }else {
+////            kAsal = "K3";
+////        }
 
-//        list.addAll(getListSearch());
-        showRecyclerList(Asal, Tujuan, Tanggal, JumlahPenumpang);
+        switch (Asal){
+            case "Bukittinggi":
+                kAsal = "K1";
+                break;
+            case "Padang":
+                kAsal = "K2";
+                break;
+            case "Pekanbaru":
+                kAsal = "K3";
+                break;
+        }
 
+
+        switch (Tujuan){
+            case "Bukittinggi":
+                kTujuan = "K1";
+                break;
+            case "Padang":
+                kTujuan = "K2";
+                break;
+            case "Pekanbaru":
+                kTujuan = "K3";
+                break;
+        }
+
+        Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan +"-" +Jadwal + "-" +JumlahPenumpang,
+                Toast.LENGTH_LONG).show();
+
+        showTrip(kAsal, kTujuan, Jadwal, JumlahPenumpang);
+//
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                showRecyclerList(Asal, Tujuan, Tanggal, JumlahPenumpang);
+                showTrip(kAsal, kTujuan, Jadwal, JumlahPenumpang);
+//                Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan , Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_home);
@@ -112,6 +137,27 @@ public class SelectTripActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setTitle("Select Trip");
+//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Select Trip</font>"));
+
+//        tvFrom = findViewById(R.id.tv_select_from);
+//        tvTo = findViewById(R.id.tv_select_to);
+//        tvDate = findViewById(R.id.tv_select_tanggal);
+//        tvTotal = findViewById(R.id.tv_select_jumlah);
+
+
+//        tvFrom.setText(inputSearch.getFrom());
+//        tvTo.setText(inputSearch.getTo());
+//        tvDate.setText(inputSearch.getDate());
+//        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
+
+//        rvSelectTrip.setHasFixedSize(true);
+
+//        list.addAll(getListSearch());
+
     }
 
     @Override
@@ -143,21 +189,23 @@ public class SelectTripActivity extends AppCompatActivity {
 //        return listSearch;
 //    }
 
-    private void showRecyclerList(String asal, String tujuan, String tanggal, String jumlahPenumpang) {
+    private void showTrip(String kAsal, String kTujuan, String jadwal, String jumlahPenumpang) {
         progressBar.setVisibility(View.VISIBLE);
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Search> searchCall = apiInterface.searchResponse(asal, tujuan, tanggal, jumlahPenumpang);
+        Call<Search> searchCall = apiInterface.searchResponse(kAsal, kTujuan, jadwal, jumlahPenumpang);
         searchCall.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
+
+//                Toast.makeText(SelectTripActivity.this, kAsal+kTujuan+jadwal+jumlahPenumpang, Toast.LENGTH_SHORT).show();
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvSelectTrip.setLayoutManager(new LinearLayoutManager(SelectTripActivity.this));
                     String message = response.body().getMessage();
                     Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
-                    list = response.body().getData();
+                    listData = response.body().getData();
 
-                    final SearchAdapter searchAdapter = new SearchAdapter(SelectTripActivity.this, list);
+                    final SearchAdapter searchAdapter = new SearchAdapter(SelectTripActivity.this, listData);
                     rvSelectTrip.setAdapter(searchAdapter);
                     searchAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.INVISIBLE);
@@ -172,15 +220,16 @@ public class SelectTripActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-//                    String message = response.body().getMessage();
-                    Toast.makeText(SelectTripActivity.this, "Kosong", Toast.LENGTH_SHORT).show();
+                    String message = response.body().getMessage();
+                    Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<Search> call, Throwable t) {
-
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

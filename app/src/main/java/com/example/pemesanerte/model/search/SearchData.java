@@ -4,43 +4,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class SearchData {
 
-	@SerializedName("merek_mobil")
-	private String merekMobil;
-
 	@SerializedName("jadwal")
 	private String jadwal;
 
-	@SerializedName("kontak")
-	private String kontak;
-
-	@SerializedName("nama")
-	private String nama;
+	@SerializedName("updated_at")
+	private String updatedAt;
 
 	@SerializedName("id_kota_asal")
 	private String idKotaAsal;
 
-	@SerializedName("plat_mobil")
-	private String platMobil;
+	@SerializedName("id_users_operator")
+	private String idUsersOperator;
 
 	@SerializedName("id_kota_tujuan")
 	private String idKotaTujuan;
 
+	@SerializedName("created_at")
+	private String createdAt;
+
 	@SerializedName("id_trip")
 	private String idTrip;
 
-	@SerializedName("jenis_kelamin")
-	private int jenisKelamin;
-
 	@SerializedName("id_users_sopir")
 	private String idUsersSopir;
-
-	public void setMerekMobil(String merekMobil){
-		this.merekMobil = merekMobil;
-	}
-
-	public String getMerekMobil(){
-		return merekMobil;
-	}
 
 	public void setJadwal(String jadwal){
 		this.jadwal = jadwal;
@@ -50,20 +36,12 @@ public class SearchData {
 		return jadwal;
 	}
 
-	public void setKontak(String kontak){
-		this.kontak = kontak;
+	public void setUpdatedAt(String updatedAt){
+		this.updatedAt = updatedAt;
 	}
 
-	public String getKontak(){
-		return kontak;
-	}
-
-	public void setNama(String nama){
-		this.nama = nama;
-	}
-
-	public String getNama(){
-		return nama;
+	public String getUpdatedAt(){
+		return updatedAt;
 	}
 
 	public void setIdKotaAsal(String idKotaAsal){
@@ -74,12 +52,12 @@ public class SearchData {
 		return idKotaAsal;
 	}
 
-	public void setPlatMobil(String platMobil){
-		this.platMobil = platMobil;
+	public void setIdUsersOperator(String idUsersOperator){
+		this.idUsersOperator = idUsersOperator;
 	}
 
-	public String getPlatMobil(){
-		return platMobil;
+	public String getIdUsersOperator(){
+		return idUsersOperator;
 	}
 
 	public void setIdKotaTujuan(String idKotaTujuan){
@@ -90,20 +68,20 @@ public class SearchData {
 		return idKotaTujuan;
 	}
 
+	public void setCreatedAt(String createdAt){
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedAt(){
+		return createdAt;
+	}
+
 	public void setIdTrip(String idTrip){
 		this.idTrip = idTrip;
 	}
 
 	public String getIdTrip(){
 		return idTrip;
-	}
-
-	public void setJenisKelamin(int jenisKelamin){
-		this.jenisKelamin = jenisKelamin;
-	}
-
-	public int getJenisKelamin(){
-		return jenisKelamin;
 	}
 
 	public void setIdUsersSopir(String idUsersSopir){
