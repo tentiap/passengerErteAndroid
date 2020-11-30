@@ -100,8 +100,8 @@ public class SelectTripActivity extends AppCompatActivity {
                 break;
         }
 
-        Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan +"-" +Jadwal + "-" +JumlahPenumpang,
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan +"-" +Jadwal + "-" +JumlahPenumpang,
+//                Toast.LENGTH_LONG).show();
 
         showTrip(kAsal, kTujuan, Jadwal, JumlahPenumpang);
 //

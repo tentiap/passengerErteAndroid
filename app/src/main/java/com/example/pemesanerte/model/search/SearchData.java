@@ -33,7 +33,11 @@ public class SearchData {
 	}
 
 	public String getJadwal(){
-		return jadwal;
+		String[] tanggal = jadwal.split(" ");
+		String time =  tanggal[1];
+
+		String[] jam = time.split(":");
+		return jam[0]+":"+jam[1];
 	}
 
 	public void setUpdatedAt(String updatedAt){

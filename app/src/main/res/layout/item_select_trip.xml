@@ -14,17 +14,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:padding="8dp">
 
         <TextView
            android:id="@+id/tv_id_select_trip"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:layout_marginLeft="6dp"
            android:text="T1"
            android:textStyle="bold"
-           android:textSize="16sp" />
+           android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_select_jam"
@@ -32,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_below="@+id/tv_id_select_trip"
-            android:layout_marginTop="6dp"
-            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
             tools:text="13.00" />
 
 <!--        <TextView-->
