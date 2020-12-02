@@ -20,6 +20,8 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.SearchAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.check.Check;
+import com.example.pemesanerte.model.check.CheckData;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.search.SearchData;
@@ -36,7 +38,7 @@ public class SelectTripActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
 
-    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan, IdTrip, Jam;
 
 //    TextView tvFrom, tvTo, tvDate, tvTotal;
 
@@ -201,8 +203,8 @@ public class SelectTripActivity extends AppCompatActivity {
 //                Toast.makeText(SelectTripActivity.this, kAsal+kTujuan+jadwal+jumlahPenumpang, Toast.LENGTH_SHORT).show();
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvSelectTrip.setLayoutManager(new LinearLayoutManager(SelectTripActivity.this));
-                    String message = response.body().getMessage();
-                    Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
+//                    String message = response.body().getMessage();
+                    Toast.makeText(SelectTripActivity.this, "Trip pada tanggal " +Tanggal, Toast.LENGTH_SHORT).show();
                     listData = response.body().getData();
 
                     final SearchAdapter searchAdapter = new SearchAdapter(SelectTripActivity.this, listData);
@@ -213,10 +215,9 @@ public class SelectTripActivity extends AppCompatActivity {
                     searchAdapter.setOnItemClickCallback(new SearchAdapter.OnItemClickCallback() {
                         @Override
                         public void onItemClicked(SearchData data) {
-                            Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateOrderActivity.class);
-//                            selectTripIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
-                            startActivity(selectTripIntent);
-                            Toast.makeText(SelectTripActivity.this, "Kamu memilih " + data.getIdTrip(), Toast.LENGTH_SHORT).show();
+                            IdTrip = data.getIdTrip();
+                            Jam = data.getJadwal();
+                            check(JumlahPenumpang, IdTrip, Pemesan);
                         }
                     });
                 }else{
@@ -229,6 +230,40 @@ public class SelectTripActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Search> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void check(String jumlahPenumpang, String idTrip, String idUsersPemesan){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Check> checkCall = apiInterface.checkResponse(jumlahPenumpang, idTrip, idUsersPemesan);
+        checkCall.enqueue(new Callback<Check>() {
+            @Override
+            public void onResponse(Call<Check> call, Response<Check> response) {
+                if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
+                    CheckData checkData = new CheckData();
+                    checkData.setId_trip(idTrip);
+                    checkData.setJumlah_penumpang(jumlahPenumpang);
+                    checkData.setId_users_pemesan(idUsersPemesan);
+                    checkData.setAsal(Asal);
+                    checkData.setTujuan(Tujuan);
+                    checkData.setTanggal(Tanggal);
+                    checkData.setJam(Jam);
+
+                    Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
+                    Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateOrderActivity.class);
+                    selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
+                    startActivity(selectTripIntent);
+
+                } else {
+                    String message = response.body().getMessage();
+                    Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Check> call, Throwable t) {
                 Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
