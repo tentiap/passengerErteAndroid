@@ -24,9 +24,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class CreateOrderActivity extends AppCompatActivity {
     public static final String EXTRA_CHECK_DATA = "extra_check_data";
     String JumlahPenumpang, IdTrip, IdUsersPemesan;
-    ImageButton arrow;
-    LinearLayout hiddenView;
-    CardView cardView;
+    ImageButton arrow1, arrow;
+    LinearLayout hiddenView1, hiddenView;
+    CardView cardView1, cardView;
 
 
     @Override
@@ -56,6 +56,40 @@ public class CreateOrderActivity extends AppCompatActivity {
         cardView = findViewById(R.id.base_cardview);
         arrow = findViewById(R.id.arrow_button);
         hiddenView = findViewById(R.id.hidden_view);
+
+        cardView1 = findViewById(R.id.base_cardview1);
+        arrow1 = findViewById(R.id.arrow_button1);
+        hiddenView1 = findViewById(R.id.hidden_view1);
+
+        arrow1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // If the CardView is already expanded, set its visibility
+                //  to gone and change the expand less icon to expand more.
+                if (hiddenView1.getVisibility() == View.VISIBLE) {
+
+                    // The transition of the hiddenView is carried out
+                    //  by the TransitionManager class.
+                    // Here we use an object of the AutoTransition
+                    // Class to create a default transition.
+                    TransitionManager.beginDelayedTransition(cardView1,
+                            new AutoTransition());
+                    hiddenView1.setVisibility(View.GONE);
+                    arrow1.setImageResource(R.drawable.ic_baseline_expand_more_24);
+                }
+
+                // If the CardView is not expanded, set its visibility
+                // to visible and change the expand more icon to expand less.
+                else {
+
+                    TransitionManager.beginDelayedTransition(cardView1,
+                            new AutoTransition());
+                    hiddenView1.setVisibility(View.VISIBLE);
+                    arrow1.setImageResource(R.drawable.ic_baseline_expand_less_24);
+                }
+            }
+        });
 
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,110 +9,196 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grad"
-        android:id="@+id/rl_create"
-        android:paddingBottom="20dp">
+        android:id="@+id/rl_create">
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_create_passengers"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_marginTop="15sp"-->
-<!--            android:fontFamily="sans-serif-light"-->
-<!--            android:text="Add Passenger(s)"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="32sp" />-->
-
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/base_cardview1"
+            style="@style/Base.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="15dp">
+            android:layout_margin="10dp"
+            android:background="@drawable/circle_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.021">
 
-            <TextView
-                android:id="@+id/tv_create_from"
-                android:layout_width="wrap_content"
+            <!--This is a ConstraintLayout for the entire CardView
+                       including the expandable portion-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Padang"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                app:layout_constraintBottom_toBottomOf="@+id/base_cardview1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.511"
+                tools:layout_editor_absoluteX="-55dp">
 
-            <TextView
-                android:id="@+id/line11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                <!--This is a ConstraintLayout for the fixed portion
+                    of the CardView. The elements
+                    that lie within the fixed portion of the CardView
+                    can be constrained to this layout.-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fixed_layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/grad"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/tv_create_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bukittinggi"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/line22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                    <!--This is ImageButton for the expansion icon.-->
 
-            <TextView
-                android:id="@+id/tv_create_tanggal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2 November 2020"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/heading1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail Trip"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/fixed_layout1"
+                        app:layout_constraintEnd_toEndOf="@+id/fixed_layout1"
+                        app:layout_constraintHorizontal_bias="0.017"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/fixed_layout1"
+                        app:layout_constraintVertical_bias="0.473" />
 
-            <TextView
-                android:id="@+id/line33"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                    <ImageButton
+                        android:id="@+id/arrow_button1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_expand_more_24"
+                        android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/fixed_layout1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.982"
+                        app:layout_constraintStart_toEndOf="@+id/heading1" />
 
-            <TextView
-                android:id="@+id/tv_create_jam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="16.30"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/line31"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                <!--The following is the expandable portion whose
+                    visibility is initially set to 'gone'.
+                    The parent LinearLayout contains 3 child LinearLayouts
+                    that hold a subject name and an icon each.-->
+                <LinearLayout
+                    android:id="@+id/hidden_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fixed_layout1">
 
-            <TextView
-                android:id="@+id/tv_create_jumlah"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2 Passenger(s)"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/tv_create_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Padang"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/line11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_create_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bukittinggi"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/line22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_create_tanggal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 November 2020"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/line33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_create_jam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="16.30"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/line31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_create_jumlah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 Passenger(s)"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:layout_marginTop="15dp">-->
+
+
+<!--        </LinearLayout>-->
 
     </RelativeLayout>
 
+
     <RelativeLayout
+        android:id="@+id/rl_detail_trip"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/rl_create"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_create">
 
         <!--Base CardView-->
         <androidx.cardview.widget.CardView
@@ -147,6 +233,7 @@
                     android:id="@+id/fixed_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/grad"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -163,7 +250,8 @@
                         android:layout_height="wrap_content"
                         android:text="Passenger 1"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
                         app:layout_constraintEnd_toEndOf="@+id/fixed_layout"
@@ -201,95 +289,187 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fixed_layout">
 
-                    <EditText
-                        android:id="@+id/edt_name_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@null"
-                        android:hint="@string/name"
-                        android:inputType="textCapWords"
-                        android:drawablePadding="10dp"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
-
-                    <Spinner
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_marginTop="10dp"
-                        android:textSize="18sp"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/spinner_jenis_kelamin_detail"
-                        android:entries="@array/spinner_jenis_kelamin"/>
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
-                    <Spinner
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <EditText
+                            android:id="@+id/edt_name_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:hint="@string/name"
+                            android:textColor="@color/black"
+                            android:inputType="textCapWords"
+                            android:drawablePadding="10dp"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_marginTop="10dp"
-                        android:textSize="18sp"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/spinner_seat_detail"
-                        android:entries="@array/array_seat"/>
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edt_asal_detail"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Gender"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textSize="18sp"
+                            android:id="@+id/spinner_jenis_kelamin_detail"
+                            android:entries="@array/spinner_jenis_kelamin"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@null"
-                        android:hint="Address (departure)"
-                        android:layout_marginLeft="5dp"
-                        android:inputType="textPostalAddress"
-                        android:drawablePadding="10dp"
-                        android:maxLines="5"
-                        android:singleLine="true" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
-                    <View
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seat"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textSize="18sp"
+                            android:id="@+id/spinner_seat_detail"
+                            android:entries="@array/array_seat"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edt_tujuan_detail"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="From"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <EditText
+                            android:id="@+id/edt_asal_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:hint="Address (departure)"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/black"
+                            android:inputType="textMultiLine"
+                            android:drawablePadding="10dp"
+                            android:maxLines="5"
+                            android:singleLine="true" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@null"
-                        android:layout_marginLeft="5dp"
-                        android:hint="Address (destination)"
-                        android:inputType="textPostalAddress"
-                        android:drawablePadding="10dp"
-                        android:maxLines="5"
-                        android:singleLine="true" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
 
-                    <View
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="To"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <EditText
+                            android:id="@+id/edt_tujuan_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="5dp"
+                            android:hint="Address (destination)"
+                            android:textColor="@color/black"
+                            android:inputType="textMultiLine"
+                            android:drawablePadding="10dp"
+                            android:maxLines="5"
+                            android:singleLine="true" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Phone Number"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="2dp"/>
+
+                        <EditText
+                            android:id="@+id/edt_contact_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:textColor="@color/black"
+                            android:hint="Phone Number (optional)"
+                            android:inputType="phone"
+                            android:layout_marginLeft="5dp"
+                            android:maxLines="1"
+                            android:drawablePadding="10dp"
+                            android:singleLine="true" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/grey"
+                            android:layout_height="1dp" />
+
+                    </LinearLayout>
 
 
-                    <EditText
-                        android:id="@+id/edt_contact_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@null"
-                        android:hint="Phone Number (optional)"
-                        android:inputType="phone"
-                        android:layout_marginLeft="5dp"
-                        android:maxLines="1"
-                        android:layout_marginTop="10dp"
-                        android:drawablePadding="10dp"
-                        android:singleLine="true" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/grey" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
