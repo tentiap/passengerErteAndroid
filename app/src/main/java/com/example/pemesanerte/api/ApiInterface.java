@@ -7,6 +7,7 @@ import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
+import com.example.pemesanerte.model.seat.Seat;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -68,6 +69,11 @@ public interface ApiInterface {
             @Path("jumlah_penumpang") String jumlah_penumpang,
             @Path("id_trip") String id_trip,
             @Path("id_users_pemesan") String id_users_pemesan
+    );
+
+    @GET("seat/{id_trip}")
+    Call<Seat> seatResponse(
+            @Path("id_seat") String id_seat
     );
 
 

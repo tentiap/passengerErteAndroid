@@ -18,12 +18,11 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.register.Register;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText edtName, edtUsername, edtEmail, edtPassword, edtContact, edtAddress;
     Button btnRegister;
     String Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin;
-    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +36,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edtContact = findViewById(R.id.edt_contact);
         edtAddress = findViewById(R.id.edt_address);
 
+
+
         btnRegister = findViewById(R.id.btn_register);
-        btnRegister.setOnClickListener(this);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Nama = edtName.getText().toString();
+                Username = edtUsername.getText().toString();
+                Email = edtEmail.getText().toString();
+                Password = edtPassword.getText().toString();
+                Kontak = edtContact.getText().toString();
+                Alamat = edtAddress.getText().toString();
+
+                if (Nama.trim().equals("")){
+                    edtName.setError("Nama wajib diisi");
+                } else if (Username.trim().equals("")){
+                    edtUsername.setError("Username wajib diisi");
+                } else if (Email.trim().equals("")){
+                    edtEmail.setError("Email wajib diisi");
+                } else if (Password.trim().equals("")){
+                    edtPassword.setError("Password wajib diisi");
+                } else if (Kontak.trim().equals("")){
+                    edtContact.setError("Nomor Handphoe wajib diisi");
+                } else if (Alamat.trim().equals("")){
+                    edtAddress.setError("Alamat wajib diisi");
+                } else{
+                    register();
+                }
+            }
+        });
     }
 
-    public void onRadioButtonClicked(View view){
+        public void onRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
 
         switch (view.getId()){
@@ -52,39 +79,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Jenis_Kelamin = ((RadioButton) view).getText().toString();
 //                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
 //                    Jenis_Kelamin = getString(R.string.satu);
-                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.radio_female:
                 if(checked){
                     Jenis_Kelamin = ((RadioButton) view).getText().toString();
-                    Toast.makeText(this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_register:
-                Nama = edtName.getText().toString();
-                Username = edtUsername.getText().toString();
-                Email = edtEmail.getText().toString();
-                Password = edtPassword.getText().toString();
-                Kontak = edtContact.getText().toString();
-                Alamat = edtAddress.getText().toString();
-
-                register(Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin);
-//                register(Nama, Username, Email, Password, Kontak, Alamat);
-                break;
-        }
-    }
-
-    private void register(String nama, String username, String email, String password, String kontak, String alamat, String jenis_kelamin) {
-//    private void register(String nama, String username, String email, String password, String kontak, String alamat) {
-
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Register> call = apiInterface.registerResponse(nama, username, email, password, kontak, alamat, jenis_kelamin);
+    private void register(){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Register> call = apiInterface.registerResponse(Nama, Username, Email, Password, Jenis_Kelamin, Kontak, Alamat);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
@@ -93,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Intent intentRegister = new Intent(RegisterActivity.this, LoginActivity.class );
                     startActivity(intentRegister);
                     finish();
-
                 }else{
                     Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -102,9 +109,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFailure(Call<Register> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
-
     }
 }

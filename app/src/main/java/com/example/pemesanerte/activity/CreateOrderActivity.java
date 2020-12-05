@@ -3,9 +3,11 @@ package com.example.pemesanerte.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,15 +20,24 @@ import android.widget.Toast;
 
 
 import com.example.pemesanerte.R;
+import com.example.pemesanerte.api.ApiClient;
+import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.search.SearchData;
+import com.example.pemesanerte.model.seat.Seat;
+import com.example.pemesanerte.model.seat.SeatData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class CreateOrderActivity extends AppCompatActivity {
     public static final String EXTRA_CHECK_DATA = "extra_check_data";
     String JumlahPenumpang, IdTrip, IdUsersPemesan;
     ImageButton arrow1, arrow;
     LinearLayout hiddenView1, hiddenView;
+    TextView tvLoop;
     CardView cardView1, cardView;
+    private List<SeatData> listSeat;
 
 
     @Override
@@ -35,9 +46,10 @@ public class CreateOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_order);
 
         CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
-//        JumlahPenumpang = checkData.getJumlah_penumpang();
-//        IdTrip = checkData.getId_trip();
+
+        IdTrip = checkData.getId_trip();
 //        IdUsersPemesan = checkData.getId_users_pemesan();
+//        JumlahPenumpang = checkData.getJumlah_penumpang();
 
         TextView tvAsal = findViewById(R.id.tv_create_from);
         TextView tvTujuan = findViewById(R.id.tv_create_to);
@@ -53,6 +65,19 @@ public class CreateOrderActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Silakan isi data penumpang", Toast.LENGTH_SHORT).show();
 
+        tvLoop = findViewById(R.id.tv_loop);
+
+        int in = Integer.valueOf(checkData.getJumlah_penumpang().toString());
+        for (int i = 0; i < in; i++ ){
+//            loop.setText("Seat yang sudah diisi : ");
+//            loop.append("i = " + i);
+//            TextView heading = findViewById(R.id.heading);
+//            heading.setText(heading.getText().toString() + i + 1);
+            tvLoop.setText(tvLoop.getText().toString() + i + ", ");
+//            loop.append("\n");
+        }
+
+
         cardView = findViewById(R.id.base_cardview);
         arrow = findViewById(R.id.arrow_button);
         hiddenView = findViewById(R.id.hidden_view);
@@ -60,6 +85,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         cardView1 = findViewById(R.id.base_cardview1);
         arrow1 = findViewById(R.id.arrow_button1);
         hiddenView1 = findViewById(R.id.hidden_view1);
+
 
         arrow1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +147,8 @@ public class CreateOrderActivity extends AppCompatActivity {
             }
         });
 
+//        seat(IdTrip);
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_home);
@@ -149,6 +177,23 @@ public class CreateOrderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Add Passenger(s)");
     }
+
+//    private void seat(String idTrip) {
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//        Call<Seat> seatCall = apiInterface.seatResponse(idTrip);
+//        seatCall.enqueue(new Callback<Seat>() {
+//            @Override
+//            public void onResponse(Call<Seat> call, Response<Seat> response) {
+////                SeatData seatData = listSeat.get(pos)
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Seat> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -74,7 +74,7 @@
                         android:id="@+id/arrow_button1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_expand_more_24"
+                        android:src="@drawable/ic_baseline_expand_less_24"
                         android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="@id/fixed_layout1"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +176,18 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@id/hidden_view">
+
+
+
+
+
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -248,7 +260,7 @@
                         android:id="@+id/heading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Passenger 1"
+                        android:text="Passenger "
                         android:layout_marginLeft="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -257,6 +269,40 @@
                         app:layout_constraintEnd_toEndOf="@+id/fixed_layout"
                         app:layout_constraintHorizontal_bias="0.017"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/fixed_layout"
+                        app:layout_constraintVertical_bias="0.473" />
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_loop"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/tv_where"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:text="Seat yang sudah diisi : "-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textStyle="italic"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/arrow_button"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/heading"-->
+<!--                        app:layout_constraintVertical_bias="0.473"-->
+<!--                        tools:layout_editor_absoluteY="11dp"-->
+<!--                        tools:ignore="MissingConstraints" />-->
+
+                    <TextView
+                        android:id="@+id/tv_loop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Seat yang sudah diisi : "
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                        app:layout_constraintEnd_toStartOf="@+id/arrow_button"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/heading"
                         app:layout_constraintTop_toTopOf="@+id/fixed_layout"
                         app:layout_constraintVertical_bias="0.473" />
 
