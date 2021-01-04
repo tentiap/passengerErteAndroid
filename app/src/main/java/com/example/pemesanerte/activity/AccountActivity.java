@@ -43,7 +43,7 @@ public class AccountActivity extends AppCompatActivity {
         email = sessionManager.getUserDetail().get(SessionManager.EMAIL);
         username = sessionManager.getUserDetail().get(SessionManager.USERNAME);
         phone = sessionManager.getUserDetail().get(SessionManager.KONTAK);
-//        gender = sessionManager.getUserDetail().get(SessionManager.JENIS_KELAMIN);
+        gender = sessionManager.getUserDetail().get(SessionManager.JENIS_KELAMIN);
         address = sessionManager.getUserDetail().get(SessionManager.ALAMAT);
 
 
@@ -51,7 +51,7 @@ public class AccountActivity extends AppCompatActivity {
         tvUsername.setText(username);
         tvEmail.setText(email);
         tvPhone.setText(phone);
-//        tvGender.setText(gender);
+        tvGender.setText(gender);
         tvAddress.setText(address);
 
         btnLogout = findViewById(R.id.btn_logout);

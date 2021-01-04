@@ -48,7 +48,7 @@ public class SessionManager {
         user.put(NAMA, sharedPreferences.getString(NAMA, null));
         user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
         user.put(KONTAK, sharedPreferences.getString(KONTAK, null));
-//        user.put(JENIS_KELAMIN, sharedPreferences.getString(JENIS_KELAMIN, null));
+        user.put(JENIS_KELAMIN, sharedPreferences.getString(JENIS_KELAMIN, null));
         user.put(ALAMAT, sharedPreferences.getString(ALAMAT, null));
         return user;
     }

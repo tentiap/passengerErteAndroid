@@ -45,6 +45,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_name"
                         android:layout_width="match_parent"
@@ -52,15 +56,24 @@
                         android:background="@null"
                         android:hint="@string/name"
                         android:inputType="textCapWords"
-                        android:drawableStart="@drawable/ic_name"
-                        android:drawablePadding="10dp"
-                        android:maxLines="1"
-                        android:singleLine="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                    android:drawablePadding="10dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/edt_username"
@@ -70,14 +83,19 @@
                         android:hint="@string/username"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:drawableStart="@drawable/ic_username"
+
                         android:drawablePadding="10dp"
                         android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/edt_email"
@@ -86,15 +104,20 @@
                         android:background="@null"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:drawableStart="@drawable/ic_email_black_24dp"
                         android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/edt_password"
@@ -103,15 +126,17 @@
                         android:background="@null"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:drawableStart="@drawable/ic_lock_black_24dp"
+
                         android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -120,13 +145,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/ic_baseline_radio_button_checked_24"
-                        tools:ignore="VectorDrawableCompat" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        app:srcCompat="@drawable/ic_baseline_radio_button_checked_24"-->
+<!--                        tools:ignore="VectorDrawableCompat" />-->
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -150,7 +175,11 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
                         android:id="@+id/edt_contact"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -159,14 +188,21 @@
                         android:inputType="phone"
                         android:maxLines="1"
                         android:layout_marginTop="10dp"
-                        android:drawableStart="@drawable/ic_baseline_phone_android_24"
+
                         android:drawablePadding="10dp"
                         android:singleLine="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/edt_address"
@@ -175,15 +211,19 @@
                         android:background="@null"
                         android:hint="@string/address"
                         android:inputType="textLongMessage"
-                        android:drawableStart="@drawable/ic_baseline_home_24"
+
                         android:drawablePadding="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="@color/grey" />-->
 
                 <Button
                     android:id="@+id/btn_register"
