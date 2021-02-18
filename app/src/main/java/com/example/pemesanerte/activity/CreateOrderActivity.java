@@ -36,7 +36,7 @@ public class CreateOrderActivity extends AppCompatActivity {
     String JumlahPenumpang, IdTrip, IdUsersPemesan;
     ImageButton arrow1, arrow;
     LinearLayout hiddenView1, hiddenView;
-    TextView tvLoop;
+//    TextView tvLoop;
     CardView cardView1, cardView;
     private List<SeatData> listSeat;
 
@@ -58,25 +58,25 @@ public class CreateOrderActivity extends AppCompatActivity {
         TextView tvJam = findViewById(R.id.tv_create_jam);
         TextView tvJumlah = findViewById(R.id.tv_create_jumlah);
 
-        tvAsal.setText(checkData.getAsal());
-        tvTujuan.setText(checkData.getTujuan());
+//        tvAsal.setText(checkData.getAsal());
+//        tvTujuan.setText(checkData.getTujuan());
         tvTanggal.setText(checkData.getTanggal());
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(checkData.getJumlah_penumpang() + " Passenger(s)");
 
         Toast.makeText(this, "Silakan isi data penumpang", Toast.LENGTH_SHORT).show();
 
-        tvLoop = findViewById(R.id.tv_loop);
-
-        int in = Integer.valueOf(checkData.getJumlah_penumpang().toString());
-        for (int i = 0; i < in; i++ ){
-//            loop.setText("Seat yang sudah diisi : ");
-//            loop.append("i = " + i);
-//            TextView heading = findViewById(R.id.heading);
-//            heading.setText(heading.getText().toString() + i + 1);
-            tvLoop.setText(tvLoop.getText().toString() + i + ", ");
-//            loop.append("\n");
-        }
+//        tvLoop = findViewById(R.id.tv_loop);
+//
+//        int in = Integer.valueOf(checkData.getJumlah_penumpang().toString());
+//        for (int i = 0; i < in; i++ ){
+////            loop.setText("Seat yang sudah diisi : ");
+////            loop.append("i = " + i);
+////            TextView heading = findViewById(R.id.heading);
+////            heading.setText(heading.getText().toString() + i + 1);
+//            tvLoop.setText(tvLoop.getText().toString() + i + ", ");
+////            loop.append("\n");
+//        }
 
 
         cardView = findViewById(R.id.base_cardview);
@@ -104,6 +104,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                             new AutoTransition());
                     hiddenView1.setVisibility(View.GONE);
                     arrow1.setImageResource(R.drawable.ic_baseline_expand_more_24);
+
                 }
 
                 // If the CardView is not expanded, set its visibility

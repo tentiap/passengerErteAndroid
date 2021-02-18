@@ -181,7 +181,7 @@
     </string-array>
 
     <string-array name="spinner_jenis_kelamin">
-        <item>Laki-laki</item>
+        <item>Male</item>
         <item>Perempuan</item>
     </string-array>
 

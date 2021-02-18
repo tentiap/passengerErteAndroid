@@ -106,7 +106,7 @@
                         android:id="@+id/tv_create_from"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Padang"
+                        android:text="London"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -122,7 +122,7 @@
                         android:id="@+id/tv_create_to"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bukittinggi"
+                        android:text="Paris"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -176,17 +176,17 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@id/hidden_view">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/hidden_view">-->
 
 
 
 
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -260,7 +260,7 @@
                         android:id="@+id/heading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Passenger "
+                        android:text="Passenger 1"
                         android:layout_marginLeft="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -290,21 +290,21 @@
                     <!--                        tools:layout_editor_absoluteY="11dp"-->
                     <!--                        tools:ignore="MissingConstraints" />-->
 
-                    <TextView
-                        android:id="@+id/tv_loop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Seat yang sudah diisi : "
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:textStyle="italic"
-                        app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
-                        app:layout_constraintEnd_toStartOf="@+id/arrow_button"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/heading"
-                        app:layout_constraintTop_toTopOf="@+id/fixed_layout"
-                        app:layout_constraintVertical_bias="0.473" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_loop"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:text="Seat yang sudah diisi : "-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textStyle="italic"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/arrow_button"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/heading"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/fixed_layout"-->
+<!--                        app:layout_constraintVertical_bias="0.473" />-->
 
                     <ImageButton
                         android:id="@+id/arrow_button"
@@ -521,7 +521,42 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="22dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="503dp"
+            android:background="@drawable/button_rounded"
+            android:text="Submit"
+            android:textColor="@color/white" />
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_navigation"
+        android:layout_below="@+id/rl_detail_trip">
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
 
 
