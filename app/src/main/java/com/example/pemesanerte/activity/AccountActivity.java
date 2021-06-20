@@ -9,16 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity implements View.OnClickListener{
 
     SessionManager sessionManager;
-    TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress;
+    TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress, tvEdit;
 //    Button btnLogout;
     Button btnLogin, btnRegister, btnLogout;
     String name, username, email, phone, gender, address;
@@ -39,6 +40,9 @@ public class AccountActivity extends AppCompatActivity {
         tvGender = findViewById(R.id.tv_gender);
         tvAddress = findViewById(R.id.tv_address);
 
+        tvEdit = findViewById(R.id.tv_edit);
+        tvEdit.setOnClickListener(this);
+
         name = sessionManager.getUserDetail().get(SessionManager.NAMA);
         email = sessionManager.getUserDetail().get(SessionManager.EMAIL);
         username = sessionManager.getUserDetail().get(SessionManager.USERNAME);
@@ -55,15 +59,16 @@ public class AccountActivity extends AppCompatActivity {
         tvAddress.setText(address);
 
         btnLogout = findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(this);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sessionManager.logoutSession();
-                moveToLogin();
-
-            }
-        });
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sessionManager.logoutSession();
+//                moveToLogin();
+//
+//            }
+//        });
 
 //        Soon delete
 //        btnLogin = findViewById(R.id.btn_login1);
@@ -107,11 +112,32 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_edit:
+                edit();
+//                Toast.makeText(this, "Text Edit", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_logout:
+                sessionManager.logoutSession();
+                moveToLogin();
+//                Toast.makeText(this, "Buttton Logout", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     private void moveToLogin() {
         Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
 
+    }
+
+    private void edit(){
+        Intent intentEdit = new Intent(AccountActivity.this, EditActivity.class);
+        startActivity(intentEdit);
+        finish();
     }
 }

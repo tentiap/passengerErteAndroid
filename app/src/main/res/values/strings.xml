@@ -182,7 +182,7 @@
 
     <string-array name="spinner_jenis_kelamin">
         <item>Male</item>
-        <item>Perempuan</item>
+        <item>Female</item>
     </string-array>
 
 
