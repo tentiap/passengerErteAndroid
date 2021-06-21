@@ -5,6 +5,7 @@ import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
+import com.example.pemesanerte.model.pemesan.Pemesan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.seat.Seat;
@@ -74,6 +75,17 @@ public interface ApiInterface {
     @GET("seat/{id_trip}")
     Call<Seat> seatResponse(
             @Path("id_seat") String id_seat
+    );
+
+    @FormUrlEncoded
+    @POST("updateDataPemesan")
+    Call<Pemesan> pemesanResponse(
+            @Field("nama") String nama,
+            @Field("username") String username,
+            @Field("email") String email,
+            @Field("jenis_kelamin") String jenis_kelamin,
+            @Field("kontak") String kontak,
+            @Field("alamat") String alamat
     );
 
 

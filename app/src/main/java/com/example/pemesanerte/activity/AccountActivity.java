@@ -2,12 +2,14 @@ package com.example.pemesanerte.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +24,19 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
     TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress, tvEdit;
 //    Button btnLogout;
     Button btnLogin, btnRegister, btnLogout;
-    String name, username, email, phone, gender, address;
+    String name, username, email, phone, gender, address, idPemesan;
+
+//    private SwipeRefreshLayout swipeRefreshLayout;
+//    private ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+//        swipeRefreshLayout = findViewById(R.id.swipe_refresh3);
+//        progressBar = findViewById(R.id.progress_bar3);
 
         //Soon delete maybe
         sessionManager = new SessionManager(AccountActivity.this);
@@ -49,6 +57,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         phone = sessionManager.getUserDetail().get(SessionManager.KONTAK);
         gender = sessionManager.getUserDetail().get(SessionManager.JENIS_KELAMIN);
         address = sessionManager.getUserDetail().get(SessionManager.ALAMAT);
+        idPemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
 
 
         tvName.setText(name);
@@ -60,6 +69,16 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(this);
+
+//        //cek ini lagi
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipeRefreshLayout.setRefreshing(true);
+////                showRecyclerList(idUser);
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
 
 //        btnLogout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -137,6 +156,13 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     private void edit(){
         Intent intentEdit = new Intent(AccountActivity.this, EditActivity.class);
+        intentEdit.putExtra("xidPemesan", idPemesan);
+        intentEdit.putExtra("xUsername", username);
+        intentEdit.putExtra("xEmail", email);
+        intentEdit.putExtra("xName", name);
+        intentEdit.putExtra("xPhone", phone);
+        intentEdit.putExtra("xGender", gender);
+        intentEdit.putExtra("xAddress", address);
         startActivity(intentEdit);
         finish();
     }

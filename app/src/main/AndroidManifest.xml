@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.EditActivity"></activity>
+        <activity
+            android:name=".activity.EditActivity"
+            android:parentActivityName=".activity.AccountActivity"
+            android:theme="@style/AppThemeActionBar" />
+
         <activity
             android:name=".activity.RegisterActivity"
             android:parentActivityName=".activity.LoginActivity"
