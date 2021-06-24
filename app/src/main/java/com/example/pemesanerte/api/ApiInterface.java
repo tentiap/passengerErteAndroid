@@ -80,6 +80,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("updateDataPemesan")
     Call<Pemesan> pemesanResponse(
+            @Field("id_users") String id_users,
             @Field("nama") String nama,
             @Field("username") String username,
             @Field("email") String email,

@@ -152,6 +152,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(intent);
         finish();
 
+
     }
 
     private void edit(){

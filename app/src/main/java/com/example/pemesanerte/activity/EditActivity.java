@@ -50,7 +50,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         btnUpdate.setOnClickListener(this);
 
         Intent terima = getIntent();
-        xIdPemesan = terima.getStringExtra("xIdPemesan");
+        xIdPemesan = terima.getStringExtra("xidPemesan");
         xUsername = terima.getStringExtra("xUsername");
         xEmail = terima.getStringExtra("xEmail");
         xName = terima.getStringExtra("xName");
@@ -91,16 +91,16 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 //        spinner.setAdapter(adapter);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
     private int getIndex(Spinner spinnerGender, String xGender) {
         for (int i=0; i < spinnerGender.getCount(); i++){
@@ -118,15 +118,17 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 //                backToAccount();
 //                break;
             case R.id.btn_eu:
+//                yIdPemesan = xIdPemesan.toString();
                 yName = euName.getText().toString();
                 yUsername = euUsername.getText().toString();
                 yEmail = euEmail.getText().toString();
-//                yGender = spinnerGender.getSelectedItem().toString();
-                yGender = euName.getText().toString();
+                yGender = spinnerGender.getSelectedItem().toString();
+//                yGender = euName.getText().toString();
                 yPhone = euPhone.getText().toString();
                 yAddress = euAddress.getText().toString();
 
                 update();
+
         }
 
     }
@@ -139,19 +141,25 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     private void update() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Pemesan> call = apiInterface.pemesanResponse(yName, yUsername, yEmail, yGender, yPhone, yAddress);
+        Call<Pemesan> call = apiInterface.pemesanResponse(xIdPemesan, yName, yUsername, yEmail, yGender, yPhone, yAddress);
         call.enqueue(new Callback<Pemesan>() {
             @Override
             public void onResponse(Call<Pemesan> call, Response<Pemesan> response) {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
-                    Toast.makeText(EditActivity.this, "Yow", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
-//                    Intent intentUpdate = new Intent(EditActivity.this, AccountActivity.class );
-//                    startActivity(intentUpdate);
+                    Intent intentUpdate = new Intent(EditActivity.this, AccountActivity.class );
+                    startActivity(intentUpdate);
                     finish();
                 }else{
-                    Toast.makeText(EditActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this, "Nomor HP udah ada", Toast.LENGTH_SHORT).show();
+
                 }
+
+//                String message = response.body().getMessage();
+//                Toast.makeText(EditActivity.this, "id = "+xIdPemesan+ " "+yName+ " "+yUsername+ " "
+//                                +yEmail+ " "+yGender+ " "+yPhone+ " "+yAddress, Toast.LENGTH_LONG).show();
+                finish();
             }
 
             @Override
@@ -159,7 +167,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(EditActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-//        Toast.makeText(this, "Button Update diklik", Toast.LENGTH_SHORT).show();
     }
 
 
