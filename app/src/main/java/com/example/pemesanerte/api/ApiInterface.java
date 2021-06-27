@@ -1,6 +1,7 @@
 package com.example.pemesanerte.api;
 
 //import com.example.pemesanerte.model.history.History;
+import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.history.History;
@@ -70,6 +71,11 @@ public interface ApiInterface {
             @Path("jumlah_penumpang") String jumlah_penumpang,
             @Path("id_trip") String id_trip,
             @Path("id_users_pemesan") String id_users_pemesan
+    );
+
+    @GET("getBookedSeat/{id_trip}")
+    Call<BookedSeat> bookedSeatResponse(
+            @Path("id_trip") String id_trip
     );
 
     @GET("seat/{id_trip}")

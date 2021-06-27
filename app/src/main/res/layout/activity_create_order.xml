@@ -106,7 +106,7 @@
                         android:id="@+id/tv_create_from"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="London"
+                        android:text="Padang"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -122,7 +122,7 @@
                         android:id="@+id/tv_create_to"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Paris"
+                        android:text="Bukittinggi"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -181,11 +181,6 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:orientation="vertical"-->
 <!--                    app:layout_constraintBottom_toBottomOf="@id/hidden_view">-->
-
-
-
-
-
 <!--                </LinearLayout>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -260,7 +255,7 @@
                         android:id="@+id/heading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Passenger 1"
+                        android:text="Passenger "
                         android:layout_marginLeft="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -272,23 +267,23 @@
                         app:layout_constraintTop_toTopOf="@+id/fixed_layout"
                         app:layout_constraintVertical_bias="0.473" />
 
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/tv_loop"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_below="@+id/tv_where"-->
-                    <!--                        android:layout_centerHorizontal="true"-->
-                    <!--                        android:layout_centerVertical="true"-->
-                    <!--                        android:text="Seat yang sudah diisi : "-->
-                    <!--                        android:textColor="@color/white"-->
-                    <!--                        android:textSize="15sp"-->
-                    <!--                        android:textStyle="italic"-->
-                    <!--                        app:layout_constraintEnd_toStartOf="@+id/arrow_button"-->
-                    <!--                        app:layout_constraintHorizontal_bias="0.0"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/heading"-->
-                    <!--                        app:layout_constraintVertical_bias="0.473"-->
-                    <!--                        tools:layout_editor_absoluteY="11dp"-->
-                    <!--                        tools:ignore="MissingConstraints" />-->
+<!--                                        <TextView-->
+<!--                                            android:id="@+id/tv_loop"-->
+<!--                                            android:layout_width="wrap_content"-->
+<!--                                            android:layout_height="wrap_content"-->
+<!--                                            android:layout_below="@+id/tv_where"-->
+<!--                                            android:layout_centerHorizontal="true"-->
+<!--                                            android:layout_centerVertical="true"-->
+<!--                                            android:text="Seat yang sudah diisi : "-->
+<!--                                            android:textColor="@color/white"-->
+<!--                                            android:textSize="15sp"-->
+<!--                                            android:textStyle="italic"-->
+<!--                                            app:layout_constraintEnd_toStartOf="@+id/arrow_button"-->
+<!--                                            app:layout_constraintHorizontal_bias="0.0"-->
+<!--                                            app:layout_constraintStart_toEndOf="@+id/heading"-->
+<!--                                            app:layout_constraintVertical_bias="0.473"-->
+<!--                                            tools:layout_editor_absoluteY="11dp"-->
+<!--                                            tools:ignore="MissingConstraints" />-->
 
 <!--                    <TextView-->
 <!--                        android:id="@+id/tv_loop"-->
@@ -410,8 +405,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:textSize="18sp"
-                            android:id="@+id/spinner_seat_detail"
-                            android:entries="@array/array_seat"/>
+                            android:id="@+id/spinner_seat_available"
+                            />
 
                     </LinearLayout>
 
@@ -522,7 +517,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/btn_logout"
+            android:id="@+id/btn_book"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -536,7 +531,7 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="503dp"
             android:background="@drawable/button_rounded"
-            android:text="Submit"
+            android:text="Book"
             android:textColor="@color/white" />
 
     </RelativeLayout>

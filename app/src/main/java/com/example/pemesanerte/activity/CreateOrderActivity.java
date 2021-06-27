@@ -13,9 +13,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,14 @@ import android.widget.Toast;
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.bookedSeat.BookedSeat;
+import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
 import com.example.pemesanerte.model.check.CheckData;
-import com.example.pemesanerte.model.search.SearchData;
-import com.example.pemesanerte.model.seat.Seat;
 import com.example.pemesanerte.model.seat.SeatData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CreateOrderActivity extends AppCompatActivity {
@@ -38,7 +42,14 @@ public class CreateOrderActivity extends AppCompatActivity {
     LinearLayout hiddenView1, hiddenView;
 //    TextView tvLoop;
     CardView cardView1, cardView;
+    Button btnBook;
+    Spinner spinnerSeat;
     private List<SeatData> listSeat;
+
+    List<BookedSeatData> bookedSeatData;
+    List<String> listSpinner = new ArrayList<String>();
+//    String[] listBookedSeat;
+    List<String> listBookedSeat = new ArrayList<>();
 
 
     @Override
@@ -49,17 +60,19 @@ public class CreateOrderActivity extends AppCompatActivity {
         CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
 
         IdTrip = checkData.getId_trip();
-//        IdUsersPemesan = checkData.getId_users_pemesan();
-//        JumlahPenumpang = checkData.getJumlah_penumpang();
+        IdUsersPemesan = checkData.getId_users_pemesan();
+        JumlahPenumpang = checkData.getJumlah_penumpang();
 
         TextView tvAsal = findViewById(R.id.tv_create_from);
         TextView tvTujuan = findViewById(R.id.tv_create_to);
         TextView tvTanggal = findViewById(R.id.tv_create_tanggal);
         TextView tvJam = findViewById(R.id.tv_create_jam);
         TextView tvJumlah = findViewById(R.id.tv_create_jumlah);
+        spinnerSeat = findViewById(R.id.spinner_seat_available);
 
-//        tvAsal.setText(checkData.getAsal());
-//        tvTujuan.setText(checkData.getTujuan());
+
+        tvAsal.setText(checkData.getAsal());
+        tvTujuan.setText(checkData.getTujuan());
         tvTanggal.setText(checkData.getTanggal());
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(checkData.getJumlah_penumpang() + " Passenger(s)");
@@ -67,14 +80,14 @@ public class CreateOrderActivity extends AppCompatActivity {
         Toast.makeText(this, "Silakan isi data penumpang", Toast.LENGTH_SHORT).show();
 
 //        tvLoop = findViewById(R.id.tv_loop);
-//
+
 //        int in = Integer.valueOf(checkData.getJumlah_penumpang().toString());
 //        for (int i = 0; i < in; i++ ){
 ////            loop.setText("Seat yang sudah diisi : ");
 ////            loop.append("i = " + i);
 ////            TextView heading = findViewById(R.id.heading);
 ////            heading.setText(heading.getText().toString() + i + 1);
-//            tvLoop.setText(tvLoop.getText().toString() + i + ", ");
+////            tvLoop.setText(tvLoop.getText().toString() + i + ", ");
 ////            loop.append("\n");
 //        }
 
@@ -87,6 +100,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         arrow1 = findViewById(R.id.arrow_button1);
         hiddenView1 = findViewById(R.id.hidden_view1);
 
+        showListItem();
 
         arrow1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,11 +159,15 @@ public class CreateOrderActivity extends AppCompatActivity {
                             new AutoTransition());
                     hiddenView.setVisibility(View.VISIBLE);
                     arrow.setImageResource(R.drawable.ic_baseline_expand_less_24);
+
                 }
             }
         });
 
-//        seat(IdTrip);
+
+
+//       showAvailableSeat();
+
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -179,6 +197,168 @@ public class CreateOrderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Add Passenger(s)");
     }
+
+    private void showListItem() {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(IdTrip);
+        bookedSeatCall.enqueue(new Callback<BookedSeat>() {
+            @Override
+            public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
+                if (response.isSuccessful()){
+                    bookedSeatData = response.body().getData();
+
+                    for (int i = 0; i < bookedSeatData.size(); i++){
+                        listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
+                    }
+
+                    String[] array = listBookedSeat.toArray(new String[0]);
+
+                    for (int i = 1; i < 8; i++){
+                        boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
+
+                        if (checkBookedSeat == true) {
+                            System.out.println("Skip aja ya, seat udah dibooking");
+                        } else {
+                            listSpinner.add(String.valueOf(i));
+                        }
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateOrderActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerSeat.setAdapter(adapter);
+
+                }else{
+                    Toast.makeText(CreateOrderActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookedSeat> call, Throwable t) {
+                Toast.makeText(CreateOrderActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+//    private void showListItemKacau() {
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//        Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(IdTrip);
+//        bookedSeatCall.enqueue(new Callback<BookedSeat>() {
+//            @Override
+//            public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
+//                if (response.isSuccessful()){
+//                    List<BookedSeatData> bookedSeatData = response.body().getData();
+////                                List<String> listSpinner = new ArrayList<String>();
+////                                List<String> listBookedSeat = new ArrayList<>();
+////
+//                    for (int i = 0; i < bookedSeatData.size(); i++){
+//                        listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
+//                    }
+//
+////                   String[] arr = new String[listBookedSeat.size()];
+////                    arr = (String[]) listBookedSeat.toArray();
+//
+////                    Integer arr[] = { 1, 3 };
+//
+//                    String[] array = listBookedSeat.toArray(new String[0]);
+////                    System.out.println(array);
+////                    for (String s : array) {
+////                        System.out.println(s);
+////                    }
+//
+////                    System.out.println(listBookedSeat.getClass().getSimpleName());
+////                    System.out.println(listBookedSeat);
+////                    System.out.println(arr[0]);
+//
+//
+//                    for (int i = 1; i < 8; i++){
+//
+////                        Integer arr[] = {1, 2, 3, 4, 5, 6};
+//                        boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
+//
+////
+//                        if (checkBookedSeat == true) {
+//                            System.out.println("Skip aja ya, seat udah dibooking");
+//                        } else {
+//                            listSpinner.add(String.valueOf(i));
+//                        }
+//
+////                                    listSpinner.add(bookedSeatDataList.get(i).getIdSeat());
+//                    }
+//
+////                    for (int i = 1; i <= 7; i++ ){
+////                        for (int j = 0; j < bookedSeatData.size(); j++){
+////                            listBookedSeat.add(bookedSeatData.get(j).getIdSeat());
+////                        }
+////
+////                        boolean checkBookedSeat = listBookedSeat.contains(i);
+////                        if (checkBookedSeat == true) {
+////                            System.out.println("Skip aja ya, seat udah dibooking");
+////                        } else {
+////                            listSpinner.add(String.valueOf(i));
+////                        }
+////                    }
+////
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateOrderActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinnerSeat.setAdapter(adapter);
+//
+//                }
+//
+////                                System.out.println(Arrays.toString(bookedSeatData.toArray()));
+//
+////                    System.out.println(listBookedSeat);
+//
+////                                for (int i = 1; i < 8; i++){
+////
+////                                    boolean checkBookedSeat = listBookedSeat.contains(i);
+//////
+////                                    if (checkBookedSeat == true) {
+////                                            System.out.println("Skip aja ya, seat udah dibooking");
+////                                    } else {
+////                                            listSpinner.add(String.valueOf(i));
+////                                    }
+////
+//////                                    listSpinner.add(bookedSeatDataList.get(i).getIdSeat());
+////                                }
+////
+////                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateOrderActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+////                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+////                                spinnerSeat.setAdapter(adapter);
+//                else{
+//                    Toast.makeText(CreateOrderActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BookedSeat> call, Throwable t) {
+//                Toast.makeText(CreateOrderActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
+
+//    private void showAvailableSeat() {
+//        for (int i = 0; i < 7; i++){
+//
+//            boolean checkBookedSeat = listBookedSeat.contains(i+1);
+//
+//            if (checkBookedSeat == true) {
+//                System.out.println("Skip aja ya, seat udah dibooking");
+////                listSpinner.add(String.valueOf(i));
+//
+//            } else {
+//                listSpinner.add(String.valueOf(i));
+////                System.out.println("Skip aja ya, seat udah dibooking");
+//
+//            }
+//
+//        }
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateOrderActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerSeat.setAdapter(adapter);
+//    }
 
 //    private void seat(String idTrip) {
 //        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
