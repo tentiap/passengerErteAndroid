@@ -210,7 +210,7 @@
                         android:layout_height="40dp"
                         android:background="@null"
                         android:hint="@string/address"
-                        android:inputType="textLongMessage"
+                        android:inputType="textMultiLine"
 
                         android:drawablePadding="10dp"
                         android:maxLines="1"

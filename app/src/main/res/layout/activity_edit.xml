@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Address"
                         android:textSize="20sp"
-                        android:inputType="text"/>
+                        android:inputType="textMultiLine"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

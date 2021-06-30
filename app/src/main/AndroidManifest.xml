@@ -14,13 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CricketersActivity"></activity>
-        <activity android:name=".activity.DynamicViewsActivity">
+        <activity
+            android:name=".activity.CreateMultipleActivity"
+            android:theme="@style/AppThemeActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.CricketersActivity" />
+        <activity android:name=".activity.DynamicViewsActivity">
+
         </activity>
         <activity
             android:name=".activity.EditActivity"
@@ -46,7 +50,7 @@
         <!-- android:parentActivityName=".activity.LoginActivity" -->
         <!-- android:theme="@style/AppThemeActionBar1" /> &lt;!&ndash;  &ndash;&gt; -->
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

@@ -25,15 +25,18 @@ public class CricketerAdapter extends RecyclerView.Adapter<CricketerAdapter.Cric
     @Override
     public CricketerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_cricketer, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_cricketer,parent,false);
+
         return new CricketerView(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CricketerView holder, int position) {
+
         Cricketer cricketer = cricketersList.get(position);
         holder.textCricketerName.setText(cricketer.getCricketerName());
         holder.textTeamName.setText(cricketer.getTeamName());
+
 
     }
 
@@ -44,7 +47,7 @@ public class CricketerAdapter extends RecyclerView.Adapter<CricketerAdapter.Cric
 
     public class CricketerView extends RecyclerView.ViewHolder{
 
-        TextView textCricketerName, textTeamName;
+        TextView textCricketerName,textTeamName;
         public CricketerView(@NonNull View itemView) {
             super(itemView);
 
@@ -53,6 +56,5 @@ public class CricketerAdapter extends RecyclerView.Adapter<CricketerAdapter.Cric
 
         }
     }
-
 
 }

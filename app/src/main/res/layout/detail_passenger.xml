@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linear_detail_passenger"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.alespero.expandablecardview.ExpandableCardView
+        android:id="@+id/card_detail_passenger"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/grad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:title="Detail Passenger"
+        app:icon="@drawable/ic_person"
+        app:inner_view="@layout/row_create_multiple"
+        app:expandOnClick="true"/>
+
+</LinearLayout>
