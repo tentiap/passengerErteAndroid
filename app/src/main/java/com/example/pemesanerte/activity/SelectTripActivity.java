@@ -252,7 +252,7 @@ public class SelectTripActivity extends AppCompatActivity {
                     checkData.setJam(Jam);
 
                     Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
-                    Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateOrderActivity.class);
+                    Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
                     selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
                     startActivity(selectTripIntent);
 

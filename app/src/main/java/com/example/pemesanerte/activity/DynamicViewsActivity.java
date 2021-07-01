@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.pemesanerte.Cricketer;
 import com.example.pemesanerte.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class DynamicViewsActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_dynamic_views);
 
         layoutList = findViewById(R.id.layout_list);
-        buttonAdd = findViewById(R.id.button_add);
+        buttonAdd = findViewById(R.id.button_add_multiple);
         buttonSubmitList = findViewById(R.id.button_submit_list);
 
         buttonAdd.setOnClickListener(this);
@@ -51,7 +50,7 @@ public class DynamicViewsActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button_add:
+            case R.id.button_add_multiple:
                 addView();
                 break;
             case R.id.button_submit_list:

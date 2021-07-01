@@ -17,10 +17,6 @@
         <activity
             android:name=".activity.CreateMultipleActivity"
             android:theme="@style/AppThemeActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.CricketersActivity" />
         <activity android:name=".activity.DynamicViewsActivity">
@@ -50,7 +46,13 @@
         <!-- android:parentActivityName=".activity.LoginActivity" -->
         <!-- android:theme="@style/AppThemeActionBar1" /> &lt;!&ndash;  &ndash;&gt; -->
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
