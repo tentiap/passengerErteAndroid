@@ -7,6 +7,7 @@ import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.pemesan.Pemesan;
+import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.seat.Seat;
@@ -37,6 +38,13 @@ public interface ApiInterface {
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("kontak") String kontak,
             @Field("alamat") String alamat
+    );
+
+    @FormUrlEncoded
+    @POST("createPesanan")
+    Call<Pesanan> pesananResponse(
+            @Field("id_trip") String id_trip,
+            @Field("id_users_pemesan") String id_users_pemesan
     );
 
 //    @FormUrlEncoded

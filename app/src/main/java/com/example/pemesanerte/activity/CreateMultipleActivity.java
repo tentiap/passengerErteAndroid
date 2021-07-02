@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateMultipleActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateMultipleActivity extends AppCompatActivity {
 
     LinearLayout layoutList;
     Button buttonAddMultiple;
@@ -50,6 +50,10 @@ public class CreateMultipleActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_multiple);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Add Passenger(s)");
 
         CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
 
@@ -86,8 +90,6 @@ public class CreateMultipleActivity extends AppCompatActivity implements View.On
         layoutList = findViewById(R.id.layout_list);
         detailTrip = findViewById(R.id.card_detail_trip);
         detailTrip.expand();
-        buttonAddMultiple = findViewById(R.id.button_add_multiple);
-        buttonAddMultiple.setOnClickListener(this);
 //        spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
         spinnerMultiGender = findViewById(R.id.spinner_multi_passenger_gender);
 
@@ -97,13 +99,22 @@ public class CreateMultipleActivity extends AppCompatActivity implements View.On
         TextView tvJam = findViewById(R.id.tv_create_jam);
         TextView tvJumlah = findViewById(R.id.tv_create_jumlah);
 
-
-
         tvAsal.setText(asal);
         tvTujuan.setText(tujuan);
         tvTanggal.setText(checkData.getTanggal());
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
+
+        buttonAddMultiple = findViewById(R.id.button_add_multiple);
+        buttonAddMultiple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+
+
 
 //        detailTrip.setOnExpandedListener(new ExpandableCardView.OnExpandedListener() {
 //            @Override
@@ -139,17 +150,12 @@ public class CreateMultipleActivity extends AppCompatActivity implements View.On
 //            }
 //        });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Add Passenger(s)");
-
-
     }
 
-    @Override
-    public void onClick(View view) {
-//        addView();
-    }
+//    @Override
+//    public void onClick(View view) {
+////        addView();
+//    }
 
 
     private void addView() {

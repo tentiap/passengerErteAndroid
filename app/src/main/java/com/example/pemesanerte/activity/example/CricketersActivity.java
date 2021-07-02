@@ -1,4 +1,4 @@
-package com.example.pemesanerte.activity;
+package com.example.pemesanerte.activity.example;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

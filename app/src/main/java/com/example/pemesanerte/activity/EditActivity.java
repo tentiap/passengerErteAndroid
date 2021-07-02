@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pemesanerte.R;
+import com.example.pemesanerte.SessionManager;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.pemesan.Pemesan;
@@ -33,11 +34,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     String xIdPemesan, xUsername, xEmail, xName, xPhone, xGender, xAddress;
     String yIdPemesan, yUsername, yEmail, yName, yPhone, yGender, yAddress;
     Spinner spinnerGender;
+    SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        sessionManager = new SessionManager(EditActivity.this);
         
 //        tvCancel = findViewById(R.id.tv_cancel);
 //        tvCancel.setOnClickListener(this);
@@ -148,9 +153,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
                     Toast.makeText(EditActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
-                    Intent intentUpdate = new Intent(EditActivity.this, AccountActivity.class );
-                    startActivity(intentUpdate);
-                    finish();
+//                    Intent intentUpdate = new Intent(EditActivity.this, AccountActivity.class );
+//                    startActivity(intentUpdate);
+//                    finish();
+                    moveToLogin();
                 }else{
                     Toast.makeText(EditActivity.this, "Nomor HP udah ada", Toast.LENGTH_SHORT).show();
 
@@ -167,6 +173,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(EditActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void moveToLogin() {
+        Intent intent = new Intent(EditActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        finish();
+
+
     }
 
 

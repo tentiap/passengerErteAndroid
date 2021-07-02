@@ -17,11 +17,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.pemesanerte.R;
+import com.example.pemesanerte.activity.example.CreateOrderActivity;
 import com.example.pemesanerte.adapter.SearchAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.search.SearchData;
@@ -252,9 +254,25 @@ public class SelectTripActivity extends AppCompatActivity {
                     checkData.setJam(Jam);
 
                     Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
-                    Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
-                    selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
-                    startActivity(selectTripIntent);
+
+                    ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
+                    Call<Pesanan> pesananCall = apiInterface1.pesananResponse(idTrip, idUsersPemesan);
+                    pesananCall.enqueue(new Callback<Pesanan>() {
+                        @Override
+                        public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
+                            String message = response.body().getMessage();
+                            Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
+                            Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
+                            selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
+                            startActivity(selectTripIntent);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Pesanan> call, Throwable t) {
+                            Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
 
                 } else {
                     String message = response.body().getMessage();

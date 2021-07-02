@@ -18,8 +18,8 @@
             android:name=".activity.CreateMultipleActivity"
             android:theme="@style/AppThemeActionBar">
         </activity>
-        <activity android:name=".activity.CricketersActivity" />
-        <activity android:name=".activity.DynamicViewsActivity">
+        <activity android:name=".activity.example.CricketersActivity" />
+        <activity android:name=".activity.example.DynamicViewsActivity">
 
         </activity>
         <activity
@@ -32,7 +32,7 @@
             android:theme="@style/AppThemeActionBar1" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity
-            android:name=".activity.CreateOrderActivity"
+            android:name=".activity.example.CreateOrderActivity"
             android:theme="@style/AppThemeActionBar" />
         <activity
             android:name=".activity.SelectTripActivity"

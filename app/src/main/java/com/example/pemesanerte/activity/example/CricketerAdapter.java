@@ -1,4 +1,4 @@
-package com.example.pemesanerte.activity;
+package com.example.pemesanerte.activity.example;
 
 import android.view.LayoutInflater;
 import android.view.View;
