@@ -170,7 +170,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < Integer.valueOf(jumlahPenumpang); i++ ){
-            View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
+            final View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
             ExpandableCardView cardDetailPassenger = findViewById(R.id.card_detail_passenger);
 
 //            checkBoxSubmit.oncli
@@ -182,19 +182,51 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //            String jumlah = "Penumpang 1";
 //            cardDetailPassenger.setTitle(jumlah);
             layoutList.addView(detailPassenger);
-            checkBoxSubmit = findViewById(R.id.checkbox_submit);
-            onCheckboxClicked(checkBoxSubmit);
+//            checkBoxSubmit = findViewById(R.id.checkbox_submit);
+//            onCheckboxClicked(checkBoxSubmit);
 //            showListItem();
 
         }
 
         showListItem();
+        getData();
+
+
 
 //        cardDetailPassenger.setTitle("Detail Passenger 1");
 
 //        EditText editText = (EditText)cricketerView.findViewById(R.id.edit_cricketer_name);
 
 
+    }
+
+    private void getData() {
+        for (int i=0; i<layoutList.getChildCount(); i++){
+            View passengerView = layoutList.getChildAt(i);
+
+            EditText editTextName = (EditText)passengerView.findViewById(R.id.multi_passenger_name);
+            CheckBox checkBoxSubmit = (CheckBox)passengerView.findViewById(R.id.checkbox_submit);
+            checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean checked = ((CheckBox) view).isChecked();
+                    if (checked){
+                        String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
+                        namaDetail = editTextName.getText().toString();
+                        view.setEnabled(false);
+                        editTextName.setEnabled(false);
+
+                        Toast.makeText(CreateMultipleActivity.this, namaDetail, Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }
+            });
+
+
+//            onCheckboxClicked(checkBoxSubmit);
+
+        }
     }
 
     private void showListItem() {
@@ -245,17 +277,15 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
         if (checked){
             String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
+//            namaDetail = " ";
 
 //            EditText editText = (EditText)cricketerView.findViewById(R.id.edit_cricketer_name);
             EditText edNameDetail = (EditText)findViewById(R.id.multi_passenger_name);
             namaDetail = edNameDetail.getText().toString();
             Toast.makeText(this, namaDetail, Toast.LENGTH_SHORT).show();
             namaDetail = " ";
-
-//            edNameDetail.setEnabled(false);
-
-//            Toast.makeText(CreateMultipleActivity.this, "Checkbox Submit clicked", Toast.LENGTH_SHORT).show();
-//            view.setEnabled(false);
+            edNameDetail.setEnabled(false);
+            view.setEnabled(false);
             createDetailPesanan();
 
         }
