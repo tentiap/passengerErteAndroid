@@ -4,7 +4,9 @@ package com.example.pemesanerte.api;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
+import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 import com.example.pemesanerte.model.history.History;
+import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
 import com.example.pemesanerte.model.pemesan.Pemesan;
 import com.example.pemesanerte.model.pesanan.Pesanan;
@@ -38,6 +40,19 @@ public interface ApiInterface {
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("kontak") String kontak,
             @Field("alamat") String alamat
+    );
+
+    @FormUrlEncoded
+    @POST("createDetailPesanan")
+    Call<DetailPesanan> detailPesananResponse(
+            @Field("id_trip") String id_trip,
+            @Field("id_pesanan") String id_pesanan,
+            @Field("id_seat") String id_seat,
+            @Field("nama_penumpang") String nama_penumpang,
+            @Field("jenis_kelamin") String jenis_kelamin,
+            @Field("detail_asal") String detail_asal,
+            @Field("detail_tujuan") String detail_tujuan,
+            @Field("no_hp") String no_hp
     );
 
     @FormUrlEncoded
@@ -84,6 +99,12 @@ public interface ApiInterface {
     @GET("getBookedSeat/{id_trip}")
     Call<BookedSeat> bookedSeatResponse(
             @Path("id_trip") String id_trip
+    );
+
+    @GET("getIdPesanan/{id_trip}/{id_users_pemesan}")
+    Call<IdPesanan> idPesananResponse(
+            @Path("id_trip") String id_trip,
+            @Path("id_users_pemesan") String id_users_pemesan
     );
 
     @GET("seat/{id_trip}")

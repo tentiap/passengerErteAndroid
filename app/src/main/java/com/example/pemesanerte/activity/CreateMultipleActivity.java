@@ -2,6 +2,7 @@ package com.example.pemesanerte.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +19,16 @@ import android.widget.Toast;
 
 import com.alespero.expandablecardview.ExpandableCardView;
 import com.example.pemesanerte.R;
+import com.example.pemesanerte.activity.example.CreateOrderActivity;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
 import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
+import com.example.pemesanerte.model.idPesanan.IdPesanan;
+import com.example.pemesanerte.model.idPesanan.IdPesananData;
+import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.seat.SeatData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -41,7 +47,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
     ExpandableCardView detailTrip;
     Spinner spinnerMultiGender, spinnerMultiSeat;
     String EXTRA_CHECK_DATA = "extra_check_data";
-    String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan;
+    String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
@@ -66,6 +72,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
         jumlahPenumpang = checkData.getJumlah_penumpang();
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
+
+        getIdPesanan();
 
         switch (asal){
             case "Bukittinggi":
@@ -156,6 +164,26 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
     }
 
+    private void getIdPesanan() {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(idTrip, idUsersPemesan);
+        idPesananCall.enqueue(new Callback<IdPesanan>() {
+            @Override
+            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
+                List<IdPesananData> data = response.body().getData();
+
+                for (int i = 0; i < data.size(); i++){
+                    idPesanan = data.get(i).getIdPesanan();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IdPesanan> call, Throwable t) {
+
+            }
+        });
+    }
+
 //    @Override
 //    public void onClick(View view) {
 ////        addView();
@@ -205,6 +233,13 @@ public class CreateMultipleActivity extends AppCompatActivity {
             View passengerView = layoutList.getChildAt(i);
 
             EditText editTextName = (EditText)passengerView.findViewById(R.id.multi_passenger_name);
+            Spinner spinnerGender = (Spinner)passengerView.findViewById(R.id.spinner_multi_passenger_gender);
+            Spinner spinnerSeat = (Spinner)passengerView.findViewById(R.id.spinner_multi_passenger_seat);
+            EditText editTextDeparture = (EditText)passengerView.findViewById(R.id.multi_passenger_from);
+            EditText editTextDestination = (EditText)passengerView.findViewById(R.id.multi_passenger_to);
+            EditText editTextPhone = (EditText)passengerView.findViewById(R.id.multi_passenger_phone);
+
+
             CheckBox checkBoxSubmit = (CheckBox)passengerView.findViewById(R.id.checkbox_submit);
             checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -212,11 +247,69 @@ public class CreateMultipleActivity extends AppCompatActivity {
                     boolean checked = ((CheckBox) view).isChecked();
                     if (checked){
                         String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
-                        namaDetail = editTextName.getText().toString();
-                        view.setEnabled(false);
-                        editTextName.setEnabled(false);
+                        namaDetail = " ";
+                        genderDetail = " ";
+                        seatDetail = " ";
+                        destinationDetail = " ";
+                        departureDetail = " ";
+                        phoneDetail = " ";
 
-                        Toast.makeText(CreateMultipleActivity.this, namaDetail, Toast.LENGTH_SHORT).show();
+                        namaDetail = editTextName.getText().toString();
+                        genderDetail = spinnerGender.getSelectedItem().toString();
+                        seatDetail = spinnerSeat.getSelectedItem().toString();
+                        departureDetail = editTextDeparture.getText().toString();
+                        destinationDetail = editTextDestination.getText().toString();
+                        phoneDetail = editTextPhone.getText().toString();
+
+                        if (namaDetail.trim().equals("")){
+                            editTextName.setError("Nama wajib diisi");
+                            ((CheckBox) view).setChecked(false);
+                        } else if (genderDetail.trim().equals("")){
+                            Toast.makeText(CreateMultipleActivity.this, "Pilih jenis kelamin terlebih dahulu", Toast.LENGTH_SHORT).show();
+                            ((CheckBox) view).setChecked(false);
+                        } else if (seatDetail.trim().equals("")){
+                            Toast.makeText(CreateMultipleActivity.this, "Pilih seat terlebih dahulu", Toast.LENGTH_SHORT).show();
+                            ((CheckBox) view).setChecked(false);
+                        } else if (departureDetail.trim().equals("")){
+                            editTextDeparture.setError("Asal wajib diisi");
+                            ((CheckBox) view).setChecked(false);
+                        } else if (destinationDetail.trim().equals("")){
+                            editTextDestination.setError("Tujuan wajib diisi");
+                            ((CheckBox) view).setChecked(false);
+                        } else{
+
+                            view.setEnabled(false);
+                            editTextName.setEnabled(false);
+                            spinnerGender.setEnabled(false);
+                            spinnerSeat.setEnabled(false);
+                            editTextDeparture.setEnabled(false);
+                            editTextDestination.setEnabled(false);
+                            editTextPhone.setEnabled(false);
+
+
+                            Toast.makeText(CreateMultipleActivity.this, idTrip+" & "+ idPesanan+" & "+ namaDetail+ " & "+ genderDetail+ " & "+ seatDetail
+                                    + " & "+ departureDetail+ " & "+ destinationDetail+ " & "+ phoneDetail, Toast.LENGTH_SHORT).show();
+
+                            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                            Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+                            detailPesananCall.enqueue(new Callback<DetailPesanan>() {
+                                @Override
+                                public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
+//                                    String message = response.body().getMessage();
+//                                    Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<DetailPesanan> call, Throwable t) {
+                                    Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                        }
+
+
+//                        Toast.makeText(CreateMultipleActivity.this, namaDetail+ " & "+ genderDetail, Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -277,11 +370,11 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
         if (checked){
             String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
-//            namaDetail = " ";
 
-//            EditText editText = (EditText)cricketerView.findViewById(R.id.edit_cricketer_name);
             EditText edNameDetail = (EditText)findViewById(R.id.multi_passenger_name);
             namaDetail = edNameDetail.getText().toString();
+
+
             Toast.makeText(this, namaDetail, Toast.LENGTH_SHORT).show();
             namaDetail = " ";
             edNameDetail.setEnabled(false);

@@ -253,15 +253,15 @@ public class SelectTripActivity extends AppCompatActivity {
                     checkData.setTanggal(Tanggal);
                     checkData.setJam(Jam);
 
-                    Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
 
                     ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
                     Call<Pesanan> pesananCall = apiInterface1.pesananResponse(idTrip, idUsersPemesan);
                     pesananCall.enqueue(new Callback<Pesanan>() {
                         @Override
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
-                            String message = response.body().getMessage();
-                            Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
+//                            String message = response.body().getMessage();
+//                            Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
                             selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
                             startActivity(selectTripIntent);

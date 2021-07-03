@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (Password.trim().equals("")){
                     edtPassword.setError("Password wajib diisi");
                 } else if (Kontak.trim().equals("")){
-                    edtContact.setError("Nomor Handphoe wajib diisi");
+                    edtContact.setError("Nomor Handphone wajib diisi");
                 } else if (Alamat.trim().equals("")){
                     edtAddress.setError("Alamat wajib diisi");
                 } else{
