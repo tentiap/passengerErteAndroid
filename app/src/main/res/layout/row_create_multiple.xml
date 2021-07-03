@@ -71,6 +71,15 @@
             android:textSize="13sp"
             android:layout_marginBottom="10dp"/>
 
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif-light"-->
+<!--            android:textSize="18sp"-->
+<!--            android:autofillHints="Seat"-->
+<!--            android:id="@+id/spinner_multi_passenger_seat"-->
+<!--            android:entries="@array/array_seat"/>-->
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,6 +88,19 @@
             android:autofillHints="Seat"
             android:id="@+id/spinner_multi_passenger_seat"
             android:entries="@array/array_seat"/>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/text_passenger_seat"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Seat"-->
+<!--                android:inputType="textMultiLine"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
     </LinearLayout>
 

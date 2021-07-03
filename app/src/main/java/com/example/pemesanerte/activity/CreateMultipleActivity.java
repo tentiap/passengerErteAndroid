@@ -45,9 +45,11 @@ public class CreateMultipleActivity extends AppCompatActivity {
     LinearLayout layoutList;
     Button buttonAddMultiple;
     ExpandableCardView detailTrip;
-    Spinner spinnerMultiGender, spinnerMultiSeat;
+//    Spinner spinnerMultiGender, spinnerMultiSeat;
+    Spinner spinnerSeat;
     String EXTRA_CHECK_DATA = "extra_check_data";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
+    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
@@ -103,7 +105,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
         detailTrip = findViewById(R.id.card_detail_trip);
         detailTrip.expand();
 //        spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
-        spinnerMultiGender = findViewById(R.id.spinner_multi_passenger_gender);
+//        spinnerMultiGender = findViewById(R.id.spinner_multi_passenger_gender);
 
         TextView tvAsal = findViewById(R.id.tv_create_from);
         TextView tvTujuan = findViewById(R.id.tv_create_to);
@@ -117,14 +119,14 @@ public class CreateMultipleActivity extends AppCompatActivity {
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
 
-        buttonAddMultiple = findViewById(R.id.button_add_multiple);
-        buttonAddMultiple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
+//        buttonAddMultiple = findViewById(R.id.button_add_multiple);
+//        buttonAddMultiple.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
 
 
 
@@ -136,8 +138,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //        });
 
 //        jumlahPenumpang = 3;
-
+        showListItem();
         addView();
+        getData();
 
 //        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 //        bottomNavigationView.setSelectedItemId(R.id.bn_home);
@@ -198,8 +201,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < Integer.valueOf(jumlahPenumpang); i++ ){
-            final View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
-            ExpandableCardView cardDetailPassenger = findViewById(R.id.card_detail_passenger);
+            View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
+            ExpandableCardView cardDetailPassenger = (ExpandableCardView)detailPassenger.findViewById(R.id.card_detail_passenger);
 
 //            checkBoxSubmit.oncli
 
@@ -212,12 +215,11 @@ public class CreateMultipleActivity extends AppCompatActivity {
             layoutList.addView(detailPassenger);
 //            checkBoxSubmit = findViewById(R.id.checkbox_submit);
 //            onCheckboxClicked(checkBoxSubmit);
-//            showListItem();
 
         }
 
-        showListItem();
-        getData();
+//        showListItem();
+//        getData();
 
 
 
@@ -234,7 +236,19 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
             EditText editTextName = (EditText)passengerView.findViewById(R.id.multi_passenger_name);
             Spinner spinnerGender = (Spinner)passengerView.findViewById(R.id.spinner_multi_passenger_gender);
-            Spinner spinnerSeat = (Spinner)passengerView.findViewById(R.id.spinner_multi_passenger_seat);
+//            EditText editTextSeat = (EditText)passengerView.findViewById(R.id.text_passenger_seat);
+
+//            Spinner spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
+            spinnerSeat = (Spinner)passengerView.findViewById(R.id.spinner_multi_passenger_seat);
+//            AppCompatSpinner spinnerSeat = (AppCompatSpinner)passengerView.findViewById(R.id.spinner_multi_passenger_seat);
+//            spinnerSeat.setAdapter(new ArrayAdapter<>(CreateMultipleActivity.this, android.R.layout.simple_spinner_dropdown_item,listSpinner ));
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listSpinner);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinnerSeat.setAdapter(adapter);
+
+//            adapter.notifyDataSetChanged();
+
+
             EditText editTextDeparture = (EditText)passengerView.findViewById(R.id.multi_passenger_from);
             EditText editTextDestination = (EditText)passengerView.findViewById(R.id.multi_passenger_to);
             EditText editTextPhone = (EditText)passengerView.findViewById(R.id.multi_passenger_phone);
@@ -246,7 +260,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     boolean checked = ((CheckBox) view).isChecked();
                     if (checked){
-                        String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
+//                        String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
                         namaDetail = " ";
                         genderDetail = " ";
                         seatDetail = " ";
@@ -257,6 +271,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
                         namaDetail = editTextName.getText().toString();
                         genderDetail = spinnerGender.getSelectedItem().toString();
                         seatDetail = spinnerSeat.getSelectedItem().toString();
+//                        seatDetail = editTextSeat.getText().toString();
                         departureDetail = editTextDeparture.getText().toString();
                         destinationDetail = editTextDestination.getText().toString();
                         phoneDetail = editTextPhone.getText().toString();
@@ -282,6 +297,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
                             editTextName.setEnabled(false);
                             spinnerGender.setEnabled(false);
                             spinnerSeat.setEnabled(false);
+//                            editTextSeat.setEnabled(false);
                             editTextDeparture.setEnabled(false);
                             editTextDestination.setEnabled(false);
                             editTextPhone.setEnabled(false);
@@ -290,28 +306,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
                             Toast.makeText(CreateMultipleActivity.this, idTrip+" & "+ idPesanan+" & "+ namaDetail+ " & "+ genderDetail+ " & "+ seatDetail
                                     + " & "+ departureDetail+ " & "+ destinationDetail+ " & "+ phoneDetail, Toast.LENGTH_SHORT).show();
 
-                            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                            Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
-                            detailPesananCall.enqueue(new Callback<DetailPesanan>() {
-                                @Override
-                                public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
-//                                    String message = response.body().getMessage();
-//                                    Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onFailure(Call<DetailPesanan> call, Throwable t) {
-                                    Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                            saveData(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
                         }
-
-
-//                        Toast.makeText(CreateMultipleActivity.this, namaDetail+ " & "+ genderDetail, Toast.LENGTH_SHORT).show();
-
-
                     }
                 }
             });
@@ -320,6 +317,24 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //            onCheckboxClicked(checkBoxSubmit);
 
         }
+    }
+
+    private void saveData(String idTrip, String idPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+        detailPesananCall.enqueue(new Callback<DetailPesanan>() {
+            @Override
+            public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
+                String message = response.body().getMessage();
+                Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<DetailPesanan> call, Throwable t) {
+                Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showListItem() {
@@ -346,11 +361,13 @@ public class CreateMultipleActivity extends AppCompatActivity {
                             listSpinner.add(String.valueOf(i));
                         }
                     }
+//
+//                    spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateMultipleActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinnerMultiSeat.setAdapter(adapter);
 
-                    spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateMultipleActivity.this, android.R.layout.simple_spinner_item, listSpinner);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerMultiSeat.setAdapter(adapter);
+                    System.out.println(listSpinner);
 
                 }else{
                     Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
