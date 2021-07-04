@@ -43,13 +43,14 @@ import retrofit2.Response;
 public class CreateMultipleActivity extends AppCompatActivity {
 
     LinearLayout layoutList;
-    Button buttonAddMultiple;
+    Button buttonDone;
     ExpandableCardView detailTrip;
 //    Spinner spinnerMultiGender, spinnerMultiSeat;
     Spinner spinnerSeat;
     String EXTRA_CHECK_DATA = "extra_check_data";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
+    int checkBeforeDone;
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
@@ -104,6 +105,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
         layoutList = findViewById(R.id.layout_list);
         detailTrip = findViewById(R.id.card_detail_trip);
         detailTrip.expand();
+        buttonDone = findViewById(R.id.button_done);
+        buttonDone.setVisibility(View.GONE);
 //        spinnerMultiSeat = findViewById(R.id.spinner_multi_passenger_seat);
 //        spinnerMultiGender = findViewById(R.id.spinner_multi_passenger_gender);
 
@@ -118,6 +121,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
         tvTanggal.setText(checkData.getTanggal());
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
+        checkBeforeDone = 0;
 
 //        buttonAddMultiple = findViewById(R.id.button_add_multiple);
 //        buttonAddMultiple.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +146,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
         addView();
         getData();
 
+
 //        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 //        bottomNavigationView.setSelectedItemId(R.id.bn_home);
 //        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -165,6 +170,23 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    private void checkData() {
+        if (checkBeforeDone == Integer.valueOf(jumlahPenumpang)){
+            buttonDone.setVisibility(View.VISIBLE);
+            buttonDone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goToMyOrder = new Intent(CreateMultipleActivity.this, MyOrderActivity.class);
+                    startActivity(goToMyOrder);
+                }
+            });
+        }
+//        else{
+//            Toast.makeText(this, "check sekarang "+checkBeforeDone, Toast.LENGTH_LONG).show();
+//
+//        }
     }
 
     private void getIdPesanan() {
@@ -341,8 +363,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                         editTextPhone.setEnabled(false);
 
 
-                                        Toast.makeText(CreateMultipleActivity.this, idTrip+" & "+ idPesanan+" & "+ namaDetail+ " & "+ genderDetail+ " & "+ seatDetail
-                                                + " & "+ departureDetail+ " & "+ destinationDetail+ " & "+ phoneDetail, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(CreateMultipleActivity.this, idTrip+" & "+ idPesanan+" & "+ namaDetail+ " & "+ genderDetail+ " & "+ seatDetail
+//                                                + " & "+ departureDetail+ " & "+ destinationDetail+ " & "+ phoneDetail, Toast.LENGTH_SHORT).show();
 
                                         saveData(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
@@ -355,7 +377,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //            onCheckboxClicked(checkBoxSubmit);
 
                     }
-
 
 
                 }else{
@@ -473,6 +494,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
             public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
                 String message = response.body().getMessage();
                 Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
+                checkBeforeDone += 1;
+                checkData();
+
             }
 
             @Override
