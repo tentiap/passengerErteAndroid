@@ -1,5 +1,6 @@
 package com.example.pemesanerte.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.check.CheckData;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
@@ -29,13 +32,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailOrderActivity extends AppCompatActivity {
+    AlertDialog.Builder builder;
     public static final String EXTRA_HISTORY_DATA = "extra_history_data";
     private RecyclerView rvDetailHistory;
     private List<DetailHistoryData> list = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
-    String idPesanan, idTrip;
+    String idPesanan, idTrip, availableSeat;
     Integer jumlahPenumpang;
 
     FloatingActionButton fb1, floatingButtonEdit, floatingButtonAddPassenger;
@@ -167,7 +171,75 @@ public class DetailOrderActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(DetailOrderActivity.this, "Add More Passenger(s)", Toast.LENGTH_SHORT).show();
+
+                        builder = new AlertDialog.Builder(DetailOrderActivity.this);
+                        builder.setTitle("Add More Passenger(s)");
+
+                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                        Call<AvailableSeat> availableSeatCall = apiInterface.availableSeatResponse(idTrip);
+                        availableSeatCall.enqueue(new Callback<AvailableSeat>() {
+                            @Override
+                            public void onResponse(Call<AvailableSeat> call, Response<AvailableSeat> response) {
+                                if (response.body().isStatus()){
+                                    builder.setMessage(response.body().getMessage());
+                                    builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(DetailOrderActivity.this, "Lanjut ke Create Pesanan", Toast.LENGTH_SHORT).show();
+                                            Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, jumlahPenumpang);
+                                            startActivity(goToTambahPesananIntent);
+                                        }
+                                    });
+
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(DetailOrderActivity.this, "Yahhhh cekewa dedek", Toast.LENGTH_SHORT).show();
+                                            dialogInterface.dismiss();
+                                        }
+                                    });
+
+                                    builder.show();
+
+                                }else{
+                                    builder.setMessage(response.body().getMessage());
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(DetailOrderActivity.this, "Hokeee", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                    builder.show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<AvailableSeat> call, Throwable t) {
+
+                            }
+                        });
+
+
+//                        builder.setMessage("Disini nanti info tentang seat yang tersedia");
+//                        builder.setPositiveButton("Ni positive button", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Toast.makeText(DetailOrderActivity.this, "Positive Button diklik", Toast.LENGTH_SHORT).show();
+//                                dialogInterface.dismiss();
+//                            }
+//                        });
+//
+//                        builder.setNegativeButton("Ni Negative Button", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Toast.makeText(DetailOrderActivity.this, "Negative Button diklik", Toast.LENGTH_SHORT).show();
+//                                dialogInterface.dismiss();
+//                            }
+//                        });
+//
+//                        builder.show();
                     }
                 });
     }

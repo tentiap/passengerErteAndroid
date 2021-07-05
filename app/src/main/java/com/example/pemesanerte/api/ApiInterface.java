@@ -1,6 +1,7 @@
 package com.example.pemesanerte.api;
 
 //import com.example.pemesanerte.model.history.History;
+import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
@@ -118,6 +119,11 @@ public interface ApiInterface {
     @GET("seat/{id_trip}")
     Call<Seat> seatResponse(
             @Path("id_seat") String id_seat
+    );
+
+    @GET("checkAvailableSeat/{id_trip}")
+    Call<AvailableSeat> availableSeatResponse(
+            @Path("id_trip") String id_trip
     );
 
     @FormUrlEncoded

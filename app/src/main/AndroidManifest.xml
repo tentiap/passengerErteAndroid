@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.EditPesananActivity"
+            android:name=".activity.TambahPesananActivity"
             android:theme="@style/AppThemeActionBar"/>
+        <activity
+            android:name=".activity.EditPesananActivity"
+            android:theme="@style/AppThemeActionBar" />
         <activity
             android:name=".activity.CreateMultipleActivity"
             android:theme="@style/AppThemeActionBar" />
