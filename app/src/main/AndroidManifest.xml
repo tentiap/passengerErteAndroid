@@ -15,13 +15,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.EditPesananActivity"
+            android:theme="@style/AppThemeActionBar"/>
+        <activity
             android:name=".activity.CreateMultipleActivity"
-            android:theme="@style/AppThemeActionBar">
-        </activity>
+            android:theme="@style/AppThemeActionBar" />
         <activity android:name=".activity.example.CricketersActivity" />
-        <activity android:name=".activity.example.DynamicViewsActivity">
-
-        </activity>
+        <activity android:name=".activity.example.DynamicViewsActivity" />
         <activity
             android:name=".activity.EditActivity"
             android:parentActivityName=".activity.AccountActivity"
@@ -49,10 +49,10 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

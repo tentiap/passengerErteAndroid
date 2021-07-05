@@ -18,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/multi_passenger_name"
+                android:id="@+id/multi_passenger_name_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
@@ -35,22 +35,22 @@
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="Gender"
-                android:textSize="13sp"
-                android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="Gender"
+            android:textSize="13sp"
+            android:layout_marginBottom="10dp"/>
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:textSize="18sp"
-                android:autofillHints="Gender"
-                android:id="@+id/spinner_multi_passenger_gender"
-                android:entries="@array/spinner_jenis_kelamin"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textSize="18sp"
+            android:autofillHints="Gender"
+            android:id="@+id/spinner_multi_passenger_gender_edit"
+            android:entries="@array/spinner_jenis_kelamin"/>
 
 
     </LinearLayout>
@@ -64,6 +64,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_seat_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
@@ -71,36 +72,14 @@
             android:textSize="13sp"
             android:layout_marginBottom="10dp"/>
 
-<!--        <androidx.appcompat.widget.AppCompatSpinner-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="sans-serif-light"-->
-<!--            android:textSize="18sp"-->
-<!--            android:autofillHints="Seat"-->
-<!--            android:id="@+id/spinner_multi_passenger_seat"-->
-<!--            android:entries="@array/array_seat"/>-->
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:textSize="18sp"
             android:autofillHints="Seat"
-            android:id="@+id/spinner_multi_passenger_seat"
+            android:id="@+id/spinner_multi_passenger_seat_edit"
             android:entries="@array/array_seat"/>
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/text_passenger_seat"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:hint="Seat"-->
-<!--                android:inputType="textMultiLine"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
     </LinearLayout>
 
@@ -117,7 +96,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/multi_passenger_from"
+                android:id="@+id/multi_passenger_from_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address (departure)"
@@ -140,7 +119,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/multi_passenger_to"
+                android:id="@+id/multi_passenger_to_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address (destination)"
@@ -163,7 +142,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/multi_passenger_phone"
+                android:id="@+id/multi_passenger_phone_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number (optional)"
@@ -181,10 +160,11 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
-        <CheckBox android:id="@+id/checkbox_submit"
+        <CheckBox
+            android:id="@+id/checkbox_submit_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Centang jika semua updateDetailPesananData sudah benar" />
+            android:text="Centang jika semua data sudah benar" />
 
     </LinearLayout>
 

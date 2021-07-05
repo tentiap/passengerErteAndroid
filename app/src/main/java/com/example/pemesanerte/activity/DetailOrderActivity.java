@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -18,6 +19,7 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.check.CheckData;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;
@@ -33,9 +35,10 @@ public class DetailOrderActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
-    String idPesanan;
+    String idPesanan, idTrip;
+    Integer jumlahPenumpang;
 
-    FloatingActionButton fb1, fb2, fb3;
+    FloatingActionButton fb1, floatingButtonEdit, floatingButtonAddPassenger;
     TextView tvEdit, tvAddMore;
 
     Boolean isAllFabsVisible;
@@ -48,7 +51,8 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
         idPesanan = historyData.getIdPesanan();
-        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
+        idTrip = historyData.getIdTrip();
+//        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -98,15 +102,16 @@ public class DetailOrderActivity extends AppCompatActivity {
 
 
 
+
         fb1 = findViewById(R.id.floating_button);
-        fb2 = findViewById(R.id.fb_edit);
-        fb3 = findViewById(R.id.fb_add_passenger);
+        floatingButtonEdit = findViewById(R.id.fb_edit);
+        floatingButtonAddPassenger = findViewById(R.id.fb_add_passenger);
 
         tvEdit = findViewById(R.id.edit_data_text);
         tvAddMore = findViewById(R.id.add_more_passenger_text);
 
-        fb2.setVisibility(View.GONE);
-        fb3.setVisibility(View.GONE);
+        floatingButtonEdit.setVisibility(View.GONE);
+        floatingButtonAddPassenger.setVisibility(View.GONE);
         tvEdit.setVisibility(View.GONE);
         tvAddMore.setVisibility(View.GONE);
 
@@ -116,15 +121,15 @@ public class DetailOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isAllFabsVisible){
-                    fb2.show();
-                    fb3.show();
+                    floatingButtonEdit.show();
+                    floatingButtonAddPassenger.show();
                     tvEdit.setVisibility(View.VISIBLE);
                     tvAddMore.setVisibility(View.VISIBLE);
 
                     isAllFabsVisible = true;
                 }else{
-                    fb2.hide();
-                    fb3.hide();
+                    floatingButtonEdit.hide();
+                    floatingButtonAddPassenger.hide();
                     tvEdit.setVisibility(View.GONE);
                     tvAddMore.setVisibility(View.GONE);
 
@@ -133,15 +138,32 @@ public class DetailOrderActivity extends AppCompatActivity {
             }
         });
 
-        fb2.setOnClickListener(
+        floatingButtonEdit.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(DetailOrderActivity.this, "Edit Data Passenger(s)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DetailOrderActivity.this, "Edit Data Passenger(s)", Toast.LENGTH_SHORT).show();
+                        Intent editPesanan = new Intent(DetailOrderActivity.this, EditPesananActivity.class);
+//                        editPesanan.putExtra("id_pesanan", idPesanan);
+//                        editPesanan.putExtra("id_trip", idTrip);
+                        CheckData checkData = new CheckData();
+                        checkData.setId_trip(idTrip);
+                        checkData.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
+                        checkData.setId_users_pemesan(historyData.getIdUsersPemesan());
+                        checkData.setAsal(historyData.getIdKotaAsal());
+                        checkData.setTujuan(historyData.getIdKotaTujuan());
+                        checkData.setTanggal(historyData.getTanggal());
+                        checkData.setJam(historyData.getJadwal());
+
+                        editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkData);
+                        startActivity(editPesanan);
+//                        Toast.makeText(DetailOrderActivity.this, "Jumlah member "+jumlahPenumpang, Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
 
-        fb3.setOnClickListener(
+        floatingButtonAddPassenger.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -199,8 +221,10 @@ public class DetailOrderActivity extends AppCompatActivity {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvDetailHistory.setLayoutManager(new LinearLayoutManager(DetailOrderActivity.this));
                     String message = response.body().getMessage();
-                    Toast.makeText(DetailOrderActivity.this, message, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(DetailOrderActivity.this, message, Toast.LENGTH_SHORT).show();
                     list = response.body().getData();
+//                    Toast.makeText(DetailOrderActivity.this, "Jumlah member "+list.size(), Toast.LENGTH_SHORT).show();
+                    jumlahPenumpang = list.size();
 
                     final DetailHistoryAdapter detailHistoryAdapter = new DetailHistoryAdapter(DetailOrderActivity.this, list);
                     rvDetailHistory.setAdapter(detailHistoryAdapter);

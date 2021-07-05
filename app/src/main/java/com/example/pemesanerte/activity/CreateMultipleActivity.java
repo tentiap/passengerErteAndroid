@@ -46,7 +46,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
     Button buttonDone;
     ExpandableCardView detailTrip;
 //    Spinner spinnerMultiGender, spinnerMultiSeat;
-    Spinner spinnerSeat;
+//    Spinner spinnerSeat;
     String EXTRA_CHECK_DATA = "extra_check_data";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;

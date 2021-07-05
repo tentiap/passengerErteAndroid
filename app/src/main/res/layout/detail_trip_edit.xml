@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/hidden_view1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingBottom="20dp"
+    android:orientation="horizontal"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_create_from_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PDG"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/line11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" | "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_create_to_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BKT"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/line22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" | "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_create_tanggal_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 November 2020"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/line33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" | "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_create_jam_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16.30"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/line31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" | "
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_create_jumlah_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 Passenger(s)"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</LinearLayout>

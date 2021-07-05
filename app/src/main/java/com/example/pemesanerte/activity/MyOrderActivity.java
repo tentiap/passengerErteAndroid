@@ -97,7 +97,7 @@ public class MyOrderActivity extends AppCompatActivity {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvHistory.setLayoutManager(new LinearLayoutManager(MyOrderActivity.this));
                     String message = response.body().getMessage();
-                    Toast.makeText(MyOrderActivity.this, message, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MyOrderActivity.this, message, Toast.LENGTH_SHORT).show();
                     listData = response.body().getData();
 
                     final HistoryAdapter historyAdapter = new HistoryAdapter(MyOrderActivity.this, listData);
@@ -117,7 +117,7 @@ public class MyOrderActivity extends AppCompatActivity {
                             detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
 //                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_PESANAN, data.getIdPesanan());
                             startActivity(detailHistoryIntent);
-                            Toast.makeText(MyOrderActivity.this, "You select " + data.getIdPesanan(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MyOrderActivity.this, "You select " + data.getIdPesanan(), Toast.LENGTH_SHORT).show();
                         }
                     });
 

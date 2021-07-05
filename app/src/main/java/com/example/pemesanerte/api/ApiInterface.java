@@ -5,6 +5,7 @@ import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
+import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
@@ -13,6 +14,7 @@ import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.seat.Seat;
+import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesanan;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -107,6 +109,12 @@ public interface ApiInterface {
             @Path("id_users_pemesan") String id_users_pemesan
     );
 
+    @GET("getDetailPesanan/{id_pesanan}/{id_trip}")
+    Call<EditDetailPesanan> getDetailPesananResponse(
+            @Path("id_pesanan") String id_pesanan,
+            @Path("id_trip") String id_trip
+    );
+
     @GET("seat/{id_trip}")
     Call<Seat> seatResponse(
             @Path("id_seat") String id_seat
@@ -122,6 +130,18 @@ public interface ApiInterface {
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("kontak") String kontak,
             @Field("alamat") String alamat
+    );
+
+    @FormUrlEncoded
+    @POST("updateDetailPesanan")
+    Call<UpdateDetailPesanan> updateDetailPesananResponse(
+            @Field("id_detail_pesanan") int id_detail_pesanan,
+            @Field("id_seat") String id_seat,
+            @Field("nama_penumpang") String nama_penumpang,
+            @Field("jenis_kelamin") String jenis_kelamin,
+            @Field("detail_asal") String detail_asal,
+            @Field("detail_tujuan") String detail_tujuan,
+            @Field("no_hp") String no_hp
     );
 
 
