@@ -99,6 +99,13 @@ public interface ApiInterface {
             @Path("id_users_pemesan") String id_users_pemesan
     );
 
+    @GET("checkUpdate/{tambah}/{id_trip}/{id_users_pemesan}")
+    Call<Check> checkUpdateResponse(
+            @Path("tambah") String tambah,
+            @Path("id_trip") String id_trip,
+            @Path("id_users_pemesan") String id_users_pemesan
+    );
+
     @GET("getBookedSeat/{id_trip}")
     Call<BookedSeat> bookedSeatResponse(
             @Path("id_trip") String id_trip

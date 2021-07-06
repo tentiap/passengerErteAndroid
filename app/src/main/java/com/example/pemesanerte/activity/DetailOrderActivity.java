@@ -185,7 +185,6 @@ public class DetailOrderActivity extends AppCompatActivity {
                                     builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(DetailOrderActivity.this, "Lanjut ke Create Pesanan", Toast.LENGTH_SHORT).show();
                                             Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
@@ -202,7 +201,6 @@ public class DetailOrderActivity extends AppCompatActivity {
                                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(DetailOrderActivity.this, "Yahhhh cekewa dedek", Toast.LENGTH_SHORT).show();
                                             dialogInterface.dismiss();
                                         }
                                     });
@@ -214,7 +212,6 @@ public class DetailOrderActivity extends AppCompatActivity {
                                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(DetailOrderActivity.this, "Hokeee", Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
