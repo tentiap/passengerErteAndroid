@@ -154,7 +154,8 @@ public interface ApiInterface {
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("detail_asal") String detail_asal,
             @Field("detail_tujuan") String detail_tujuan,
-            @Field("no_hp") String no_hp
+            @Field("no_hp") String no_hp,
+            @Field("status") String status
     );
 
 

@@ -154,7 +154,17 @@ public class EditDetailPesananData {
 		this.status = status;
 	}
 
-	public int getStatus(){
-		return status;
+	public String getStatus(){
+		if (status == 1){
+			return "Booking ";
+		}else if (status == 2){
+			return "Picked Up";
+		}else if (status == 3){
+			return "On Going";
+		}else if (status == 4){
+			return "Arrived";
+		}else{
+			return "Cancelled";
+		}
 	}
 }

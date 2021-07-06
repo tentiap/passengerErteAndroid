@@ -109,13 +109,13 @@ public class TambahPesananActivity extends AppCompatActivity {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerAdd.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    tambah = spinnerAdd.getSelectedItem().toString();
+
 
                     buttonCari.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(TambahPesananActivity.this, "Jumlah yang mau ditambah "+tambah, Toast.LENGTH_SHORT).show();
-//                check(tambah, idTrip, idUsersPemesan);
+                            tambah = spinnerAdd.getSelectedItem().toString();
+                            check(tambah, idTrip, idUsersPemesan);
                         }
                     });
 

@@ -11,6 +11,9 @@ public class CheckData implements Parcelable {
     private String tujuan;
     private String tanggal;
     private String jam;
+    private int status;
+
+
 
     public CheckData(Parcel in) {
         jumlah_penumpang = in.readString();
@@ -20,6 +23,10 @@ public class CheckData implements Parcelable {
         tujuan = in.readString();
         tanggal = in.readString();
         jam = in.readString();
+        jam = in.readString();
+        status = in.readInt();
+
+
     }
 
     public static final Creator<CheckData> CREATOR = new Creator<CheckData>() {
@@ -94,6 +101,24 @@ public class CheckData implements Parcelable {
         this.id_users_pemesan = id_users_pemesan;
     }
 
+    public void setStatus(int status){
+        this.status = status;
+    }
+
+    public String getStatus(){
+        if (status == 1){
+            return "Booking ";
+        }else if (status == 2){
+            return "Picked Up";
+        }else if (status == 3){
+            return "On Going";
+        }else if (status == 4){
+            return "Arrived";
+        }else{
+            return "Cancelled";
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -108,5 +133,7 @@ public class CheckData implements Parcelable {
         parcel.writeString(tujuan);
         parcel.writeString(tanggal);
         parcel.writeString(jam);
+        parcel.writeInt(status);
+
     }
 }

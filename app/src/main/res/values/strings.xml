@@ -176,6 +176,13 @@
         <item>T2</item>
     </string-array>
 
+
+    <string-array name="array_edit_status">
+        <item>Booking</item>
+        <item>Cancelled</item>
+    </string-array>
+
+
     <string-array name="array_jam">
         <item>14.00</item>
         <item>16.00</item>

@@ -44,7 +44,7 @@ public class EditPesananActivity extends AppCompatActivity {
     Spinner spinnerSeat;
 //    String EXTRA_CHECK_DATA_EDIT = "extra_check_data_edit";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
-    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
+    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus;
     int checkBeforeDone;
 
 
@@ -69,6 +69,7 @@ public class EditPesananActivity extends AppCompatActivity {
         jumlahPenumpang = checkData.getJumlah_penumpang();
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
+
 //        getIdPesanan();
 
 
@@ -211,6 +212,11 @@ public class EditPesananActivity extends AppCompatActivity {
                                     Spinner spinnerGender = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_gender_edit);
                                     spinnerGender.setSelection(getIndexGender(spinnerGender, detailPesananData.get(i).getJenisKelamin()));
 
+                                    Spinner spinnerStatus = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_status_edit);
+                                    spinnerStatus.setSelection(getIndexStatus(spinnerStatus, detailPesananData.get(i).getStatus()));
+
+                                    Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
+
                                     //Iko lawak mah wwkwkw, silly solution
                                     Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
 //                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditPesananActivity.this, android.R.layout.simple_spinner_item, listSpinner);
@@ -244,6 +250,17 @@ public class EditPesananActivity extends AppCompatActivity {
                                                 destinationDetail = editTextDestination.getText().toString();
                                                 phoneDetail = editTextPhone.getText().toString();
 
+                                                selectedStatus = spinnerStatus.getSelectedItem().toString();
+                                                switch (selectedStatus){
+                                                    case "Booking":
+                                                        statusDetail = String.valueOf(1);
+                                                        break;
+                                                    case "Cancelled":
+                                                        statusDetail = String.valueOf(5);
+                                                        break;
+                                                }
+
+
                                                 if (namaDetail.trim().equals("")){
                                                     editTextName.setError("Nama wajib diisi");
                                                     ((CheckBox) view).setChecked(false);
@@ -252,6 +269,9 @@ public class EditPesananActivity extends AppCompatActivity {
                                                     ((CheckBox) view).setChecked(false);
                                                 } else if (seatDetail.trim().equals("")){
                                                     Toast.makeText(EditPesananActivity.this, "Pilih seat terlebih dahulu", Toast.LENGTH_SHORT).show();
+                                                    ((CheckBox) view).setChecked(false);
+                                                } else if (statusDetail.trim().equals("")){
+                                                    Toast.makeText(EditPesananActivity.this, "Pilih status terlebih dahulu", Toast.LENGTH_SHORT).show();
                                                     ((CheckBox) view).setChecked(false);
                                                 } else if (departureDetail.trim().equals("")){
                                                     editTextDeparture.setError("Asal wajib diisi");
@@ -264,12 +284,13 @@ public class EditPesananActivity extends AppCompatActivity {
                                                     view.setEnabled(false);
                                                     editTextName.setEnabled(false);
                                                     spinnerGender.setEnabled(false);
+                                                    spinnerStatus.setEnabled(false);
                                                     spinnerSeat.setEnabled(false);
                                                     editTextDeparture.setEnabled(false);
                                                     editTextDestination.setEnabled(false);
                                                     editTextPhone.setEnabled(false);
 
-                                                    updateDetailPesanan(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+                                                    updateDetailPesanan(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
 
                                                 }
                                             }
@@ -304,9 +325,18 @@ public class EditPesananActivity extends AppCompatActivity {
         });
     }
 
-    private void updateDetailPesanan(int idDetailPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
+    private int getIndexStatus(Spinner spinnerStatus, String status) {
+        for (int i=0; i < spinnerStatus.getCount(); i++){
+            if (spinnerStatus.getItemAtPosition(i).toString().equalsIgnoreCase(status)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void updateDetailPesanan(int idDetailPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
         updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
             @Override
             public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
