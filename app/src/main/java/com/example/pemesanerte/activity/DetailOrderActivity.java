@@ -187,7 +187,14 @@ public class DetailOrderActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             Toast.makeText(DetailOrderActivity.this, "Lanjut ke Create Pesanan", Toast.LENGTH_SHORT).show();
                                             Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, jumlahPenumpang);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, idPesanan);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, idTrip);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdUsersPemesan());
                                             startActivity(goToTambahPesananIntent);
                                         }
                                     });
