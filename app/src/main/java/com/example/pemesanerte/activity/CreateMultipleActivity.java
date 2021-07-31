@@ -32,6 +32,7 @@ import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.seat.SeatData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,11 +52,13 @@ public class CreateMultipleActivity extends AppCompatActivity {
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
     int checkBeforeDone;
+//    String[] inputSeats;
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
     List<String> listSpinner = new ArrayList<>();
     List<String> listBookedSeat = new ArrayList<>();
+    List<String> inputSeats = new ArrayList<>();
 
     CheckBox checkBoxSubmit;
 
@@ -353,20 +356,32 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                         ((CheckBox) view).setChecked(false);
                                     } else{
 
-                                        view.setEnabled(false);
-                                        editTextName.setEnabled(false);
-                                        spinnerGender.setEnabled(false);
-                                        spinnerSeat.setEnabled(false);
-//                            editTextSeat.setEnabled(false);
-                                        editTextDeparture.setEnabled(false);
-                                        editTextDestination.setEnabled(false);
-                                        editTextPhone.setEnabled(false);
+                                        //Disini cek dia udah dipesan sebelumnya atau ndak
+                                        String[] array = inputSeats.toArray(new String[0]);
+                                        boolean checkInputSeat = Arrays.asList(array).contains(seatDetail);
 
+                                        if (checkInputSeat == true) {
+                                            Toast.makeText(CreateMultipleActivity.this, "Seat "+seatDetail+ " sudah dipesan sebelumnya. Pilih seat lain", Toast.LENGTH_LONG).show();
+                                            ((CheckBox) view).setChecked(false);
+                                        } else {
+                                            inputSeats.add(seatDetail);
+                                            Toast.makeText(CreateMultipleActivity.this, "Input seats sekarang "+inputSeats, Toast.LENGTH_SHORT).show();
+                                            saveData(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+
+                                            view.setEnabled(false);
+                                            editTextName.setEnabled(false);
+                                            spinnerGender.setEnabled(false);
+                                            spinnerSeat.setEnabled(false);
+//                            editTextSeat.setEnabled(false);
+                                            editTextDeparture.setEnabled(false);
+                                            editTextDestination.setEnabled(false);
+                                            editTextPhone.setEnabled(false);
+                                        }
 
 //                                        Toast.makeText(CreateMultipleActivity.this, idTrip+" & "+ idPesanan+" & "+ namaDetail+ " & "+ genderDetail+ " & "+ seatDetail
 //                                                + " & "+ departureDetail+ " & "+ destinationDetail+ " & "+ phoneDetail, Toast.LENGTH_SHORT).show();
 
-                                        saveData(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+
 
                                     }
                                 }

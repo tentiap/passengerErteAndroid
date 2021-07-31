@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvWelcome, tvJadwal;
     Spinner spinnerAsal, spinnerTujuan, spinnerJumlahPenumpang;
     DatePickerDialog pickerDialog;
-    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, monthss;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, monthss, dayss;
     Button btnCari;
 
 
@@ -105,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             monthss = String.valueOf(months + 1);
                         }
-                        Jadwal = years + "-" + (monthss) + "-" + dayS;
+
+                        if (dayS < 10){
+                            dayss = "0" + (dayS );
+                        } else {
+                            dayss = String.valueOf(dayS);
+                        }
+                        Jadwal = years + "-" + (monthss) + "-" + dayss;
                     }
                 }, year, month, day);
                 pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -157,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(cariIntent);
 //                    Toast.makeText(MainActivity.this, Pemesan, Toast.LENGTH_SHORT).show();
                 }
+
+//                Toast.makeText(MainActivity.this, Jadwal, Toast.LENGTH_SHORT).show();
                 
             }
         });
