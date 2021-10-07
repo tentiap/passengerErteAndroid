@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog pickerDialog;
     String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, monthss, dayss;
     Button btnCari;
+    Integer months;
 
 
     @Override
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
                         final String month_name = monthName[months];
 //                        Tanggal = years + "-" + (months + 1) + "-" + dayS;
                         Tanggal = dayS+ " " +month_name+ " " +years;
-                        if (months < 10){
+                        System.out.println("Months: " +months+ " Days: " +dayS);
+                        if (months + 1  < 10){
                            monthss = "0" + (months + 1);
                         } else {
                             monthss = String.valueOf(months + 1);
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
                 Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
 
-//                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Tanggal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Jadwal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_LONG).show();
                 InputSearch inputSearch = new InputSearch();
                 inputSearch.setFrom(Asal);
                 inputSearch.setTo(Tujuan);

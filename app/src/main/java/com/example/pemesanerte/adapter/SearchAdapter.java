@@ -34,7 +34,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     @Override
     public SearchHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_select_trip, viewGroup, false);
-//        return new SearchAdapter.SearchHolder(view);
         SearchAdapter.SearchHolder holder = new SearchAdapter.SearchHolder(view);
         return holder;
     }
@@ -45,7 +44,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
         holder.tvIdSelectTrip.setText(searchData.getIdTrip());
         holder.tvSelectJam.setText(searchData.getJadwal());
-//        holder.tvSelectSopir.setText(searchData.getNama());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +67,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
             tvIdSelectTrip = itemView.findViewById(R.id.tv_id_select_trip);
             tvSelectJam = itemView.findViewById(R.id.tv_select_jam);
-//            tvSelectSopir = itemView.findViewById(R.id.tv_select_sopir);
         }
     }
 

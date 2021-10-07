@@ -202,10 +202,8 @@ public class SelectTripActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
 
-//                Toast.makeText(SelectTripActivity.this, kAsal+kTujuan+jadwal+jumlahPenumpang, Toast.LENGTH_SHORT).show();
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvSelectTrip.setLayoutManager(new LinearLayoutManager(SelectTripActivity.this));
-//                    String message = response.body().getMessage();
                     Toast.makeText(SelectTripActivity.this, "Trip pada tanggal " +Tanggal, Toast.LENGTH_SHORT).show();
                     listData = response.body().getData();
 
@@ -253,17 +251,13 @@ public class SelectTripActivity extends AppCompatActivity {
                     checkData.setTanggal(Tanggal);
                     checkData.setJam(Jam);
 
-//                    Toast.makeText(SelectTripActivity.this, "Kamu memilih " + idTrip, Toast.LENGTH_SHORT).show();
-
                     ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
                     Call<Pesanan> pesananCall = apiInterface1.pesananResponse(idTrip, idUsersPemesan);
                     pesananCall.enqueue(new Callback<Pesanan>() {
                         @Override
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
-//                            String message = response.body().getMessage();
-//                            Toast.makeText(SelectTripActivity.this, message, Toast.LENGTH_SHORT).show();
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
-                            selectTripIntent.putExtra(CreateOrderActivity.EXTRA_CHECK_DATA, checkData);
+                            selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkData);
                             startActivity(selectTripIntent);
                         }
 
