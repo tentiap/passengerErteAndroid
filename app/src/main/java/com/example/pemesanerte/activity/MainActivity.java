@@ -77,11 +77,6 @@ public class MainActivity extends AppCompatActivity {
         tvJadwal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                selectDate();
-//                final String[] monthName = {"January", "February",
-//                        "March", "April", "May", "June", "July",
-//                        "August", "September", "October", "November",
-//                        "December"};
 
                 final String[] monthName = {"Jan", "Feb",
                         "Mar", "Apr", "May", "Jun", "Jul",
@@ -129,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
                 Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
 
-//                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Jadwal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_LONG).show();
                 InputSearch inputSearch = new InputSearch();
                 inputSearch.setFrom(Asal);
                 inputSearch.setTo(Tujuan);
@@ -137,23 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 inputSearch.setPemesan(Pemesan);
                 inputSearch.setTotal(JumlahPenumpang);
                 inputSearch.setJadwal(Jadwal);
-
-//                if(Asal == "Bukittinggi"){
-//                    inputSearch.setAsal("K1");
-//                }else if(Asal == "Padang"){
-//                    inputSearch.setAsal("K2");
-//                }else if (Asal == "Pekanbaru"){
-//                    inputSearch.setAsal("K3");
-//                }
-//
-//                if(Tujuan == "Bukittinggi"){
-//                    inputSearch.setTujuan("K1");
-//                }else if(Tujuan == "Padang"){
-//                    inputSearch.setTujuan("K2");
-//                }else if (Tujuan == "Pekanbaru"){
-//                    inputSearch.setTujuan("K3");
-//                }
-
 
                 if (Tanggal == null){
                     Toast.makeText(MainActivity.this, "Please select date", Toast.LENGTH_SHORT).show();
@@ -163,14 +140,9 @@ public class MainActivity extends AppCompatActivity {
                     Intent cariIntent = new Intent(MainActivity.this, SelectTripActivity.class );
                     cariIntent.putExtra(SelectTripActivity.EXTRA_INPUT_SEARCH, inputSearch);
                     startActivity(cariIntent);
-//                    Toast.makeText(MainActivity.this, Pemesan, Toast.LENGTH_SHORT).show();
                 }
-
-//                Toast.makeText(MainActivity.this, Jadwal, Toast.LENGTH_SHORT).show();
-                
             }
         });
-
     }
 
     private void moveToLogin() {
@@ -180,21 +152,4 @@ public class MainActivity extends AppCompatActivity {
         finish();
 
     }
-
-//    private void selectDate() {
-//        final Calendar calendar = Calendar.getInstance();
-//        final int day = calendar.get(Calendar.DAY_OF_MONTH);
-//        int month = calendar.get(Calendar.MONTH);
-//        int year = calendar.get(Calendar.YEAR);
-//
-//        pickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker datePicker, int years, int months, int dayS) {
-//                tvJadwal.setText(years + "-" + (months + 1) + "-" + dayS );
-//                Tanggal = years + "-" + (months + 1) + "-" + dayS;
-//            }
-//        }, year, month, day);
-//        pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-//        pickerDialog.show();
-//    }
 }

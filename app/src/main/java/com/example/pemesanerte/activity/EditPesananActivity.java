@@ -42,11 +42,9 @@ public class EditPesananActivity extends AppCompatActivity {
     Button buttonDone;
     ExpandableCardView detailTrip;
     Spinner spinnerSeat;
-//    String EXTRA_CHECK_DATA_EDIT = "extra_check_data_edit";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus;
     int checkBeforeDone;
-
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
@@ -69,9 +67,6 @@ public class EditPesananActivity extends AppCompatActivity {
         jumlahPenumpang = checkData.getJumlah_penumpang();
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
-
-//        getIdPesanan();
-
 
         switch (asal){
             case "Bukittinggi":
@@ -113,10 +108,6 @@ public class EditPesananActivity extends AppCompatActivity {
         tvJam.setText(checkData.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
 
-//        Toast.makeText(EditPesananActivity.this, "idPesanan = "+idPesanan, Toast.LENGTH_SHORT).show();
-
-
-
         buttonDone = findViewById(R.id.button_done_edit);
         buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +146,6 @@ public class EditPesananActivity extends AppCompatActivity {
 
     private void getData() {
 
-//        getIdPesanan();
-        //Karena idPesanan null kalau dibikin fungsi sendiri, jadinya coba kayak gini:
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(idTrip, idUsersPemesan);
         idPesananCall.enqueue(new Callback<IdPesanan>() {
@@ -169,7 +158,6 @@ public class EditPesananActivity extends AppCompatActivity {
                     idPesanan = data.get(i).getIdPesanan();
                 }
 
-                //This is for get data Detail Pesanan
                 ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
                 Call<EditDetailPesanan> detailPesananCall = apiInterface1.getDetailPesananResponse(idPesanan, idTrip);
                 detailPesananCall.enqueue(new Callback<EditDetailPesanan>() {
@@ -178,7 +166,6 @@ public class EditPesananActivity extends AppCompatActivity {
 
                         detailPesananData = response.body().getData();
 
-                        //This is to get booked seat
                         ApiInterface apiInterface2 = ApiClient.getClient().create(ApiInterface.class);
                         Call<BookedSeat> bookedSeatCall = apiInterface2.bookedSeatResponse(idTrip);
                         bookedSeatCall.enqueue(new Callback<BookedSeat>() {
@@ -202,7 +189,6 @@ public class EditPesananActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                //Set Data to each edittext/spinner passenger
                                 for (int i=0; i<layoutList.getChildCount(); i++){
                                     View detailPassengerView = layoutList.getChildAt(i);
 
@@ -217,11 +203,7 @@ public class EditPesananActivity extends AppCompatActivity {
 
                                     Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
 
-                                    //Iko lawak mah wwkwkw, silly solution
                                     Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
-//                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditPesananActivity.this, android.R.layout.simple_spinner_item, listSpinner);
-//                                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                                    spinnerSeat.setAdapter(adapter);
                                     TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
                                     textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
                                     spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
@@ -260,7 +242,6 @@ public class EditPesananActivity extends AppCompatActivity {
                                                         break;
                                                 }
 
-
                                                 if (namaDetail.trim().equals("")){
                                                     editTextName.setError("Nama wajib diisi");
                                                     ((CheckBox) view).setChecked(false);
@@ -296,23 +277,18 @@ public class EditPesananActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
-//                    Toast.makeText(EditPesananActivity.this, "Nama = "+detailPesananData.get(i).getNamaPenumpang(), Toast.LENGTH_SHORT).show();
                                 }
-
                             }
 
                             @Override
                             public void onFailure(Call<BookedSeat> call, Throwable t) {
-
                             }
                         });
-
 
                     }
 
                     @Override
                     public void onFailure(Call<EditDetailPesanan> call, Throwable t) {
-
                     }
                 });
 
@@ -375,27 +351,6 @@ public class EditPesananActivity extends AppCompatActivity {
             View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger_edit, null, false);
             layoutList.addView(detailPassenger);
         }
-
-//        Toast.makeText(EditPesananActivity.this, idPesanan+ " "+idTrip, Toast.LENGTH_SHORT).show();
-
-
-
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<EditDetailPesanan> detailPesananCall = apiInterface.getDetailPesananResponse(idPesanan, idTrip);
-//        detailPesananCall.enqueue(new Callback<EditDetailPesanan>() {
-//            @Override
-//            public void onResponse(Call<EditDetailPesanan> call, Response<EditDetailPesanan> response) {
-//                Toast.makeText(EditPesananActivity.this, idPesanan+ " "+idTrip, Toast.LENGTH_SHORT).show();
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<EditDetailPesanan> call, Throwable t) {
-//
-//            }
-//        });
     }
 
     @Override

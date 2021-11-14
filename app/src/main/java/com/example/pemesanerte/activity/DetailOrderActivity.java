@@ -56,7 +56,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
         idPesanan = historyData.getIdPesanan();
         idTrip = historyData.getIdTrip();
-//        Toast.makeText(DetailOrderActivity.this, "ID Pesanan : " +idPesanan, Toast.LENGTH_SHORT).show();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -67,7 +66,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         rvDetailHistory = findViewById(R.id.rv_detail_history);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh1);
         progressBar = findViewById(R.id.progress_bar1);
-//        rvDetailHistory.setHasFixedSize(true);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -78,34 +76,7 @@ public class DetailOrderActivity extends AppCompatActivity {
             }
         });
 
-//        TextView tvIdPesanan = findViewById(R.id.tv_id_order);
-//        TextView tvIdTrip = findViewById(R.id.tv_id_trip);
-//        TextView tvFrom = findViewById(R.id.tv_from);
-//        TextView tvTo = findViewById(R.id.tv_to);
-//        TextView tvJadwal = findViewById(R.id.tv_date);
-//        TextView tvWaktu = findViewById(R.id.tv_time);
-//        TextView tvPrcllble = findViewById(R.id.tv_prcllble);
-//        HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
-//
-//        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
-
-
-//        tvIdPesanan.setText("Id Order: " +idPesanan);
-//        tvIdTrip.setText("Id Trip: " +historyData.getIdTrip());
-//        tvFrom.setText(historyData.getIdKotaAsal());
-//        tvTo.setText(historyData.getIdKotaTujuan());
-//        tvJadwal.setText(historyData.getTanggal());
-//        tvWaktu.setText(historyData.getJadwal());
-
-
-//        String text = "Asal : " + historyData.getIdKotaAsal() + ",\nTujuan : " + historyData.getIdKotaTujuan() + ",\nJadwal : " + historyData.getJadwal();
-//        tvPrcllble.setText(text);
-
-//        list.addAll(getDetailHistory());
         showRecyclerDetail(idPesanan);
-
-
-
 
         fb1 = findViewById(R.id.floating_button);
         floatingButtonEdit = findViewById(R.id.fb_edit);
@@ -146,10 +117,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Toast.makeText(DetailOrderActivity.this, "Edit Data Passenger(s)", Toast.LENGTH_SHORT).show();
                         Intent editPesanan = new Intent(DetailOrderActivity.this, EditPesananActivity.class);
-//                        editPesanan.putExtra("id_pesanan", idPesanan);
-//                        editPesanan.putExtra("id_trip", idTrip);
                         CheckData checkData = new CheckData();
                         checkData.setId_trip(idTrip);
                         checkData.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
@@ -161,9 +129,6 @@ public class DetailOrderActivity extends AppCompatActivity {
 
                         editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkData);
                         startActivity(editPesanan);
-//                        Toast.makeText(DetailOrderActivity.this, "Jumlah member "+jumlahPenumpang, Toast.LENGTH_SHORT).show();
-
-
                     }
                 });
 
@@ -224,26 +189,6 @@ public class DetailOrderActivity extends AppCompatActivity {
 
                             }
                         });
-
-
-//                        builder.setMessage("Disini nanti info tentang seat yang tersedia");
-//                        builder.setPositiveButton("Ni positive button", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                Toast.makeText(DetailOrderActivity.this, "Positive Button diklik", Toast.LENGTH_SHORT).show();
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//
-//                        builder.setNegativeButton("Ni Negative Button", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                Toast.makeText(DetailOrderActivity.this, "Negative Button diklik", Toast.LENGTH_SHORT).show();
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//
-//                        builder.show();
                     }
                 });
     }
@@ -259,33 +204,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-//    public ArrayList<HistoryData> getDetailHistory() {
-//        String[] dataPassengerName = getResources().getStringArray(R.array.array_name);
-//        String[] dataPassengerGender = getResources().getStringArray(R.array.array_gender);
-//        String[] dataPassengerAsal = getResources().getStringArray(R.array.array_asal);
-//        String[] dataPassengerTujuan = getResources().getStringArray(R.array.array_tujuan);
-//        String[] dataPassengerKontak = getResources().getStringArray(R.array.array_phone);
-//        String[] dataPassengerBiaya = getResources().getStringArray(R.array.array_cost);
-//        String[] dataPassengerSeat = getResources().getStringArray(R.array.array_seat);
-//
-//        ArrayList<HistoryData> listHistory = new ArrayList<>();
-//        for (int i = 0; i < dataPassengerName.length; i++) {
-//            HistoryData historyData = new HistoryData();
-//
-//            historyData.setNamaPenumpang(dataPassengerName[i]);
-//            historyData.setJenisKelamin(dataPassengerGender[i]);
-//            historyData.setDetailAsal(dataPassengerAsal[i]);
-//            historyData.setDetailTujuan(dataPassengerTujuan[i]);
-//            historyData.setNoHp(dataPassengerKontak[i]);
-//            historyData.setBiayaTambahan(dataPassengerBiaya[i]);
-//            historyData.setIdSeat(dataPassengerSeat[i]);
-//
-//            listHistory.add(historyData);
-//        }
-//
-//        return listHistory;
-//    }
-
     private void showRecyclerDetail(String idPesanan) {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -297,9 +215,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     rvDetailHistory.setLayoutManager(new LinearLayoutManager(DetailOrderActivity.this));
                     String message = response.body().getMessage();
-//                    Toast.makeText(DetailOrderActivity.this, message, Toast.LENGTH_SHORT).show();
                     list = response.body().getData();
-//                    Toast.makeText(DetailOrderActivity.this, "Jumlah member "+list.size(), Toast.LENGTH_SHORT).show();
                     jumlahPenumpang = list.size();
 
                     final DetailHistoryAdapter detailHistoryAdapter = new DetailHistoryAdapter(DetailOrderActivity.this, list);
@@ -320,20 +236,5 @@ public class DetailOrderActivity extends AppCompatActivity {
 
             }
         });
-//        rvDetailHistory.setLayoutManager(new LinearLayoutManager(this));
-//        final DetailHistoryAdapter detailHistoryAdapter = new DetailHistoryAdapter(list);
-//        rvDetailHistory.setAdapter(detailHistoryAdapter);
-
-//        detailHistoryAdapter.setOnItemClickCallback(new HistoryAdapter.OnItemClickCallback() {
-//            @Override
-//            public void onItemClicked(HistoryData data) {
-//                Intent detailHistoryIntent = new Intent(DetailOrderActivity.this, DetailOrderActivity.class);
-////                detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
-//                startActivity(detailHistoryIntent);
-//                Toast.makeText(DetailOrderActivity.this, "Kamu memilih " + data.getJadwal(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
     }
 }

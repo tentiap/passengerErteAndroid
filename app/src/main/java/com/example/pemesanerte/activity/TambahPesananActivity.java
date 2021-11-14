@@ -84,10 +84,7 @@ public class TambahPesananActivity extends AppCompatActivity {
         spinnerAdd = findViewById(R.id.spinner_add_jumlah_tambah);
         buttonCari = findViewById(R.id.btn_add_cari);
 
-
         getData();
-
-
 
     }
 

@@ -35,14 +35,11 @@ import java.util.List;
 public class SelectTripActivity extends AppCompatActivity {
     private RecyclerView rvSelectTrip;
     private List<SearchData> listData = new ArrayList<>();
-
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
     public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
 
     String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan, IdTrip, Jam;
-
-//    TextView tvFrom, tvTo, tvDate, tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +67,6 @@ public class SelectTripActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle(Asal+ " | " +Tujuan+ " | "
                 +Tanggal+ " | " +JumlahPenumpang+ " Passenger(s)");
 
-
-//        if(Asal == "Bukittinggi"){
-//            kAsal = "K1";}
-////        }else if(Asal == "Padang"){
-////            kAsal = "K2";
-////        }else {
-////            kAsal = "K3";
-////        }
-
         switch (Asal){
             case "Bukittinggi":
                 kAsal = "K1";
@@ -90,7 +78,6 @@ public class SelectTripActivity extends AppCompatActivity {
                 kAsal = "K3";
                 break;
         }
-
 
         switch (Tujuan){
             case "Bukittinggi":
@@ -104,17 +91,13 @@ public class SelectTripActivity extends AppCompatActivity {
                 break;
         }
 
-//        Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan +"-" +Jadwal + "-" +JumlahPenumpang,
-//                Toast.LENGTH_LONG).show();
-
         showTrip(kAsal, kTujuan, Jadwal, JumlahPenumpang);
-//
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
                 showTrip(kAsal, kTujuan, Jadwal, JumlahPenumpang);
-//                Toast.makeText(SelectTripActivity.this, kAsal +"-"+ kTujuan , Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -141,27 +124,6 @@ public class SelectTripActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setTitle("Select Trip");
-//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Select Trip</font>"));
-
-//        tvFrom = findViewById(R.id.tv_select_from);
-//        tvTo = findViewById(R.id.tv_select_to);
-//        tvDate = findViewById(R.id.tv_select_tanggal);
-//        tvTotal = findViewById(R.id.tv_select_jumlah);
-
-
-//        tvFrom.setText(inputSearch.getFrom());
-//        tvTo.setText(inputSearch.getTo());
-//        tvDate.setText(inputSearch.getDate());
-//        tvTotal.setText(inputSearch.getTotal() + " Passenger(s)");
-
-//        rvSelectTrip.setHasFixedSize(true);
-
-//        list.addAll(getListSearch());
-
     }
 
     @Override
@@ -174,24 +136,6 @@ public class SelectTripActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-//    public ArrayList<Search> getListSearch() {
-//        String[] dataTrip = getResources().getStringArray(R.array.array_trip);
-//        String[] dataJam = getResources().getStringArray(R.array.array_jam);
-//        String[] dataSopir = getResources().getStringArray(R.array.array_sopir);
-//
-//        ArrayList<Search> listSearch = new ArrayList<>();
-//        for (int i = 0; i < dataTrip.length; i++) {
-//            Search search = new Search();
-//            search.setIdTrip(dataTrip[i]);
-//            search.setJadwal(dataJam[i]);
-//            search.setNama(dataSopir[i]);
-//
-//            listSearch.add(search);
-//        }
-//
-//        return listSearch;
-//    }
 
     private void showTrip(String kAsal, String kTujuan, String jadwal, String jumlahPenumpang) {
         progressBar.setVisibility(View.VISIBLE);

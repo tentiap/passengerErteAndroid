@@ -22,23 +22,14 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     SessionManager sessionManager;
     TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress, tvEdit;
-//    Button btnLogout;
     Button btnLogin, btnRegister, btnLogout;
     String name, username, email, phone, gender, address, idPemesan;
-
-//    private SwipeRefreshLayout swipeRefreshLayout;
-//    private ProgressBar progressBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-//        swipeRefreshLayout = findViewById(R.id.swipe_refresh3);
-//        progressBar = findViewById(R.id.progress_bar3);
-
-        //Soon delete maybe
         sessionManager = new SessionManager(AccountActivity.this);
 
         tvName = findViewById(R.id.tv_name);
@@ -70,45 +61,6 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(this);
 
-//        //cek ini lagi
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeRefreshLayout.setRefreshing(true);
-////                showRecyclerList(idUser);
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        });
-
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sessionManager.logoutSession();
-//                moveToLogin();
-//
-//            }
-//        });
-
-//        Soon delete
-//        btnLogin = findViewById(R.id.btn_login1);
-//        btnRegister = findViewById(R.id.btn_register1);
-//
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intentLogin = new Intent(AccountActivity.this, LoginActivity.class);
-//                startActivity(intentLogin);
-//            }
-//        });
-//
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intentRegister = new Intent(AccountActivity.this, RegisterActivity.class);
-//                startActivity(intentRegister);
-//            }
-//        });
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.bn_account);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -136,12 +88,10 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.tv_edit:
                 edit();
-//                Toast.makeText(this, "Text Edit", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_logout:
                 sessionManager.logoutSession();
                 moveToLogin();
-//                Toast.makeText(this, "Buttton Logout", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -151,8 +101,6 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
-
-
     }
 
     private void edit(){

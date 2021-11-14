@@ -1,6 +1,5 @@
 package com.example.pemesanerte.api;
 
-//import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
@@ -64,15 +63,6 @@ public interface ApiInterface {
             @Field("id_trip") String id_trip,
             @Field("id_users_pemesan") String id_users_pemesan
     );
-
-//    @FormUrlEncoded
-//    @POST("history")
-//    Call<kacauHistory> historyResponse(
-//            @Field("id_users_pemesan") String id_users_pemesan
-////            @Field("id_kota_asal") String id_kota_asal,
-////            @Field("id_kota_tujuan") String id_kota_tujuan,
-////            @Field("jadwal") String jadwal
-//    );
 
     @GET("history/{id_users_pemesan}")
     Call<History> historyResponse(
@@ -157,6 +147,4 @@ public interface ApiInterface {
             @Field("no_hp") String no_hp,
             @Field("status") String status
     );
-
-
 }

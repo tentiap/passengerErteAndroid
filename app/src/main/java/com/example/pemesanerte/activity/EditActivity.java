@@ -43,9 +43,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_edit);
 
         sessionManager = new SessionManager(EditActivity.this);
-        
-//        tvCancel = findViewById(R.id.tv_cancel);
-//        tvCancel.setOnClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -88,24 +85,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         euEmail.setText(xEmail);
         euPhone.setText(xPhone);
         euAddress.setText(xAddress);
-
-//        String[] gender = {"Male", "Female"};
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner_gender_update);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, gender);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
     }
-
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        onBackPressed();
-//        return true;
-//    }
-//
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
 
     private int getIndex(Spinner spinnerGender, String xGender) {
         for (int i=0; i < spinnerGender.getCount(); i++){
@@ -119,30 +99,18 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.tv_cancel:
-//                backToAccount();
-//                break;
             case R.id.btn_eu:
-//                yIdPemesan = xIdPemesan.toString();
                 yName = euName.getText().toString();
                 yUsername = euUsername.getText().toString();
                 yEmail = euEmail.getText().toString();
                 yGender = spinnerGender.getSelectedItem().toString();
-//                yGender = euName.getText().toString();
                 yPhone = euPhone.getText().toString();
                 yAddress = euAddress.getText().toString();
 
                 update();
-
         }
 
     }
-
-//    private void backToAccount() {
-//        Intent intentBack = new Intent(EditActivity.this, AccountActivity.class);
-//        startActivity(intentBack);
-//        finish();
-//    }
 
     private void update() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -152,19 +120,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<Pemesan> call, Response<Pemesan> response) {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
                     Toast.makeText(EditActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-//                    Intent intentUpdate = new Intent(EditActivity.this, AccountActivity.class );
-//                    startActivity(intentUpdate);
-//                    finish();
                     moveToLogin();
                 }else{
                     Toast.makeText(EditActivity.this, "Nomor HP udah ada", Toast.LENGTH_SHORT).show();
-
                 }
 
-//                String message = response.body().getMessage();
-//                Toast.makeText(EditActivity.this, "id = "+xIdPemesan+ " "+yName+ " "+yUsername+ " "
-//                                +yEmail+ " "+yGender+ " "+yPhone+ " "+yAddress, Toast.LENGTH_LONG).show();
                 finish();
             }
 
@@ -180,11 +140,5 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
-
-
     }
-
-
-
-        
 }

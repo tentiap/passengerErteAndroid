@@ -25,7 +25,6 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
        this.listDetailHistory = listDetailHistory;
     }
 
-
     @NonNull
     @Override
     public DetailHistoryHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -35,21 +34,14 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
 
     @Override
     public void onBindViewHolder(@NonNull final DetailHistoryHolder detailHolder, int position) {
-//        HistoryData detailHistoryData = listDetailHistory.get(position);
         DetailHistoryData detailHistoryData = listDetailHistory.get(position);
-//
+
         detailHolder.tvPassengerName.setText(detailHistoryData.getNamaPenumpang());
         detailHolder.tvPassengerGender.setText(detailHistoryData.getJenisKelamin());
         detailHolder.tvPassengerAsal.setText(detailHistoryData.getDetailAsal());
         detailHolder.tvPassengerTujuan.setText(detailHistoryData.getDetailTujuan());
         detailHolder.tvPassengerKontak.setText(detailHistoryData.getNoHp());
-//        if (detailHistoryData.getBiayaTambahan() == null ){
-//            detailHolder.tvPassengerBiaya.setText("-");
-//        }
-//        else{
-            detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
-//        }
-
+        detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
         detailHolder.tvPassengerSeat.setText(detailHistoryData.getIdSeat());
         detailHolder.tvPassengerStatus.setText(String.valueOf(detailHistoryData.getStatus()));
 
@@ -59,9 +51,6 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
     public int getItemCount() {
         return listDetailHistory.size();
     }
-
-//    public void setOnItemClickCallback(HistoryAdapter.OnItemClickCallback onItemClickCallback) {
-//    }
 
     public class DetailHistoryHolder extends RecyclerView.ViewHolder {
         TextView tvPassengerName, tvPassengerGender, tvPassengerAsal, tvPassengerTujuan, tvPassengerKontak,

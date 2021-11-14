@@ -45,8 +45,6 @@ public class MyOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_order);
 
         rvHistory = findViewById(R.id.rv_history);
-//        lmHistory = new LinearLayoutManager(MyOrderActivity.this, LinearLayoutManager.VERTICAL, false);
-//        rvHistory.setLayoutManager(lmHistory);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         progressBar = findViewById(R.id.progress_bar);
 
@@ -104,20 +102,13 @@ public class MyOrderActivity extends AppCompatActivity {
                     rvHistory.setAdapter(historyAdapter);
                     historyAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.INVISIBLE);
-//                    historyAdapter = new HistoryAdapter(MyOrderActivity.this, listData);
-//                    rvHistory.setAdapter(historyAdapter);
-//                    historyAdapter.notifyDataSetChanged();
-//                    progressBar.setVisibility(View.INVISIBLE);
-//
+
                     historyAdapter.setOnItemClickCallback(new HistoryAdapter.OnItemClickCallback() {
                         @Override
                         public void onItemClicked(HistoryData data) {
                             Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, (Parcelable) data);
                             detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_ID_PESANAN, data.getIdPesanan());
                             startActivity(detailHistoryIntent);
-//                            Toast.makeText(MyOrderActivity.this, "You select " + data.getIdPesanan(), Toast.LENGTH_SHORT).show();
                         }
                     });
 

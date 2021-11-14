@@ -74,11 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.radio_male:
                 if(checked){
-//                    Jenis_Kelamin = "1";
-//                    String Jenis_Kelamin = "1";
                     Jenis_Kelamin = ((RadioButton) view).getText().toString();
-//                    Jenis_Kelamin = ((RadioButton) view).getText().toString();
-//                    Jenis_Kelamin = getString(R.string.satu);
                     Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
                 break;

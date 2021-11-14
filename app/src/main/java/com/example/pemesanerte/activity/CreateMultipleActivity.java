@@ -46,7 +46,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
     LinearLayout layoutList;
     Button buttonDone;
     ExpandableCardView detailTrip;
-//    String EXTRA_CHECK_DATA = "extra_check_data";
     String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail;
     int checkBeforeDone;
