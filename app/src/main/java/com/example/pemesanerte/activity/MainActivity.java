@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
                 Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
 
-                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Jadwal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, "Asal : " +Asal+ ", Tujuan : "  +Tujuan+ ", Tanggal : " +Jadwal+ ", Penumpang : " +JumlahPenumpang, Toast.LENGTH_LONG).show();
                 InputSearch inputSearch = new InputSearch();
                 inputSearch.setFrom(Asal);
                 inputSearch.setTo(Tujuan);

@@ -151,7 +151,7 @@
             android:layout_gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Cari"
+            android:text="Next"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
