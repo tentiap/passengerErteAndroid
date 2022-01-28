@@ -75,13 +75,13 @@ public class RegisterActivity extends AppCompatActivity {
             case R.id.radio_male:
                 if(checked){
                     Jenis_Kelamin = ((RadioButton) view).getText().toString();
-                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.radio_female:
                 if(checked){
                     Jenis_Kelamin = ((RadioButton) view).getText().toString();
-                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(RegisterActivity.this, Jenis_Kelamin, Toast.LENGTH_SHORT).show();
                 }
         }
     }
