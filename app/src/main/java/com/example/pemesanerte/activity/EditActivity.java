@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,7 +17,7 @@ import com.example.pemesanerte.SessionManager;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.pemesan.Pemesan;
-import com.example.pemesanerte.model.register.Register;
+//import com.example.pemesanerte.model.pemesanOld.PemesanOld;
 
 import java.util.ArrayList;
 

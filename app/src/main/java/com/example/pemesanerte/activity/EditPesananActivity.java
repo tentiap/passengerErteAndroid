@@ -19,7 +19,7 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
-import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.checkOld.CheckDataOld;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananData;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
@@ -61,12 +61,12 @@ public class EditPesananActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Edit Data Passenger(s)");
         
-        CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA_EDIT);
-        idTrip = checkData.getId_trip();
-        idUsersPemesan = checkData.getId_users_pemesan();
-        jumlahPenumpang = checkData.getJumlah_penumpang();
-        asal = checkData.getAsal();
-        tujuan = checkData.getTujuan();
+        CheckDataOld checkDataOld = getIntent().getParcelableExtra(EXTRA_CHECK_DATA_EDIT);
+//        idTrip = checkDataOld.getId_trip();
+//        idUsersPemesan = checkDataOld.getId_users_pemesan();
+        jumlahPenumpang = checkDataOld.getJumlah_penumpang();
+        asal = checkDataOld.getAsal();
+        tujuan = checkDataOld.getTujuan();
 
         switch (asal){
             case "Bukittinggi":
@@ -104,8 +104,8 @@ public class EditPesananActivity extends AppCompatActivity {
 
         tvAsal.setText(asal);
         tvTujuan.setText(tujuan);
-        tvTanggal.setText(checkData.getTanggal());
-        tvJam.setText(checkData.getJam());
+        tvTanggal.setText(checkDataOld.getTanggal());
+        tvJam.setText(checkDataOld.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
 
         buttonDone = findViewById(R.id.button_done_edit);

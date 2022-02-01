@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
+	@SerializedName("id_pemesan")
+	private String idPemesan;
+
 	@SerializedName("password")
 	private String password;
 
@@ -14,13 +17,10 @@ public class LoginData {
 	private String nama;
 
 	@SerializedName("updated_at")
-	private Object updatedAt;
-
-	@SerializedName("id_users")
-	private String idUsers;
+	private String updatedAt;
 
 	@SerializedName("created_at")
-	private Object createdAt;
+	private String createdAt;
 
 	@SerializedName("jenis_kelamin")
 	private String jenisKelamin;
@@ -33,6 +33,14 @@ public class LoginData {
 
 	@SerializedName("alamat")
 	private String alamat;
+
+	public void setIdPemesan(String idPemesan){
+		this.idPemesan = idPemesan;
+	}
+
+	public String getIdPemesan(){
+		return idPemesan;
+	}
 
 	public void setPassword(String password){
 		this.password = password;
@@ -58,27 +66,19 @@ public class LoginData {
 		return nama;
 	}
 
-	public void setUpdatedAt(Object updatedAt){
+	public void setUpdatedAt(String updatedAt){
 		this.updatedAt = updatedAt;
 	}
 
-	public Object getUpdatedAt(){
+	public String getUpdatedAt(){
 		return updatedAt;
 	}
 
-	public void setIdUsers(String idUsers){
-		this.idUsers = idUsers;
-	}
-
-	public String getIdUsers(){
-		return idUsers;
-	}
-
-	public void setCreatedAt(Object createdAt){
+	public void setCreatedAt(String createdAt){
 		this.createdAt = createdAt;
 	}
 
-	public Object getCreatedAt(){
+	public String getCreatedAt(){
 		return createdAt;
 	}
 

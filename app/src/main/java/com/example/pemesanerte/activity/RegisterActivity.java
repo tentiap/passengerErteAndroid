@@ -17,18 +17,20 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.register.Register;
+import com.example.pemesanerte.model.register.RegisterOld;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edtName, edtUsername, edtEmail, edtPassword, edtContact, edtAddress;
+    EditText edtIdPemesan, edtName, edtUsername, edtEmail, edtPassword, edtContact, edtAddress;
     Button btnRegister;
-    String Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin;
+    String Id_pemesan, Nama, Username, Email, Password, Kontak, Alamat, Jenis_Kelamin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        edtIdPemesan = findViewById(R.id.edt_id_pemesan);
         edtName = findViewById(R.id.edt_name);
         edtUsername = findViewById(R.id.edt_username);
         edtEmail = findViewById(R.id.edt_email);
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Id_pemesan = edtIdPemesan.getText().toString();
                 Nama = edtName.getText().toString();
                 Username = edtUsername.getText().toString();
                 Email = edtEmail.getText().toString();
@@ -51,6 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (Nama.trim().equals("")){
                     edtName.setError("Nama wajib diisi");
+                } else if (Id_pemesan.trim().equals("")){
+                    edtIdPemesan.setError("ID Pemesan wajib diisi");
                 } else if (Username.trim().equals("")){
                     edtUsername.setError("Username wajib diisi");
                 } else if (Email.trim().equals("")){
@@ -88,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register(){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Register> call = apiInterface.registerResponse(Nama, Username, Email, Password, Jenis_Kelamin, Kontak, Alamat);
+        Call<Register> call = apiInterface.registerResponse(Id_pemesan, Nama, Username, Email, Password, Jenis_Kelamin, Kontak, Alamat);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {

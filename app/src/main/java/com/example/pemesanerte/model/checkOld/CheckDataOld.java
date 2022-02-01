@@ -1,12 +1,13 @@
-package com.example.pemesanerte.model.check;
+package com.example.pemesanerte.model.checkOld;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class CheckData implements Parcelable {
+public class CheckDataOld implements Parcelable {
     private String jumlah_penumpang;
-    private String id_trip;
-    private String id_users_pemesan;
+    private String jadwal;
+    private String plat_mobil;
+    private String id_pemesan;
     private String asal;
     private String tujuan;
     private String tanggal;
@@ -15,33 +16,34 @@ public class CheckData implements Parcelable {
 
 
 
-    public CheckData(Parcel in) {
+    public CheckDataOld(Parcel in) {
         jumlah_penumpang = in.readString();
-        id_trip = in.readString();
-        id_users_pemesan = in.readString();
+        jadwal = in.readString();
+        plat_mobil = in.readString();
+        id_pemesan = in.readString();
         asal = in.readString();
         tujuan = in.readString();
         tanggal = in.readString();
         jam = in.readString();
-        jam = in.readString();
+//        jam = in.readString();
         status = in.readInt();
 
 
     }
 
-    public static final Creator<CheckData> CREATOR = new Creator<CheckData>() {
+    public static final Creator<CheckDataOld> CREATOR = new Creator<CheckDataOld>() {
         @Override
-        public CheckData createFromParcel(Parcel in) {
-            return new CheckData(in);
+        public CheckDataOld createFromParcel(Parcel in) {
+            return new CheckDataOld(in);
         }
 
         @Override
-        public CheckData[] newArray(int size) {
-            return new CheckData[size];
+        public CheckDataOld[] newArray(int size) {
+            return new CheckDataOld[size];
         }
     };
 
-    public CheckData() {
+    public CheckDataOld() {
 
     }
 
@@ -53,12 +55,17 @@ public class CheckData implements Parcelable {
         this.jumlah_penumpang = jumlah_penumpang;
     }
 
-    public String getId_trip() {
-        return id_trip;
+    public String getJadwal() {
+        return jadwal;
     }
 
-    public void setId_trip(String id_trip) {
-        this.id_trip = id_trip;
+    public String plat_mobil() {
+        return plat_mobil;
+    }
+
+
+    public void setJadwal(String jadwal) {
+        this.jadwal = jadwal;
     }
 
     public String getAsal() {
@@ -93,12 +100,12 @@ public class CheckData implements Parcelable {
         this.jam = jam;
     }
 
-    public String getId_users_pemesan() {
-        return id_users_pemesan;
+    public String getId_pemesan() {
+        return id_pemesan;
     }
 
-    public void setId_users_pemesan(String id_users_pemesan) {
-        this.id_users_pemesan = id_users_pemesan;
+    public void setId_pemesan(String id_pemesan) {
+        this.id_pemesan = id_pemesan;
     }
 
     public void setStatus(int status){
@@ -127,8 +134,9 @@ public class CheckData implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(jumlah_penumpang);
-        parcel.writeString(id_trip);
-        parcel.writeString(id_users_pemesan);
+        parcel.writeString(jadwal);
+        parcel.writeString(plat_mobil);
+        parcel.writeString(id_pemesan);
         parcel.writeString(asal);
         parcel.writeString(tujuan);
         parcel.writeString(tanggal);

@@ -1,8 +1,8 @@
-package com.example.pemesanerte.model.check;
+package com.example.pemesanerte.model.checkOld;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Check {
+public class CheckOld {
     @SerializedName("message")
     private String message;
 

@@ -22,7 +22,7 @@ import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.availableSeat.AvailableSeat;
-import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.checkOld.CheckDataOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;
@@ -118,16 +118,16 @@ public class DetailOrderActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent editPesanan = new Intent(DetailOrderActivity.this, EditPesananActivity.class);
-                        CheckData checkData = new CheckData();
-                        checkData.setId_trip(idTrip);
-                        checkData.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
-                        checkData.setId_users_pemesan(historyData.getIdUsersPemesan());
-                        checkData.setAsal(historyData.getIdKotaAsal());
-                        checkData.setTujuan(historyData.getIdKotaTujuan());
-                        checkData.setTanggal(historyData.getTanggal());
-                        checkData.setJam(historyData.getJadwal());
+                        CheckDataOld checkDataOld = new CheckDataOld();
+//                        checkDataOld.setId_trip(idTrip);
+                        checkDataOld.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
+//                        checkDataOld.setId_users_pemesan(historyData.getIdUsersPemesan());
+                        checkDataOld.setAsal(historyData.getIdKotaAsal());
+                        checkDataOld.setTujuan(historyData.getIdKotaTujuan());
+                        checkDataOld.setTanggal(historyData.getTanggal());
+                        checkDataOld.setJam(historyData.getJadwal());
 
-                        editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkData);
+                        editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkDataOld);
                         startActivity(editPesanan);
                     }
                 });

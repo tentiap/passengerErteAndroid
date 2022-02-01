@@ -2,10 +2,7 @@ package com.example.pemesanerte.model.register;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RegisterData {
-
-	@SerializedName("id_pemesan")
-	private String idPemesan;
+public class RegisterDataOld {
 
 	@SerializedName("password")
 	private String password;
@@ -18,6 +15,9 @@ public class RegisterData {
 
 	@SerializedName("updated_at")
 	private String updatedAt;
+
+	@SerializedName("id_users")
+	private String idUsers;
 
 	@SerializedName("created_at")
 	private String createdAt;
@@ -33,14 +33,6 @@ public class RegisterData {
 
 	@SerializedName("alamat")
 	private String alamat;
-
-	public void setIdPemesan(String idPemesan){
-		this.idPemesan = idPemesan;
-	}
-
-	public String getIdPemesan(){
-		return idPemesan;
-	}
 
 	public void setPassword(String password){
 		this.password = password;
@@ -72,6 +64,14 @@ public class RegisterData {
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public void setIdUsers(String idUsers){
+		this.idUsers = idUsers;
+	}
+
+	public String getIdUsers(){
+		return idUsers;
 	}
 
 	public void setCreatedAt(String createdAt){

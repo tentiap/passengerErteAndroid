@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 Asal = spinnerAsal.getSelectedItem().toString();
                 Tujuan = spinnerTujuan.getSelectedItem().toString();
                 JumlahPenumpang = spinnerJumlahPenumpang.getSelectedItem().toString();
-                Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
+                Pemesan = sessionManager.getUserDetail().get(SessionManager.ID_PEMESAN);
 
                 InputSearch inputSearch = new InputSearch();
                 inputSearch.setFrom(Asal);

@@ -1,12 +1,9 @@
 package com.example.pemesanerte.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,20 +16,16 @@ import android.widget.Toast;
 
 import com.alespero.expandablecardview.ExpandableCardView;
 import com.example.pemesanerte.R;
-import com.example.pemesanerte.activity.example.CreateOrderActivity;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
-import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.checkOld.CheckDataOld;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesananData;
-import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.seat.SeatData;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,13 +60,13 @@ public class CreateMultipleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Add Passenger(s)");
 
-        CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
-
-        idTrip = checkData.getId_trip();
-        idUsersPemesan = checkData.getId_users_pemesan();
-        jumlahPenumpang = checkData.getJumlah_penumpang();
-        asal = checkData.getAsal();
-        tujuan = checkData.getTujuan();
+        CheckDataOld checkDataOld = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
+//
+//        idTrip = checkDataOld.getId_trip();
+//        idUsersPemesan = checkDataOld.getId_users_pemesan();
+        jumlahPenumpang = checkDataOld.getJumlah_penumpang();
+        asal = checkDataOld.getAsal();
+        tujuan = checkDataOld.getTujuan();
 
         getIdPesanan();
 
@@ -115,8 +108,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
         tvAsal.setText(asal);
         tvTujuan.setText(tujuan);
-        tvTanggal.setText(checkData.getTanggal());
-        tvJam.setText(checkData.getJam());
+        tvTanggal.setText(checkDataOld.getTanggal());
+        tvJam.setText(checkDataOld.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
         checkBeforeDone = 0;
 

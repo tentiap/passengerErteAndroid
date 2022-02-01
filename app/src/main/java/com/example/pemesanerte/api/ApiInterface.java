@@ -2,13 +2,14 @@ package com.example.pemesanerte.api;
 
 import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
-import com.example.pemesanerte.model.check.Check;
+import com.example.pemesanerte.model.checkOld.CheckOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
+//import com.example.pemesanerte.model.pemesanOld.PemesanOld;
 import com.example.pemesanerte.model.pemesan.Pemesan;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
@@ -35,6 +36,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("register")
     Call<Register> registerResponse(
+            @Field("id_pemesan") String id_pemesan,
             @Field("nama") String nama,
             @Field("username") String username,
             @Field("email") String email,
@@ -83,14 +85,14 @@ public interface ApiInterface {
     );
 
     @GET("check/{jumlah_penumpang}/{id_trip}/{id_users_pemesan}")
-    Call<Check> checkResponse(
+    Call<CheckOld> checkResponse(
             @Path("jumlah_penumpang") String jumlah_penumpang,
             @Path("id_trip") String id_trip,
             @Path("id_users_pemesan") String id_users_pemesan
     );
 
     @GET("checkUpdate/{tambah}/{id_trip}/{id_users_pemesan}")
-    Call<Check> checkUpdateResponse(
+    Call<CheckOld> checkUpdateResponse(
             @Path("tambah") String tambah,
             @Path("id_trip") String id_trip,
             @Path("id_users_pemesan") String id_users_pemesan
@@ -126,7 +128,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("updateDataPemesan")
     Call<Pemesan> pemesanResponse(
-            @Field("id_users") String id_users,
+            @Field("id_pemesan") String id_pemesan,
             @Field("nama") String nama,
             @Field("username") String username,
             @Field("email") String email,

@@ -30,7 +30,7 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
-import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.checkOld.CheckDataOld;
 import com.example.pemesanerte.model.seat.SeatData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -60,11 +60,11 @@ public class CreateOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
 
-        CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
+        CheckDataOld checkDataOld = getIntent().getParcelableExtra(EXTRA_CHECK_DATA);
 
-        IdTrip = checkData.getId_trip();
-        IdUsersPemesan = checkData.getId_users_pemesan();
-        JumlahPenumpang = checkData.getJumlah_penumpang();
+//        IdTrip = checkDataOld.getId_trip();
+//        IdUsersPemesan = checkDataOld.getId_users_pemesan();
+        JumlahPenumpang = checkDataOld.getJumlah_penumpang();
 
         TextView tvAsal = findViewById(R.id.tv_create_from);
         TextView tvTujuan = findViewById(R.id.tv_create_to);
@@ -74,11 +74,11 @@ public class CreateOrderActivity extends AppCompatActivity {
         spinnerSeat = findViewById(R.id.spinner_seat_available);
 
 
-        tvAsal.setText(checkData.getAsal());
-        tvTujuan.setText(checkData.getTujuan());
-        tvTanggal.setText(checkData.getTanggal());
-        tvJam.setText(checkData.getJam());
-        tvJumlah.setText(checkData.getJumlah_penumpang() + " Passenger(s)");
+        tvAsal.setText(checkDataOld.getAsal());
+        tvTujuan.setText(checkDataOld.getTujuan());
+        tvTanggal.setText(checkDataOld.getTanggal());
+        tvJam.setText(checkDataOld.getJam());
+        tvJumlah.setText(checkDataOld.getJumlah_penumpang() + " Passenger(s)");
 
         Toast.makeText(this, "Silakan isi data penumpang", Toast.LENGTH_SHORT).show();
 

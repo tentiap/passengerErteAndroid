@@ -17,12 +17,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.pemesanerte.R;
-import com.example.pemesanerte.activity.example.CreateOrderActivity;
 import com.example.pemesanerte.adapter.SearchAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
-import com.example.pemesanerte.model.check.Check;
-import com.example.pemesanerte.model.check.CheckData;
+import com.example.pemesanerte.model.checkOld.CheckOld;
+import com.example.pemesanerte.model.checkOld.CheckDataOld;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
@@ -181,19 +180,19 @@ public class SelectTripActivity extends AppCompatActivity {
 
     private void check(String jumlahPenumpang, String idTrip, String idUsersPemesan){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Check> checkCall = apiInterface.checkResponse(jumlahPenumpang, idTrip, idUsersPemesan);
-        checkCall.enqueue(new Callback<Check>() {
+        Call<CheckOld> checkCall = apiInterface.checkResponse(jumlahPenumpang, idTrip, idUsersPemesan);
+        checkCall.enqueue(new Callback<CheckOld>() {
             @Override
-            public void onResponse(Call<Check> call, Response<Check> response) {
+            public void onResponse(Call<CheckOld> call, Response<CheckOld> response) {
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
-                    CheckData checkData = new CheckData();
-                    checkData.setId_trip(idTrip);
-                    checkData.setJumlah_penumpang(jumlahPenumpang);
-                    checkData.setId_users_pemesan(idUsersPemesan);
-                    checkData.setAsal(Asal);
-                    checkData.setTujuan(Tujuan);
-                    checkData.setTanggal(Tanggal);
-                    checkData.setJam(Jam);
+                    CheckDataOld checkDataOld = new CheckDataOld();
+//                    checkDataOld.setId_trip(idTrip);
+                    checkDataOld.setJumlah_penumpang(jumlahPenumpang);
+//                    checkDataOld.setId_users_pemesan(idUsersPemesan);
+                    checkDataOld.setAsal(Asal);
+                    checkDataOld.setTujuan(Tujuan);
+                    checkDataOld.setTanggal(Tanggal);
+                    checkDataOld.setJam(Jam);
 
                     ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
                     Call<Pesanan> pesananCall = apiInterface1.pesananResponse(idTrip, idUsersPemesan);
@@ -201,7 +200,7 @@ public class SelectTripActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
-                            selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkData);
+                            selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkDataOld);
                             startActivity(selectTripIntent);
                         }
 
@@ -219,7 +218,7 @@ public class SelectTripActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Check> call, Throwable t) {
+            public void onFailure(Call<CheckOld> call, Throwable t) {
                 Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

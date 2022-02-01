@@ -49,7 +49,7 @@ public class MyOrderActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         sessionManager = new SessionManager(MyOrderActivity.this);
-        idUser = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
+        idUser = sessionManager.getUserDetail().get(SessionManager.ID_PEMESAN);
 
         showRecyclerList(idUser);
 

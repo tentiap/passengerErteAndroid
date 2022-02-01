@@ -26,6 +26,7 @@
 
     <string name="where">Where will you go?</string>
     <string name="detail_order">Detail Order</string>
+    <string name="id_pemesan">ID Pemesan</string>
 
     <string-array name="spinner_kota">
         <item>Bukittinggi</item>

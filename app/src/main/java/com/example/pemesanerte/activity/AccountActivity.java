@@ -21,7 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class AccountActivity extends AppCompatActivity implements View.OnClickListener{
 
     SessionManager sessionManager;
-    TextView tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress, tvEdit;
+    TextView tvIdPemesan, tvName, tvUsername, tvEmail, tvPhone, tvGender, tvAddress, tvEdit;
     Button btnLogin, btnRegister, btnLogout;
     String name, username, email, phone, gender, address, idPemesan;
 
@@ -32,6 +32,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
         sessionManager = new SessionManager(AccountActivity.this);
 
+        tvIdPemesan = findViewById(R.id.tv_id_pemesan);
         tvName = findViewById(R.id.tv_name);
         tvUsername = findViewById(R.id.tv_username);
         tvEmail = findViewById(R.id.tv_email);
@@ -48,9 +49,9 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         phone = sessionManager.getUserDetail().get(SessionManager.KONTAK);
         gender = sessionManager.getUserDetail().get(SessionManager.JENIS_KELAMIN);
         address = sessionManager.getUserDetail().get(SessionManager.ALAMAT);
-        idPemesan = sessionManager.getUserDetail().get(SessionManager.ID_USERS);
+        idPemesan = sessionManager.getUserDetail().get(SessionManager.ID_PEMESAN);
 
-
+        tvIdPemesan.setText(idPemesan);
         tvName.setText(name);
         tvUsername.setText(username);
         tvEmail.setText(email);
