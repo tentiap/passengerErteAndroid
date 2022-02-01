@@ -1,11 +1,11 @@
-//package com.example.pemesanerte.model.pemesan;
+//package com.example.pemesanerte.model.pesanan;
 //
 //import com.google.gson.annotations.SerializedName;
 //
-//public class PemesanOld {
+//public class PesananOld {
 //
 //	@SerializedName("data")
-//	private PemesanDataOld pemesanDataOld;
+//	private PesananDataOld pesananDataOld;
 //
 //	@SerializedName("message")
 //	private String message;
@@ -13,12 +13,12 @@
 //	@SerializedName("status")
 //	private boolean status;
 //
-//	public void setPemesanDataOld(PemesanDataOld pemesanDataOld){
-//		this.pemesanDataOld = pemesanDataOld;
+//	public void setPesananDataOld(PesananDataOld pesananDataOld){
+//		this.pesananDataOld = pesananDataOld;
 //	}
 //
-//	public PemesanDataOld getPemesanDataOld(){
-//		return pemesanDataOld;
+//	public PesananDataOld getPesananDataOld(){
+//		return pesananDataOld;
 //	}
 //
 //	public void setMessage(String message){

@@ -14,7 +14,7 @@ import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
 //import com.example.pemesanerte.model.pemesanOld.PemesanOld;
-import com.example.pemesanerte.model.pemesan.PemesanOld;
+import com.example.pemesanerte.model.pemesan.Pemesan;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
@@ -146,7 +146,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("updateDataPemesan")
-    Call<PemesanOld> pemesanResponse(
+    Call<Pemesan> pemesanResponse(
             @Field("id_pemesan") String id_pemesan,
             @Field("nama") String nama,
             @Field("username") String username,

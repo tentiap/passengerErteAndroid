@@ -24,6 +24,7 @@ import com.example.pemesanerte.model.check.Check;
 import com.example.pemesanerte.model.check.CheckData;
 //import com.example.pemesanerte.model.check.CheckOld;
 //import com.example.pemesanerte.model.check.CheckDataOld;
+//import com.example.pemesanerte.model.pesanan.PesananOld;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
@@ -164,8 +165,11 @@ public class SelectTripActivity extends AppCompatActivity {
                         public void onItemClicked(SearchData data) {
                             PlatMobil = data.getPlatMobil();
                             Jam = data.getJadwal();
+                            String newJadwal = jadwal + " " + Jam;
+//                            Toast.makeText(SelectTripActivity.this, newJadwal, Toast.LENGTH_SHORT).show();
 //                            check(JumlahPenumpang, PlatMobil, Pemesan);
-                            check(JumlahPenumpang, jadwal, PlatMobil, Pemesan);
+                            check(JumlahPenumpang, newJadwal, PlatMobil, Pemesan);
+//                            Toast.makeText(SelectTripActivity.this, "Jadwal " +jadwal, Toast.LENGTH_SHORT);
                         }
 
 //                        @Override
@@ -190,15 +194,15 @@ public class SelectTripActivity extends AppCompatActivity {
         });
     }
 
-    private void check(String jumlahPenumpang, String jadwal, String platMobil,  String idPemesan){
+    private void check(String jumlahPenumpang, String newJadwal, String platMobil,  String idPemesan){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Check> checkCall = apiInterface.checkResponse(jumlahPenumpang, jadwal, platMobil, idPemesan);
+        Call<Check> checkCall = apiInterface.checkResponse(jumlahPenumpang, newJadwal, platMobil, idPemesan);
         checkCall.enqueue(new Callback<Check>() {
             @Override
             public void onResponse(Call<Check> call, Response<Check> response) {
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
                     CheckData checkData = new CheckData();
-                    checkData.setJadwal(jadwal);
+                    checkData.setJadwal(newJadwal);
                     checkData.setPlat_mobil(PlatMobil);
                     checkData.setJumlah_penumpang(jumlahPenumpang);
                     checkData.setId_pemesan(idPemesan);
@@ -208,12 +212,13 @@ public class SelectTripActivity extends AppCompatActivity {
                     checkData.setJam(Jam);
 
                     ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
-                    Call<Pesanan> pesananCall = apiInterface1.pesananResponse(jadwal, platMobil, idPemesan);
+                    Call<Pesanan> pesananCall = apiInterface1.pesananResponse(newJadwal, platMobil, idPemesan);
                     pesananCall.enqueue(new Callback<Pesanan>() {
                         @Override
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
                             selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkData);
+//                            Toast.makeText(SelectTripActivity.this, "Jadwal " +newJadwal, Toast.LENGTH_SHORT).show();
                             startActivity(selectTripIntent);
                         }
 

@@ -16,7 +16,8 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.SessionManager;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
-import com.example.pemesanerte.model.pemesan.PemesanOld;
+import com.example.pemesanerte.model.pemesan.Pemesan;
+//import com.example.pemesanerte.model.pemesan.PemesanOld;
 //import com.example.pemesanerte.model.pemesanOld.PemesanOld;
 
 import java.util.ArrayList;
@@ -113,10 +114,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     private void update() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<PemesanOld> call = apiInterface.pemesanResponse(xIdPemesan, yName, yUsername, yEmail, yGender, yPhone, yAddress);
-        call.enqueue(new Callback<PemesanOld>() {
+        Call<Pemesan> call = apiInterface.pemesanResponse(xIdPemesan, yName, yUsername, yEmail, yGender, yPhone, yAddress);
+        call.enqueue(new Callback<Pemesan>() {
             @Override
-            public void onResponse(Call<PemesanOld> call, Response<PemesanOld> response) {
+            public void onResponse(Call<Pemesan> call, Response<Pemesan> response) {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
                     Toast.makeText(EditActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     moveToLogin();
@@ -128,7 +129,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void onFailure(Call<PemesanOld> call, Throwable t) {
+            public void onFailure(Call<Pemesan> call, Throwable t) {
                 Toast.makeText(EditActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
