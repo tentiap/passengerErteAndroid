@@ -21,12 +21,15 @@ import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
 //import com.example.pemesanerte.model.check.CheckDataOld;
 import com.example.pemesanerte.model.check.CheckData;
+//import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananOld;
+//import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananDataOld;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananData;
+//import com.example.pemesanerte.model.idPesanan.IdPesananOld;
+//import com.example.pemesanerte.model.idPesanan.IdPesananDataOld;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesananData;
 import com.example.pemesanerte.model.seat.SeatData;
-import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesanan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,7 +137,8 @@ public class EditPesananActivity extends AppCompatActivity {
                 List<IdPesananData> data = response.body().getData();
 
                 for (int i = 0; i < data.size(); i++){
-                    idPesanan = data.get(i).getIdPesanan();
+                    //harusnya idPesanan
+                    idPesanan = data.get(i).getIdPemesan();
                 }
 
             }
@@ -157,7 +161,8 @@ public class EditPesananActivity extends AppCompatActivity {
                 List<IdPesananData> data = response.body().getData();
 
                 for (int i = 0; i < data.size(); i++){
-                    idPesanan = data.get(i).getIdPesanan();
+                    //harusnya idPesanan
+                    idPesanan = data.get(i).getIdPemesan();
                 }
 
                 ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
@@ -219,7 +224,8 @@ public class EditPesananActivity extends AppCompatActivity {
                                     EditText editTextPhone = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_phone_edit);
                                     editTextPhone.setText(detailPesananData.get(i).getNoHp());
 
-                                    int idDetailPesanan = detailPesananData.get(i).getIdDetailPesanan();
+                                    //harusnya idDetailPesanan
+                                    int idDetailPesanan = detailPesananData.get(i).getOrderNumber();
 
                                     CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
                                     checkBoxSubmit.setOnClickListener(new View.OnClickListener() {

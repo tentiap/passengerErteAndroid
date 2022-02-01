@@ -6,13 +6,15 @@ import com.example.pemesanerte.model.check.Check;
 //import com.example.pemesanerte.model.check.CheckOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
+//import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananOld;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.history.History;
 //import com.example.pemesanerte.model.history.HistoryOld;
+//import com.example.pemesanerte.model.idPesanan.IdPesananOld;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
 //import com.example.pemesanerte.model.pemesanOld.PemesanOld;
-import com.example.pemesanerte.model.pemesan.Pemesan;
+import com.example.pemesanerte.model.pemesan.PemesanOld;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
@@ -122,7 +124,7 @@ public interface ApiInterface {
             @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("getDetailPesanan/{jadwal}/{plat_mobil}/{id_pemesan}")
+    @GET("getDetailPesanan/{id_pemesan}/{jadwal}/{plat_mobil}")
     Call<EditDetailPesanan> getDetailPesananResponse(
             @Path("jadwal") String jadwal,
             @Path("plat_mobil") String plat_mobil,
@@ -144,7 +146,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("updateDataPemesan")
-    Call<Pemesan> pemesanResponse(
+    Call<PemesanOld> pemesanResponse(
             @Field("id_pemesan") String id_pemesan,
             @Field("nama") String nama,
             @Field("username") String username,

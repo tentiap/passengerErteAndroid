@@ -4,11 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class EditDetailPesananData {
 
-	@SerializedName("id_users_feeder")
-	private Object idUsersFeeder;
+	@SerializedName("id_pemesan")
+	private String idPemesan;
 
 	@SerializedName("no_hp")
 	private String noHp;
+
+	@SerializedName("plat_mobil")
+	private String platMobil;
+
+	@SerializedName("order_number")
+	private int orderNumber;
 
 	@SerializedName("detail_tujuan")
 	private String detailTujuan;
@@ -19,8 +25,8 @@ public class EditDetailPesananData {
 	@SerializedName("id_seat")
 	private String idSeat;
 
-	@SerializedName("id_trip")
-	private String idTrip;
+	@SerializedName("id_feeder")
+	private String idFeeder;
 
 	@SerializedName("nama_penumpang")
 	private String namaPenumpang;
@@ -29,10 +35,10 @@ public class EditDetailPesananData {
 	private String detailAsal;
 
 	@SerializedName("biaya_tambahan")
-	private String biayaTambahan;
+	private Object biayaTambahan;
 
-	@SerializedName("id_pesanan")
-	private String idPesanan;
+	@SerializedName("jadwal")
+	private String jadwal;
 
 	@SerializedName("updated_at")
 	private String updatedAt;
@@ -40,18 +46,15 @@ public class EditDetailPesananData {
 	@SerializedName("jenis_kelamin")
 	private String jenisKelamin;
 
-	@SerializedName("id_detail_pesanan")
-	private int idDetailPesanan;
-
 	@SerializedName("status")
-	private int status;
+	private String status;
 
-	public void setIdUsersFeeder(Object idUsersFeeder){
-		this.idUsersFeeder = idUsersFeeder;
+	public void setIdPemesan(String idPemesan){
+		this.idPemesan = idPemesan;
 	}
 
-	public Object getIdUsersFeeder(){
-		return idUsersFeeder;
+	public String getIdPemesan(){
+		return idPemesan;
 	}
 
 	public void setNoHp(String noHp){
@@ -60,6 +63,22 @@ public class EditDetailPesananData {
 
 	public String getNoHp(){
 		return noHp;
+	}
+
+	public void setPlatMobil(String platMobil){
+		this.platMobil = platMobil;
+	}
+
+	public String getPlatMobil(){
+		return platMobil;
+	}
+
+	public void setOrderNumber(int orderNumber){
+		this.orderNumber = orderNumber;
+	}
+
+	public int getOrderNumber(){
+		return orderNumber;
 	}
 
 	public void setDetailTujuan(String detailTujuan){
@@ -86,12 +105,12 @@ public class EditDetailPesananData {
 		return idSeat;
 	}
 
-	public void setIdTrip(String idTrip){
-		this.idTrip = idTrip;
+	public void setIdFeeder(String idFeeder){
+		this.idFeeder = idFeeder;
 	}
 
-	public String getIdTrip(){
-		return idTrip;
+	public String getIdFeeder(){
+		return idFeeder;
 	}
 
 	public void setNamaPenumpang(String namaPenumpang){
@@ -110,20 +129,20 @@ public class EditDetailPesananData {
 		return detailAsal;
 	}
 
-	public void setBiayaTambahan(String biayaTambahan){
+	public void setBiayaTambahan(Object biayaTambahan){
 		this.biayaTambahan = biayaTambahan;
 	}
 
-	public String getBiayaTambahan(){
+	public Object getBiayaTambahan(){
 		return biayaTambahan;
 	}
 
-	public void setIdPesanan(String idPesanan){
-		this.idPesanan = idPesanan;
+	public void setJadwal(String jadwal){
+		this.jadwal = jadwal;
 	}
 
-	public String getIdPesanan(){
-		return idPesanan;
+	public String getJadwal(){
+		return jadwal;
 	}
 
 	public void setUpdatedAt(String updatedAt){
@@ -142,26 +161,19 @@ public class EditDetailPesananData {
 		return jenisKelamin;
 	}
 
-	public void setIdDetailPesanan(int idDetailPesanan){
-		this.idDetailPesanan = idDetailPesanan;
-	}
-
-	public int getIdDetailPesanan(){
-		return idDetailPesanan;
-	}
-
-	public void setStatus(int status){
+	public void setStatus(String status){
 		this.status = status;
 	}
 
 	public String getStatus(){
-		if (status == 1){
+//		return status;
+		if (status == "1"){
 			return "Booking ";
-		}else if (status == 2){
+		}else if (status == "2"){
 			return "Picked Up";
-		}else if (status == 3){
+		}else if (status == "3"){
 			return "On Going";
-		}else if (status == 4){
+		}else if (status == "4"){
 			return "Arrived";
 		}else{
 			return "Cancelled";
