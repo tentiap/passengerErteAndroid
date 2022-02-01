@@ -22,7 +22,7 @@ import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.availableSeat.AvailableSeat;
-import com.example.pemesanerte.model.checkOld.CheckDataOld;
+import com.example.pemesanerte.model.check.CheckData;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;
@@ -39,7 +39,7 @@ public class DetailOrderActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
-    String idPesanan, idTrip, availableSeat;
+    String jadwal, platMobil, idPemesan, availableSeat;
     Integer jumlahPenumpang;
 
     FloatingActionButton fb1, floatingButtonEdit, floatingButtonAddPassenger;
@@ -54,12 +54,15 @@ public class DetailOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_order);
 
         HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
-        idPesanan = historyData.getIdPesanan();
-        idTrip = historyData.getIdTrip();
+//        idPesanan = historyData.getIdPesanan();
+//        idTrip = historyData.getIdTrip();
+        jadwal = historyData.getJadwalFormatted();
+        idPemesan = historyData.getIdPemesan();
+        platMobil = historyData.getPlatMobil();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Detail Order " + idPesanan);
+        getSupportActionBar().setTitle("Detail Order ");
         getSupportActionBar().setSubtitle(historyData.getIdKotaAsal()+ " | " +historyData.getIdKotaTujuan()+ " | "
                 +historyData.getTanggal()+ " | " +historyData.getJadwal());
 
@@ -71,12 +74,12 @@ public class DetailOrderActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                showRecyclerDetail(idPesanan);
+                showRecyclerDetail(idPemesan, jadwal, platMobil);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        showRecyclerDetail(idPesanan);
+        showRecyclerDetail(idPemesan, jadwal, platMobil);
 
         fb1 = findViewById(R.id.floating_button);
         floatingButtonEdit = findViewById(R.id.fb_edit);
@@ -118,16 +121,17 @@ public class DetailOrderActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent editPesanan = new Intent(DetailOrderActivity.this, EditPesananActivity.class);
-                        CheckDataOld checkDataOld = new CheckDataOld();
+                        CheckData checkData = new CheckData();
 //                        checkDataOld.setId_trip(idTrip);
-                        checkDataOld.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
+//                        checkData.setId_pemesan();
+                        checkData.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
 //                        checkDataOld.setId_users_pemesan(historyData.getIdUsersPemesan());
-                        checkDataOld.setAsal(historyData.getIdKotaAsal());
-                        checkDataOld.setTujuan(historyData.getIdKotaTujuan());
-                        checkDataOld.setTanggal(historyData.getTanggal());
-                        checkDataOld.setJam(historyData.getJadwal());
+                        checkData.setAsal(historyData.getIdKotaAsal());
+                        checkData.setTujuan(historyData.getIdKotaTujuan());
+                        checkData.setTanggal(historyData.getTanggal());
+                        checkData.setJam(historyData.getJadwal());
 
-                        editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkDataOld);
+                        editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkData);
                         startActivity(editPesanan);
                     }
                 });
@@ -140,55 +144,55 @@ public class DetailOrderActivity extends AppCompatActivity {
                         builder = new AlertDialog.Builder(DetailOrderActivity.this);
                         builder.setTitle("Add More Passenger(s)");
 
-                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-                        Call<AvailableSeat> availableSeatCall = apiInterface.availableSeatResponse(idTrip);
-                        availableSeatCall.enqueue(new Callback<AvailableSeat>() {
-                            @Override
-                            public void onResponse(Call<AvailableSeat> call, Response<AvailableSeat> response) {
-                                if (response.body().isStatus()){
-                                    builder.setMessage(response.body().getMessage());
-                                    builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, idPesanan);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, idTrip);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdUsersPemesan());
-                                            startActivity(goToTambahPesananIntent);
-                                        }
-                                    });
+//                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//                        Call<AvailableSeat> availableSeatCall = apiInterface.availableSeatResponse(idTrip);
+//                        availableSeatCall.enqueue(new Callback<AvailableSeat>() {
+//                            @Override
+//                            public void onResponse(Call<AvailableSeat> call, Response<AvailableSeat> response) {
+//                                if (response.body().isStatus()){
+//                                    builder.setMessage(response.body().getMessage());
+//                                    builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, idPesanan);
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, idTrip);
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdUsersPemesan());
+//                                            startActivity(goToTambahPesananIntent);
+//                                        }
+//                                    });
+//
+//                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            dialogInterface.dismiss();
+//                                        }
+//                                    });
+//
+//                                    builder.show();
+//
+//                                }else{
+//                                    builder.setMessage(response.body().getMessage());
+//                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                        }
+//                                    });
+//
+//                                    builder.show();
+//                                }
+//                            }
 
-                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    });
-
-                                    builder.show();
-
-                                }else{
-                                    builder.setMessage(response.body().getMessage());
-                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                        }
-                                    });
-
-                                    builder.show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<AvailableSeat> call, Throwable t) {
-
-                            }
-                        });
+//                            @Override
+//                            public void onFailure(Call<AvailableSeat> call, Throwable t) {
+//
+//                            }
+//                        });
                     }
                 });
     }
@@ -204,11 +208,11 @@ public class DetailOrderActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void showRecyclerDetail(String idPesanan) {
+    private void showRecyclerDetail(String idPemesan, String jadwal, String platMobil) {
         progressBar.setVisibility(View.VISIBLE);
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<DetailHistory> detailHistoryCall = apiInterface.detailResponse(idPesanan);
+        Call<DetailHistory> detailHistoryCall = apiInterface.detailResponse(idPemesan, jadwal, platMobil);
         detailHistoryCall.enqueue(new Callback<DetailHistory>() {
             @Override
             public void onResponse(Call<DetailHistory> call, Response<DetailHistory> response) {

@@ -8,9 +8,7 @@ import android.widget.TextView;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
-import com.example.pemesanerte.model.history.HistoryData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;

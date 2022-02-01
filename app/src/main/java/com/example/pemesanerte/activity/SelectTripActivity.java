@@ -20,11 +20,15 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.SearchAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
-import com.example.pemesanerte.model.checkOld.CheckOld;
-import com.example.pemesanerte.model.checkOld.CheckDataOld;
+import com.example.pemesanerte.model.check.Check;
+import com.example.pemesanerte.model.check.CheckData;
+//import com.example.pemesanerte.model.check.CheckOld;
+//import com.example.pemesanerte.model.check.CheckDataOld;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.search.InputSearch;
 import com.example.pemesanerte.model.search.Search;
+//import com.example.pemesanerte.model.search.SearchOld;
+//import com.example.pemesanerte.model.search.SearchDataOld;
 import com.example.pemesanerte.model.search.SearchData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,7 +42,7 @@ public class SelectTripActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     public static final String EXTRA_INPUT_SEARCH = "extra_input_search";
 
-    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan, IdTrip, Jam;
+    String Asal, Tujuan, Tanggal, JumlahPenumpang, Pemesan, Jadwal, kAsal, kTujuan, PlatMobil, Jam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class SelectTripActivity extends AppCompatActivity {
         Pemesan = inputSearch.getPemesan();
         Jadwal = inputSearch.getJadwal();
         kAsal = inputSearch.getAsal();
-        kTujuan = inputSearch.getTujuan();
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -158,10 +162,18 @@ public class SelectTripActivity extends AppCompatActivity {
                     searchAdapter.setOnItemClickCallback(new SearchAdapter.OnItemClickCallback() {
                         @Override
                         public void onItemClicked(SearchData data) {
-                            IdTrip = data.getIdTrip();
+                            PlatMobil = data.getPlatMobil();
                             Jam = data.getJadwal();
-                            check(JumlahPenumpang, IdTrip, Pemesan);
+//                            check(JumlahPenumpang, PlatMobil, Pemesan);
+                            check(JumlahPenumpang, jadwal, PlatMobil, Pemesan);
                         }
+
+//                        @Override
+//                        public void onItemClicked(Search data) {
+//                            IdTrip = data.getIdTrip();
+//                            Jam = data.getJadwal();
+//                            check(JumlahPenumpang, IdTrip, Pemesan);
+//                        }
                     });
                 }else{
                     String message = response.body().getMessage();
@@ -178,29 +190,30 @@ public class SelectTripActivity extends AppCompatActivity {
         });
     }
 
-    private void check(String jumlahPenumpang, String idTrip, String idUsersPemesan){
+    private void check(String jumlahPenumpang, String jadwal, String platMobil,  String idPemesan){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<CheckOld> checkCall = apiInterface.checkResponse(jumlahPenumpang, idTrip, idUsersPemesan);
-        checkCall.enqueue(new Callback<CheckOld>() {
+        Call<Check> checkCall = apiInterface.checkResponse(jumlahPenumpang, jadwal, platMobil, idPemesan);
+        checkCall.enqueue(new Callback<Check>() {
             @Override
-            public void onResponse(Call<CheckOld> call, Response<CheckOld> response) {
+            public void onResponse(Call<Check> call, Response<Check> response) {
                 if (response.body() != null && response.isSuccessful() && response.body().isStatus()) {
-                    CheckDataOld checkDataOld = new CheckDataOld();
-//                    checkDataOld.setId_trip(idTrip);
-                    checkDataOld.setJumlah_penumpang(jumlahPenumpang);
-//                    checkDataOld.setId_users_pemesan(idUsersPemesan);
-                    checkDataOld.setAsal(Asal);
-                    checkDataOld.setTujuan(Tujuan);
-                    checkDataOld.setTanggal(Tanggal);
-                    checkDataOld.setJam(Jam);
+                    CheckData checkData = new CheckData();
+                    checkData.setJadwal(jadwal);
+                    checkData.setPlat_mobil(PlatMobil);
+                    checkData.setJumlah_penumpang(jumlahPenumpang);
+                    checkData.setId_pemesan(idPemesan);
+                    checkData.setAsal(Asal);
+                    checkData.setTujuan(Tujuan);
+                    checkData.setTanggal(Tanggal);
+                    checkData.setJam(Jam);
 
                     ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
-                    Call<Pesanan> pesananCall = apiInterface1.pesananResponse(idTrip, idUsersPemesan);
+                    Call<Pesanan> pesananCall = apiInterface1.pesananResponse(jadwal, platMobil, idPemesan);
                     pesananCall.enqueue(new Callback<Pesanan>() {
                         @Override
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
-                            selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkDataOld);
+                            selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkData);
                             startActivity(selectTripIntent);
                         }
 
@@ -218,7 +231,7 @@ public class SelectTripActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CheckOld> call, Throwable t) {
+            public void onFailure(Call<Check> call, Throwable t) {
                 Toast.makeText(SelectTripActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

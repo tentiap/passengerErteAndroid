@@ -18,24 +18,24 @@
         android:padding="8dp">
 
         <TextView
-           android:id="@+id/tv_id_select_trip"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="6dp"
-           android:text="T1"
-           android:textStyle="bold"
-           android:textSize="20sp" />
-
-        <TextView
             android:id="@+id/tv_select_jam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:layout_below="@+id/tv_id_select_trip"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textSize="20sp"
             tools:text="13.00" />
+
+        <TextView
+            android:id="@+id/tv_id_select_mobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="6dp"
+            android:layout_below="@+id/tv_select_jam"
+            android:text="BA0000LL"
+            android:textSize="18sp" />
 
 <!--        <TextView-->
 <!--            android:id="@+id/tv_select_sopir"-->

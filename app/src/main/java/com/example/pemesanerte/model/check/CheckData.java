@@ -1,9 +1,9 @@
-package com.example.pemesanerte.model.checkOld;
+package com.example.pemesanerte.model.check;//package com.example.pemesanerte.model.checkOld;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class CheckDataOld implements Parcelable {
+public class CheckData implements Parcelable {
     private String jumlah_penumpang;
     private String jadwal;
     private String plat_mobil;
@@ -16,7 +16,7 @@ public class CheckDataOld implements Parcelable {
 
 
 
-    public CheckDataOld(Parcel in) {
+    public CheckData(Parcel in) {
         jumlah_penumpang = in.readString();
         jadwal = in.readString();
         plat_mobil = in.readString();
@@ -31,19 +31,19 @@ public class CheckDataOld implements Parcelable {
 
     }
 
-    public static final Creator<CheckDataOld> CREATOR = new Creator<CheckDataOld>() {
+    public static final Creator<com.example.pemesanerte.model.check.CheckData> CREATOR = new Creator<com.example.pemesanerte.model.check.CheckData>() {
         @Override
-        public CheckDataOld createFromParcel(Parcel in) {
-            return new CheckDataOld(in);
+        public com.example.pemesanerte.model.check.CheckData createFromParcel(Parcel in) {
+            return new com.example.pemesanerte.model.check.CheckData(in);
         }
 
         @Override
-        public CheckDataOld[] newArray(int size) {
-            return new CheckDataOld[size];
+        public com.example.pemesanerte.model.check.CheckData[] newArray(int size) {
+            return new com.example.pemesanerte.model.check.CheckData[size];
         }
     };
 
-    public CheckDataOld() {
+    public CheckData() {
 
     }
 
@@ -59,6 +59,10 @@ public class CheckDataOld implements Parcelable {
         return jadwal;
     }
 
+    public String getPlat_mobil() {
+        return plat_mobil;
+    }
+
     public String plat_mobil() {
         return plat_mobil;
     }
@@ -66,6 +70,10 @@ public class CheckDataOld implements Parcelable {
 
     public void setJadwal(String jadwal) {
         this.jadwal = jadwal;
+    }
+
+    public void setPlat_mobil(String plat_mobil) {
+        this.plat_mobil = plat_mobil;
     }
 
     public String getAsal() {

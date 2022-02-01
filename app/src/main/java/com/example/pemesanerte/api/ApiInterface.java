@@ -2,11 +2,13 @@ package com.example.pemesanerte.api;
 
 import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
-import com.example.pemesanerte.model.checkOld.CheckOld;
+import com.example.pemesanerte.model.check.Check;
+//import com.example.pemesanerte.model.check.CheckOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.history.History;
+//import com.example.pemesanerte.model.history.HistoryOld;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.login.Login;
 //import com.example.pemesanerte.model.pemesanOld.PemesanOld;
@@ -14,7 +16,9 @@ import com.example.pemesanerte.model.pemesan.Pemesan;
 import com.example.pemesanerte.model.pesanan.Pesanan;
 import com.example.pemesanerte.model.register.Register;
 import com.example.pemesanerte.model.search.Search;
+//import com.example.pemesanerte.model.search.SearchOld;
 import com.example.pemesanerte.model.seat.Seat;
+//import com.example.pemesanerte.model.seat.SeatOld;
 import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesanan;
 
 import retrofit2.Call;
@@ -49,8 +53,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("createDetailPesanan")
     Call<DetailPesanan> detailPesananResponse(
-            @Field("id_trip") String id_trip,
-            @Field("id_pesanan") String id_pesanan,
+            @Field("jadwal") String jadwal,
+            @Field("plat_mobil") String plat_mobil,
+            @Field("id_pemesan") String id_pemesan,
+            @Field("order_number") int order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,
@@ -62,18 +68,21 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("createPesanan")
     Call<Pesanan> pesananResponse(
-            @Field("id_trip") String id_trip,
-            @Field("id_users_pemesan") String id_users_pemesan
+            @Field("jadwal") String jadwal,
+            @Field("plat_mobil") String plat_mobil,
+            @Field("id_pemesan") String id_pemesan
     );
 
-    @GET("history/{id_users_pemesan}")
+    @GET("history/{id_pemesan}")
     Call<History> historyResponse(
-            @Path("id_users_pemesan") String id_users_pemesan
+            @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("detail/{id_pesanan}")
+    @GET("detail/{id_pemesan}/{jadwal}/{plat_mobil}")
     Call<DetailHistory> detailResponse(
-            @Path("id_pesanan") String id_pesanan
+            @Path("id_pemesan") String id_pemesan,
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil
     );
 
     @GET("search/{id_kota_asal}/{id_kota_tujuan}/{jadwal}/{jumlah_penumpang}")
@@ -83,46 +92,54 @@ public interface ApiInterface {
             @Path("jadwal") String jadwal,
             @Path("jumlah_penumpang") String jumlah_penumpang
     );
-
-    @GET("check/{jumlah_penumpang}/{id_trip}/{id_users_pemesan}")
-    Call<CheckOld> checkResponse(
+    
+    @GET("check/{jumlah_penumpang}/{jadwal}/{plat_mobil}/{id_pemesan}")
+    Call<Check> checkResponse(
             @Path("jumlah_penumpang") String jumlah_penumpang,
-            @Path("id_trip") String id_trip,
-            @Path("id_users_pemesan") String id_users_pemesan
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil,
+            @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("checkUpdate/{tambah}/{id_trip}/{id_users_pemesan}")
-    Call<CheckOld> checkUpdateResponse(
+    @GET("checkUpdate/{tambah}/{jadwal}/{plat_mobil}/{id_pemesan}")
+    Call<Check> checkUpdateResponse(
             @Path("tambah") String tambah,
-            @Path("id_trip") String id_trip,
-            @Path("id_users_pemesan") String id_users_pemesan
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil,
+            @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("getBookedSeat/{id_trip}")
+    @GET("getBookedSeat/{jadwal}/{plat_mobil}")
     Call<BookedSeat> bookedSeatResponse(
-            @Path("id_trip") String id_trip
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil
     );
 
-    @GET("getIdPesanan/{id_trip}/{id_users_pemesan}")
+    @GET("getIdPesanan/{jadwal}/{plat_mobil}/{id_pemesan}")
     Call<IdPesanan> idPesananResponse(
-            @Path("id_trip") String id_trip,
-            @Path("id_users_pemesan") String id_users_pemesan
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil,
+            @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("getDetailPesanan/{id_pesanan}/{id_trip}")
+    @GET("getDetailPesanan/{jadwal}/{plat_mobil}/{id_pemesan}")
     Call<EditDetailPesanan> getDetailPesananResponse(
-            @Path("id_pesanan") String id_pesanan,
-            @Path("id_trip") String id_trip
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil,
+            @Path("id_pemesan") String id_pemesan
     );
 
-    @GET("seat/{id_trip}")
+    @GET("seat/{jadwal}/{plat_mobil}")
     Call<Seat> seatResponse(
-            @Path("id_seat") String id_seat
+//            @Path("id_seat") String id_seat
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil
     );
 
-    @GET("checkAvailableSeat/{id_trip}")
+    @GET("checkAvailableSeat/{jadwal}/{plat_mobil}")
     Call<AvailableSeat> availableSeatResponse(
-            @Path("id_trip") String id_trip
+            @Path("jadwal") String jadwal,
+            @Path("plat_mobil") String plat_mobil
     );
 
     @FormUrlEncoded
@@ -140,7 +157,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("updateDetailPesanan")
     Call<UpdateDetailPesanan> updateDetailPesananResponse(
-            @Field("id_detail_pesanan") int id_detail_pesanan,
+            @Field("jadwal") String jadwal,
+            @Field("plat_mobil") String plat_mobil,
+            @Field("id_pemesan") String id_pemesan,
+            @Field("order_number") String order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,

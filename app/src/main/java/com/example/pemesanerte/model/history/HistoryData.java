@@ -5,26 +5,22 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class HistoryData implements Parcelable {
+
+	@SerializedName("id_pemesan")
+	private String idPemesan;
 
 	@SerializedName("jadwal")
 	private String jadwal;
 
-	@SerializedName("id_pesanan")
-	private String idPesanan;
-
 	@SerializedName("updated_at")
 	private String updatedAt;
 
+	@SerializedName("plat_mobil")
+	private String platMobil;
+
 	@SerializedName("id_kota_asal")
 	private String idKotaAsal;
-
-	@SerializedName("id_users_operator")
-	private String idUsersOperator;
 
 	@SerializedName("tanggal_pesan")
 	private String tanggalPesan;
@@ -35,30 +31,23 @@ public class HistoryData implements Parcelable {
 	@SerializedName("id_kota_tujuan")
 	private String idKotaTujuan;
 
-	@SerializedName("id_trip")
-	private String idTrip;
+	@SerializedName("tarif_trip")
+	private int tarifTrip;
 
-	@SerializedName("deleted_at")
-	private Object deletedAt;
-
-	@SerializedName("id_users_pemesan")
-	private String idUsersPemesan;
-
-	@SerializedName("id_users_sopir")
-	private String idUsersSopir;
+	@SerializedName("id_pengurus")
+	private String idPengurus;
 
 	protected HistoryData(Parcel in) {
+		idPemesan = in.readString();
 		jadwal = in.readString();
-		idPesanan = in.readString();
 		updatedAt = in.readString();
+		platMobil = in.readString();
 		idKotaAsal = in.readString();
-		idUsersOperator = in.readString();
 		tanggalPesan = in.readString();
 		createdAt = in.readString();
 		idKotaTujuan = in.readString();
-		idTrip = in.readString();
-		idUsersPemesan = in.readString();
-		idUsersSopir = in.readString();
+		tarifTrip = in.readInt();
+		idPengurus = in.readString();
 	}
 
 	public static final Creator<HistoryData> CREATOR = new Creator<HistoryData>() {
@@ -73,24 +62,30 @@ public class HistoryData implements Parcelable {
 		}
 	};
 
+	public void setIdPemesan(String idPemesan){
+		this.idPemesan = idPemesan;
+	}
+
+	public String getIdPemesan(){
+		return idPemesan;
+	}
+
 	public void setJadwal(String jadwal){
 		this.jadwal = jadwal;
 	}
 
 	public String getJadwal(){
 //		return jadwal;
-//		SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
-//		return sfd.format(jadwal);
 
 		String[] tanggal = jadwal.split(" ");
 		String time =  tanggal[1];
 
 		String[] jam = time.split(":");
 		return jam[0]+":"+jam[1];
+	}
 
-//		DateFormat outputFormatter1 = new SimpleDateFormat("dd-MMM-yyyy");
-//		String output1 = outputFormatter1.format(jadwal);
-//		return output1;
+	public String getJadwalFormatted(){
+		return jadwal;
 	}
 
 	public String getTanggal(){
@@ -99,21 +94,11 @@ public class HistoryData implements Parcelable {
 		String[] tanggal = tgl.split("-");
 
 		final String[] monthName = {"January", "February",
-                        "March", "April", "May", "June", "July",
-                        "August", "September", "October", "November",
-                        "December"};
+				"March", "April", "May", "June", "July",
+				"August", "September", "October", "November",
+				"December"};
 		Integer months = Integer.parseInt(tanggal[1]);
 		return tanggal[2] +" "+monthName[months - 1]+ " "+tanggal[0];
-	}
-
-
-
-	public void setIdPesanan(String idPesanan){
-		this.idPesanan = idPesanan;
-	}
-
-	public String getIdPesanan(){
-		return idPesanan;
 	}
 
 	public void setUpdatedAt(String updatedAt){
@@ -124,20 +109,21 @@ public class HistoryData implements Parcelable {
 		return updatedAt;
 	}
 
+	public void setPlatMobil(String platMobil){
+		this.platMobil = platMobil;
+	}
+
+	public String getPlatMobil(){
+		return platMobil;
+	}
+
 	public void setIdKotaAsal(String idKotaAsal){
 		this.idKotaAsal = idKotaAsal;
-
 	}
 
 	public String getIdKotaAsal(){
-//		if(idKotaAsal == "K1") {
-//			return "Bukittinggi";
-//		}else if(idKotaAsal == "K2"){
-//			return "Padang";
-//		}else{
-//			return "Pekanbaru";
-//		}
 //		return idKotaAsal;
+
 		switch (idKotaAsal){
 			case "K1":
 				idKotaAsal = "Bukittinggi";
@@ -150,14 +136,6 @@ public class HistoryData implements Parcelable {
 				break;
 		}
 		return idKotaAsal;
-	}
-
-	public void setIdUsersOperator(String idUsersOperator){
-		this.idUsersOperator = idUsersOperator;
-	}
-
-	public String getIdUsersOperator(){
-		return idUsersOperator;
 	}
 
 	public void setTanggalPesan(String tanggalPesan){
@@ -181,20 +159,7 @@ public class HistoryData implements Parcelable {
 	}
 
 	public String getIdKotaTujuan(){
-//		if(idKotaTujuan == "K1") {
-//			return "Bukittinggi";
-//		}else if(idKotaTujuan == "K2"){
-//			return "Padang";
-//		}else{
-//			return "Pekanbaru";
-//		}
-//		if (idKotaAsal == "K1"){
-//			return "Bukittinggi";
-//		}else if (idKotaAsal == "K2"){
-//			return "Padang";
-//		}else{
-//			return "Pekanbaru";
-//		}
+//		return idKotaTujuan;
 		switch (idKotaTujuan){
 			case "K1":
 				idKotaTujuan = "Bukittinggi";
@@ -209,41 +174,25 @@ public class HistoryData implements Parcelable {
 		return idKotaTujuan;
 	}
 
-	public void setIdTrip(String idTrip){
-		this.idTrip = idTrip;
+	public void setTarifTrip(int tarifTrip){
+		this.tarifTrip = tarifTrip;
 	}
 
-	public String getIdTrip(){
-		return idTrip;
+	public int getTarifTrip(){
+		return tarifTrip;
 	}
 
-	public void setDeletedAt(Object deletedAt){
-		this.deletedAt = deletedAt;
+	public void setIdPengurus(String idPengurus){
+		this.idPengurus = idPengurus;
 	}
 
-	public Object getDeletedAt(){
-		return deletedAt;
-	}
-
-	public void setIdUsersPemesan(String idUsersPemesan){
-		this.idUsersPemesan = idUsersPemesan;
-	}
-
-	public String getIdUsersPemesan(){
-		return idUsersPemesan;
-	}
-
-	public void setIdUsersSopir(String idUsersSopir){
-		this.idUsersSopir = idUsersSopir;
-	}
-
-	public String getIdUsersSopir(){
-		return idUsersSopir;
+	public String getIdPengurus(){
+		return idPengurus;
 	}
 
 	public HistoryData(){
 
-    }
+	}
 
 	@Override
 	public int describeContents() {
@@ -252,16 +201,15 @@ public class HistoryData implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(idPemesan);
 		parcel.writeString(jadwal);
-		parcel.writeString(idPesanan);
 		parcel.writeString(updatedAt);
+		parcel.writeString(platMobil);
 		parcel.writeString(idKotaAsal);
-		parcel.writeString(idUsersOperator);
 		parcel.writeString(tanggalPesan);
 		parcel.writeString(createdAt);
 		parcel.writeString(idKotaTujuan);
-		parcel.writeString(idTrip);
-		parcel.writeString(idUsersPemesan);
-		parcel.writeString(idUsersSopir);
+		parcel.writeInt(tarifTrip);
+		parcel.writeString(idPengurus);
 	}
 }

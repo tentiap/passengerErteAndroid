@@ -11,7 +11,6 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,9 +23,10 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.history.History;
 import com.example.pemesanerte.model.history.HistoryData;
+//import com.example.pemesanerte.model.history.HistoryOld;
+//import com.example.pemesanerte.model.history.HistoryDataOld;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +110,13 @@ public class MyOrderActivity extends AppCompatActivity {
                             detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
                             startActivity(detailHistoryIntent);
                         }
+
+//                        @Override
+//                        public void onItemClicked(HistoryData data) {
+//                            Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
+//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
+//                            startActivity(detailHistoryIntent);
+//                        }
                     });
 
                 }else{

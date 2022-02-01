@@ -19,7 +19,8 @@ import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
-import com.example.pemesanerte.model.checkOld.CheckDataOld;
+//import com.example.pemesanerte.model.check.CheckDataOld;
+import com.example.pemesanerte.model.check.CheckData;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesanan;
 import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananData;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
@@ -42,8 +43,8 @@ public class EditPesananActivity extends AppCompatActivity {
     Button buttonDone;
     ExpandableCardView detailTrip;
     Spinner spinnerSeat;
-    String asal, tujuan, jumlahPenumpang, idTrip, idUsersPemesan, idPesanan;
-    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus;
+    String asal, tujuan, jumlahPenumpang, jadwal, idPemesan, platMobil, idPesanan;
+    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus, orderNumber;
     int checkBeforeDone;
 
     private List<SeatData> listSeat;
@@ -60,13 +61,14 @@ public class EditPesananActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Edit Data Passenger(s)");
-        
-        CheckDataOld checkDataOld = getIntent().getParcelableExtra(EXTRA_CHECK_DATA_EDIT);
-//        idTrip = checkDataOld.getId_trip();
-//        idUsersPemesan = checkDataOld.getId_users_pemesan();
-        jumlahPenumpang = checkDataOld.getJumlah_penumpang();
-        asal = checkDataOld.getAsal();
-        tujuan = checkDataOld.getTujuan();
+
+        CheckData checkData = getIntent().getParcelableExtra(EXTRA_CHECK_DATA_EDIT);
+        jadwal = checkData.getJadwal();
+        idPemesan = checkData.getId_pemesan();
+        platMobil = checkData.getPlat_mobil();
+        jumlahPenumpang = checkData.getJumlah_penumpang();
+        asal = checkData.getAsal();
+        tujuan = checkData.getTujuan();
 
         switch (asal){
             case "Bukittinggi":
@@ -104,8 +106,8 @@ public class EditPesananActivity extends AppCompatActivity {
 
         tvAsal.setText(asal);
         tvTujuan.setText(tujuan);
-        tvTanggal.setText(checkDataOld.getTanggal());
-        tvJam.setText(checkDataOld.getJam());
+        tvTanggal.setText(checkData.getTanggal());
+        tvJam.setText(checkData.getJam());
         tvJumlah.setText(jumlahPenumpang + " Passenger(s)");
 
         buttonDone = findViewById(R.id.button_done_edit);
@@ -124,7 +126,7 @@ public class EditPesananActivity extends AppCompatActivity {
 
     private void getIdPesanan() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(idTrip, idUsersPemesan);
+        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
         idPesananCall.enqueue(new Callback<IdPesanan>() {
             @Override
             public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
@@ -147,7 +149,7 @@ public class EditPesananActivity extends AppCompatActivity {
     private void getData() {
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(idTrip, idUsersPemesan);
+        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
         idPesananCall.enqueue(new Callback<IdPesanan>() {
             @Override
             public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
@@ -159,7 +161,7 @@ public class EditPesananActivity extends AppCompatActivity {
                 }
 
                 ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
-                Call<EditDetailPesanan> detailPesananCall = apiInterface1.getDetailPesananResponse(idPesanan, idTrip);
+                Call<EditDetailPesanan> detailPesananCall = apiInterface1.getDetailPesananResponse(jadwal, platMobil, idPemesan);
                 detailPesananCall.enqueue(new Callback<EditDetailPesanan>() {
                     @Override
                     public void onResponse(Call<EditDetailPesanan> call, Response<EditDetailPesanan> response) {
@@ -167,7 +169,7 @@ public class EditPesananActivity extends AppCompatActivity {
                         detailPesananData = response.body().getData();
 
                         ApiInterface apiInterface2 = ApiClient.getClient().create(ApiInterface.class);
-                        Call<BookedSeat> bookedSeatCall = apiInterface2.bookedSeatResponse(idTrip);
+                        Call<BookedSeat> bookedSeatCall = apiInterface2.bookedSeatResponse(jadwal, platMobil);
                         bookedSeatCall.enqueue(new Callback<BookedSeat>() {
                             @Override
                             public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
@@ -271,7 +273,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                                     editTextDestination.setEnabled(false);
                                                     editTextPhone.setEnabled(false);
 
-                                                    updateDetailPesanan(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+//                                                    updateDetailPesanan(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
 
                                                 }
                                             }
@@ -310,22 +312,22 @@ public class EditPesananActivity extends AppCompatActivity {
         return 0;
     }
 
-    private void updateDetailPesanan(int idDetailPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
-        updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
-            @Override
-            public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
-                String message = response.body().getMessage();
-                Toast.makeText(EditPesananActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<UpdateDetailPesanan> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void updateDetailPesanan(int idDetailPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+////        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+//        updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
+//            @Override
+//            public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
+//                String message = response.body().getMessage();
+//                Toast.makeText(EditPesananActivity.this, message, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UpdateDetailPesanan> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 
     private int getIndexSeat(Spinner spinnerSeat, String idSeat) {

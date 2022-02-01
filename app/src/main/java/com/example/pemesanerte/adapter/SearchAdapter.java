@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.model.search.SearchData;
+//import com.example.pemesanerte.model.search.SearchDataOld;
 
 import java.util.List;
 
@@ -42,8 +43,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     public void onBindViewHolder(@NonNull final SearchHolder holder, int position) {
         SearchData searchData = listSearch.get(position);
 
-        holder.tvIdSelectTrip.setText(searchData.getIdTrip());
+//        holder.tvIdSelectTrip.setText(searchDataOld.getIdTrip());
         holder.tvSelectJam.setText(searchData.getJadwal());
+        holder.tvIdSelectMobil.setText(searchData.getPlatMobil());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +62,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     }
 
     public class SearchHolder extends RecyclerView.ViewHolder {
-        TextView tvIdSelectTrip, tvSelectJam;
+        TextView tvIdSelectMobil, tvSelectJam;
 
         public SearchHolder(@NonNull View view) {
             super(view);
 
-            tvIdSelectTrip = itemView.findViewById(R.id.tv_id_select_trip);
+            tvIdSelectMobil = itemView.findViewById(R.id.tv_id_select_mobil);
             tvSelectJam = itemView.findViewById(R.id.tv_select_jam);
         }
     }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.model.history.HistoryData;
+//import com.example.pemesanerte.model.history.HistoryDataOld;
 
 import java.util.List;
 
@@ -43,12 +44,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     public void onBindViewHolder(@NonNull final HistoryHolder holder, int position) {
         HistoryData historyData = listHistory.get(position);
 
-        holder.tvIdPesanan.setText(historyData.getIdPesanan());
+//        holder.tvIdPesanan.setText(historyData.getIdPesanan());
         holder.tvAsal.setText(historyData.getIdKotaAsal());
         holder.tvTujuan.setText(historyData.getIdKotaTujuan());
         holder.tvJadwal.setText(historyData.getTanggal());
         holder.tvJam.setText(historyData.getJadwal());
         holder.tvPesan.setText(historyData.getTanggalPesan());
+        holder.tvPlatMobil.setText(historyData.getPlatMobil());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,17 +67,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     }
 
     public class HistoryHolder extends RecyclerView.ViewHolder {
-        TextView tvIdPesanan, tvAsal, tvTujuan, tvJadwal, tvJam, tvPesan;
+        TextView tvIdPesanan, tvAsal, tvTujuan, tvJadwal, tvJam, tvPesan, tvPlatMobil;
 
         public HistoryHolder(@NonNull View view) {
             super(view);
 
-            tvIdPesanan = itemView.findViewById(R.id.tv_id_pesanan);
+//            tvIdPesanan = itemView.findViewById(R.id.tv_id_pesanan);
             tvAsal = itemView.findViewById(R.id.tv_item_asal);
             tvTujuan = itemView.findViewById(R.id.tv_item_tujuan);
             tvJadwal = itemView.findViewById(R.id.tv_item_jadwal);
             tvJam = itemView.findViewById(R.id.tv_item_jam);
             tvPesan = itemView.findViewById(R.id.tv_item_tanggal_pesan);
+            tvPlatMobil = itemView.findViewById(R.id.tv_plat_mobil);
 
         }
     }
