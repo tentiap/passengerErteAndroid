@@ -9,7 +9,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +20,9 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
-import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.check.CheckData;
+//import com.example.pemesanerte.model.detailHistory.DetailHistoryOld;
+//import com.example.pemesanerte.model.detailHistory.DetailHistoryDataOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;

@@ -1,14 +1,14 @@
-package com.example.pemesanerte.model.detailPesanan;
+package com.example.pemesanerte.model.updateDetailPesanan;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DetailPesananData {
+public class UpdateDetailPesananData {
 
 	@SerializedName("id_pemesan")
 	private String idPemesan;
 
 	@SerializedName("no_hp")
-	private String noHp;
+	private Object noHp;
 
 	@SerializedName("plat_mobil")
 	private String platMobil;
@@ -24,6 +24,9 @@ public class DetailPesananData {
 
 	@SerializedName("id_seat")
 	private String idSeat;
+
+	@SerializedName("id_feeder")
+	private String idFeeder;
 
 	@SerializedName("nama_penumpang")
 	private String namaPenumpang;
@@ -44,7 +47,7 @@ public class DetailPesananData {
 	private String jenisKelamin;
 
 	@SerializedName("status")
-	private int status;
+	private String status;
 
 	public void setIdPemesan(String idPemesan){
 		this.idPemesan = idPemesan;
@@ -54,11 +57,11 @@ public class DetailPesananData {
 		return idPemesan;
 	}
 
-	public void setNoHp(String noHp){
+	public void setNoHp(Object noHp){
 		this.noHp = noHp;
 	}
 
-	public String getNoHp(){
+	public Object getNoHp(){
 		return noHp;
 	}
 
@@ -100,6 +103,14 @@ public class DetailPesananData {
 
 	public String getIdSeat(){
 		return idSeat;
+	}
+
+	public void setIdFeeder(String idFeeder){
+		this.idFeeder = idFeeder;
+	}
+
+	public String getIdFeeder(){
+		return idFeeder;
 	}
 
 	public void setNamaPenumpang(String namaPenumpang){
@@ -150,11 +161,11 @@ public class DetailPesananData {
 		return jenisKelamin;
 	}
 
-	public void setStatus(int status){
+	public void setStatus(String status){
 		this.status = status;
 	}
 
-	public int getStatus(){
+	public String getStatus(){
 		return status;
 	}
 }

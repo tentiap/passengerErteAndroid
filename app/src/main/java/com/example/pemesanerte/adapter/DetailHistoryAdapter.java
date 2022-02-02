@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.pemesanerte.R;
 import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
+//import com.example.pemesanerte.model.detailHistory.DetailHistoryDataOld;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class DetailHistoryAdapter extends RecyclerView.Adapter<DetailHistoryAdap
         detailHolder.tvPassengerGender.setText(detailHistoryData.getJenisKelamin());
         detailHolder.tvPassengerAsal.setText(detailHistoryData.getDetailAsal());
         detailHolder.tvPassengerTujuan.setText(detailHistoryData.getDetailTujuan());
-        detailHolder.tvPassengerKontak.setText(detailHistoryData.getNoHp());
+        detailHolder.tvPassengerKontak.setText((CharSequence) detailHistoryData.getNoHp());
         detailHolder.tvPassengerBiaya.setText(String.valueOf(detailHistoryData.getBiayaTambahan()));
         detailHolder.tvPassengerSeat.setText(detailHistoryData.getIdSeat());
         detailHolder.tvPassengerStatus.setText(String.valueOf(detailHistoryData.getStatus()));

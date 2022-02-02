@@ -4,6 +4,7 @@ import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.bookedSeat.BookedSeat;
 import com.example.pemesanerte.model.check.Check;
 //import com.example.pemesanerte.model.check.CheckOld;
+//import com.example.pemesanerte.model.detailHistory.DetailHistoryOld;
 import com.example.pemesanerte.model.detailHistory.DetailHistory;
 import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 //import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananOld;
@@ -22,6 +23,7 @@ import com.example.pemesanerte.model.search.Search;
 import com.example.pemesanerte.model.seat.Seat;
 //import com.example.pemesanerte.model.seat.SeatOld;
 import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesanan;
+import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesananOld;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -58,7 +60,6 @@ public interface ApiInterface {
             @Field("jadwal") String jadwal,
             @Field("plat_mobil") String plat_mobil,
             @Field("id_pemesan") String id_pemesan,
-            @Field("order_number") int order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,
@@ -162,7 +163,7 @@ public interface ApiInterface {
             @Field("jadwal") String jadwal,
             @Field("plat_mobil") String plat_mobil,
             @Field("id_pemesan") String id_pemesan,
-            @Field("order_number") String order_number,
+            @Field("order_number") int order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,

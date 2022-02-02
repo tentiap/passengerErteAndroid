@@ -2,10 +2,10 @@ package com.example.pemesanerte.model.updateDetailPesanan;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateDetailPesanan{
+public class UpdateDetailPesananOld {
 
 	@SerializedName("data")
-	private UpdateDetailPesananData updateDetailPesananData;
+	private DataOld dataOld;
 
 	@SerializedName("message")
 	private String message;
@@ -13,12 +13,12 @@ public class UpdateDetailPesanan{
 	@SerializedName("status")
 	private boolean status;
 
-	public void setUpdateDetailPesananData(UpdateDetailPesananData updateDetailPesananData){
-		this.updateDetailPesananData = updateDetailPesananData;
+	public void setDataOld(DataOld dataOld){
+		this.dataOld = dataOld;
 	}
 
-	public UpdateDetailPesananData getUpdateDetailPesananData(){
-		return updateDetailPesananData;
+	public DataOld getDataOld(){
+		return dataOld;
 	}
 
 	public void setMessage(String message){

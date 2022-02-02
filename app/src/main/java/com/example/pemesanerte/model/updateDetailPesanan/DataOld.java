@@ -2,7 +2,7 @@ package com.example.pemesanerte.model.updateDetailPesanan;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data{
+public class DataOld {
 
 	@SerializedName("id_users_feeder")
 	private Object idUsersFeeder;

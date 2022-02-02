@@ -30,6 +30,7 @@ import com.example.pemesanerte.model.editDetailPesanan.EditDetailPesananData;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesananData;
 import com.example.pemesanerte.model.seat.SeatData;
+import com.example.pemesanerte.model.updateDetailPesanan.UpdateDetailPesanan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,8 +48,8 @@ public class EditPesananActivity extends AppCompatActivity {
     ExpandableCardView detailTrip;
     Spinner spinnerSeat;
     String asal, tujuan, jumlahPenumpang, jadwal, idPemesan, platMobil, idPesanan;
-    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus, orderNumber;
-    int checkBeforeDone;
+    String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus;
+    int orderNumber, checkBeforeDone;
 
     private List<SeatData> listSeat;
     List<BookedSeatData> bookedSeatData;
@@ -225,7 +226,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                     editTextPhone.setText(detailPesananData.get(i).getNoHp());
 
                                     //harusnya idDetailPesanan
-                                    int idDetailPesanan = detailPesananData.get(i).getOrderNumber();
+                                    orderNumber = detailPesananData.get(i).getOrderNumber();
 
                                     CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
                                     checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +280,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                                     editTextDestination.setEnabled(false);
                                                     editTextPhone.setEnabled(false);
 
-//                                                    updateDetailPesanan(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+                                                    updateDetailPesanan(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
 
                                                 }
                                             }
@@ -318,22 +319,22 @@ public class EditPesananActivity extends AppCompatActivity {
         return 0;
     }
 
-//    private void updateDetailPesanan(int idDetailPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-////        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(idDetailPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
-//        updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
-//            @Override
-//            public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
-//                String message = response.body().getMessage();
-//                Toast.makeText(EditPesananActivity.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UpdateDetailPesanan> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void updateDetailPesanan(String jadwal, String platMobil, String idPemesan, int orderNumber, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+        updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
+            @Override
+            public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
+                String message = response.body().getMessage();
+                Toast.makeText(EditPesananActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<UpdateDetailPesanan> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     private int getIndexSeat(Spinner spinnerSeat, String idSeat) {

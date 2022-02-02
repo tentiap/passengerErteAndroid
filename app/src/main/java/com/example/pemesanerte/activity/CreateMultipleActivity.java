@@ -23,6 +23,7 @@ import com.example.pemesanerte.model.bookedSeat.BookedSeatData;
 import com.example.pemesanerte.model.check.CheckData;
 //import com.example.pemesanerte.model.idPesanan.IdPesananOld;
 //import com.example.pemesanerte.model.idPesanan.IdPesananDataOld;
+import com.example.pemesanerte.model.detailPesanan.DetailPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesanan;
 import com.example.pemesanerte.model.idPesanan.IdPesananData;
 import com.example.pemesanerte.model.seat.SeatData;
@@ -70,7 +71,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
 
-        getIdPesanan();
+//        getIdPesanan();
 
         switch (asal){
             case "Bukittinggi":
@@ -132,26 +133,26 @@ public class CreateMultipleActivity extends AppCompatActivity {
         }
     }
 
-    private void getIdPesanan() {
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
-        idPesananCall.enqueue(new Callback<IdPesanan>() {
-            @Override
-            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
-                List<IdPesananData> data = response.body().getData();
-
-                for (int i = 0; i < data.size(); i++){
-                    //harusnya idPesanan
-                    idPesanan = data.get(i).getIdPemesan();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<IdPesanan> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void getIdPesanan() {
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
+//        idPesananCall.enqueue(new Callback<IdPesanan>() {
+//            @Override
+//            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
+//                List<IdPesananData> data = response.body().getData();
+//
+//                for (int i = 0; i < data.size(); i++){
+//                    //harusnya idPesanan
+//                    idPesanan = data.get(i).getIdPemesan();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<IdPesanan> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     private void addView() {
 
@@ -254,8 +255,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                             ((CheckBox) view).setChecked(false);
                                         } else {
                                             inputSeats.add(seatDetail);
-                                            Toast.makeText(CreateMultipleActivity.this, "Input seats sekarang "+inputSeats, Toast.LENGTH_SHORT).show();
-//                                            saveData(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+                                            Toast.makeText(CreateMultipleActivity.this, "Seat "+inputSeats+ " booked", Toast.LENGTH_SHORT).show();
+                                            saveData(jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
                                             view.setEnabled(false);
                                             editTextName.setEnabled(false);
@@ -287,64 +288,64 @@ public class CreateMultipleActivity extends AppCompatActivity {
         });
 
     }
-//
-//    private void saveData(String idTrip, String idPesanan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
-//
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idTrip, idPesanan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
-//        detailPesananCall.enqueue(new Callback<DetailPesanan>() {
-//            @Override
-//            public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
-//                String message = response.body().getMessage();
-//                Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
-//                checkBeforeDone += 1;
-//                checkData();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DetailPesanan> call, Throwable t) {
-//                Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
-//    private void showListItem() {
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(idTrip);
-//        bookedSeatCall.enqueue(new Callback<BookedSeat>() {
-//            @Override
-//            public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
-//                if (response.isSuccessful()){
-//                    bookedSeatData = response.body().getData();
-//
-//                    for (int i = 0; i < bookedSeatData.size(); i++){
-//                        listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
-//                    }
-//
-//                    String[] array = listBookedSeat.toArray(new String[0]);
-//
-//                    for (int i = 1; i < 8; i++){
-//                        boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
-//
-//                        if (checkBookedSeat == true) {
-//                            System.out.println("Skip aja ya, seat udah dibooking");
-//                        } else {
-//                            listSpinner.add(String.valueOf(i));
-//                        }
-//                    }
-//
-//                }else{
-//                    Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<BookedSeat> call, Throwable t) {
-//                Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void saveData(String jadwal, String platMobil, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+        detailPesananCall.enqueue(new Callback<DetailPesanan>() {
+            @Override
+            public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
+                String message = response.body().getMessage();
+                Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
+                checkBeforeDone += 1;
+                checkData();
+
+            }
+
+            @Override
+            public void onFailure(Call<DetailPesanan> call, Throwable t) {
+                Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showListItem() {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(jadwal, platMobil);
+        bookedSeatCall.enqueue(new Callback<BookedSeat>() {
+            @Override
+            public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
+                if (response.isSuccessful()){
+                    bookedSeatData = response.body().getData();
+
+                    for (int i = 0; i < bookedSeatData.size(); i++){
+                        listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
+                    }
+
+                    String[] array = listBookedSeat.toArray(new String[0]);
+
+                    for (int i = 1; i < 8; i++){
+                        boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
+
+                        if (checkBookedSeat == true) {
+                            System.out.println("Skip aja ya, seat udah dibooking");
+                        } else {
+                            listSpinner.add(String.valueOf(i));
+                        }
+                    }
+
+                }else{
+                    Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookedSeat> call, Throwable t) {
+                Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     public void onCheckboxClicked(View view) {
 
