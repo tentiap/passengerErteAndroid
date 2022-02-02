@@ -74,6 +74,8 @@ public class EditPesananActivity extends AppCompatActivity {
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
 
+        System.out.println("Check Data: "+checkData.getJadwal());
+
         switch (asal){
             case "Bukittinggi":
                 asal = "BKT";
@@ -153,159 +155,171 @@ public class EditPesananActivity extends AppCompatActivity {
 
     private void getData() {
 
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
-        idPesananCall.enqueue(new Callback<IdPesanan>() {
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
+//        idPesananCall.enqueue(new Callback<IdPesanan>() {
+//            @Override
+//            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
+//
+//                List<IdPesananData> data = response.body().getData();
+//
+//                for (int i = 0; i < data.size(); i++){
+//                    //harusnya idPesanan
+//                    idPesanan = data.get(i).getIdPemesan();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<IdPesanan> call, Throwable t) {
+//                System.out.println("Gagal get Id");
+//            }
+//        });
+
+        System.out.println("Id Pemesan: "+idPemesan+ " Jadwal: "+jadwal+ " Plat Mobil: "+platMobil);
+
+        ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
+        Call<EditDetailPesanan> detailPesananCall = apiInterface1.getDetailPesananResponse(idPemesan, jadwal, platMobil);
+        detailPesananCall.enqueue(new Callback<EditDetailPesanan>() {
             @Override
-            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
+            public void onResponse(Call<EditDetailPesanan> call, Response<EditDetailPesanan> response) {
 
-                List<IdPesananData> data = response.body().getData();
+                detailPesananData = response.body().getData();
+                System.out.println("Halo, ini detail pesanan data" +detailPesananData);
 
-                for (int i = 0; i < data.size(); i++){
-                    //harusnya idPesanan
-                    idPesanan = data.get(i).getIdPemesan();
-                }
 
-                ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
-                Call<EditDetailPesanan> detailPesananCall = apiInterface1.getDetailPesananResponse(jadwal, platMobil, idPemesan);
-                detailPesananCall.enqueue(new Callback<EditDetailPesanan>() {
+                ApiInterface apiInterface2 = ApiClient.getClient().create(ApiInterface.class);
+                Call<BookedSeat> bookedSeatCall = apiInterface2.bookedSeatResponse(jadwal, platMobil);
+                bookedSeatCall.enqueue(new Callback<BookedSeat>() {
                     @Override
-                    public void onResponse(Call<EditDetailPesanan> call, Response<EditDetailPesanan> response) {
+                    public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
+                        bookedSeatData = response.body().getData();
+                        System.out.println("BookedSeatData" +bookedSeatData);
 
-                        detailPesananData = response.body().getData();
 
-                        ApiInterface apiInterface2 = ApiClient.getClient().create(ApiInterface.class);
-                        Call<BookedSeat> bookedSeatCall = apiInterface2.bookedSeatResponse(jadwal, platMobil);
-                        bookedSeatCall.enqueue(new Callback<BookedSeat>() {
-                            @Override
-                            public void onResponse(Call<BookedSeat> call, Response<BookedSeat> response) {
-                                bookedSeatData = response.body().getData();
+                        for (int i = 0; i < bookedSeatData.size(); i++){
+                            listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
+                        }
 
-                                for (int i = 0; i < bookedSeatData.size(); i++){
-                                    listBookedSeat.add(bookedSeatData.get(i).getIdSeat());
-                                }
+                        String[] array = listBookedSeat.toArray(new String[0]);
 
-                                String[] array = listBookedSeat.toArray(new String[0]);
+                        for (int i = 1; i < 8; i++){
+                            boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
 
-                                for (int i = 1; i < 8; i++){
-                                    boolean checkBookedSeat = Arrays.asList(array).contains(String.valueOf(i));
+                            if (checkBookedSeat == true) {
+                                System.out.println("Skip aja ya, seat "+i+ " udah dibooking");
+                            } else {
+                                listSpinner.add(String.valueOf(i));
+                            }
+                        }
 
-                                    if (checkBookedSeat == true) {
-                                        System.out.println("Skip aja ya, seat udah dibooking");
-                                    } else {
-                                        listSpinner.add(String.valueOf(i));
+                        System.out.println("List spinner: "+listSpinner);
+
+                        for (int i=0; i<layoutList.getChildCount(); i++){
+                            View detailPassengerView = layoutList.getChildAt(i);
+
+                            EditText editTextName = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_name_edit);
+                            editTextName.setText(detailPesananData.get(i).getNamaPenumpang());
+
+                            Spinner spinnerGender = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_gender_edit);
+                            spinnerGender.setSelection(getIndexGender(spinnerGender, detailPesananData.get(i).getJenisKelamin()));
+
+                            Spinner spinnerStatus = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_status_edit);
+                            spinnerStatus.setSelection(getIndexStatus(spinnerStatus, detailPesananData.get(i).getStatus()));
+
+                            Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
+
+                            Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
+                            TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
+//                            textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
+                            spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
+                            spinnerSeat.setEnabled(false);
+
+                            EditText editTextDeparture = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_from_edit);
+                            editTextDeparture.setText(detailPesananData.get(i).getDetailAsal());
+
+                            EditText editTextDestination = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_to_edit);
+                            editTextDestination.setText(detailPesananData.get(i).getDetailTujuan());
+
+                            EditText editTextPhone = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_phone_edit);
+                            editTextPhone.setText(detailPesananData.get(i).getNoHp());
+
+                            //harusnya idDetailPesanan
+                            orderNumber = detailPesananData.get(i).getOrderNumber();
+
+                            CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
+                            checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    boolean checked = ((CheckBox) view).isChecked();
+                                    if (checked){
+                                        namaDetail = editTextName.getText().toString();
+                                        genderDetail = spinnerGender.getSelectedItem().toString();
+                                        seatDetail = spinnerSeat.getSelectedItem().toString();
+                                        departureDetail = editTextDeparture.getText().toString();
+                                        destinationDetail = editTextDestination.getText().toString();
+                                        phoneDetail = editTextPhone.getText().toString();
+
+                                        selectedStatus = spinnerStatus.getSelectedItem().toString();
+                                        switch (selectedStatus){
+                                            case "Booking":
+                                                statusDetail = String.valueOf(1);
+                                                break;
+                                            case "Cancelled":
+                                                statusDetail = String.valueOf(5);
+                                                break;
+                                        }
+
+                                        if (namaDetail.trim().equals("")){
+                                            editTextName.setError("Nama wajib diisi");
+                                            ((CheckBox) view).setChecked(false);
+                                        } else if (genderDetail.trim().equals("")){
+                                            Toast.makeText(EditPesananActivity.this, "Pilih jenis kelamin terlebih dahulu", Toast.LENGTH_SHORT).show();
+                                            ((CheckBox) view).setChecked(false);
+                                        } else if (seatDetail.trim().equals("")){
+                                            Toast.makeText(EditPesananActivity.this, "Pilih seat terlebih dahulu", Toast.LENGTH_SHORT).show();
+                                            ((CheckBox) view).setChecked(false);
+                                        } else if (statusDetail.trim().equals("")){
+                                            Toast.makeText(EditPesananActivity.this, "Pilih status terlebih dahulu", Toast.LENGTH_SHORT).show();
+                                            ((CheckBox) view).setChecked(false);
+                                        } else if (departureDetail.trim().equals("")){
+                                            editTextDeparture.setError("Asal wajib diisi");
+                                            ((CheckBox) view).setChecked(false);
+                                        } else if (destinationDetail.trim().equals("")){
+                                            editTextDestination.setError("Tujuan wajib diisi");
+                                            ((CheckBox) view).setChecked(false);
+                                        } else{
+
+                                            view.setEnabled(false);
+                                            editTextName.setEnabled(false);
+                                            spinnerGender.setEnabled(false);
+                                            spinnerStatus.setEnabled(false);
+//                                            spinnerSeat.setEnabled(false);
+                                            editTextDeparture.setEnabled(false);
+                                            editTextDestination.setEnabled(false);
+                                            editTextPhone.setEnabled(false);
+
+                                            updateDetailPesanan(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+
+                                        }
                                     }
                                 }
-
-                                for (int i=0; i<layoutList.getChildCount(); i++){
-                                    View detailPassengerView = layoutList.getChildAt(i);
-
-                                    EditText editTextName = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_name_edit);
-                                    editTextName.setText(detailPesananData.get(i).getNamaPenumpang());
-
-                                    Spinner spinnerGender = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_gender_edit);
-                                    spinnerGender.setSelection(getIndexGender(spinnerGender, detailPesananData.get(i).getJenisKelamin()));
-
-                                    Spinner spinnerStatus = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_status_edit);
-                                    spinnerStatus.setSelection(getIndexStatus(spinnerStatus, detailPesananData.get(i).getStatus()));
-
-                                    Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
-
-                                    Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
-                                    TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
-                                    textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
-                                    spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
-
-                                    EditText editTextDeparture = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_from_edit);
-                                    editTextDeparture.setText(detailPesananData.get(i).getDetailAsal());
-
-                                    EditText editTextDestination = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_to_edit);
-                                    editTextDestination.setText(detailPesananData.get(i).getDetailTujuan());
-
-                                    EditText editTextPhone = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_phone_edit);
-                                    editTextPhone.setText(detailPesananData.get(i).getNoHp());
-
-                                    //harusnya idDetailPesanan
-                                    orderNumber = detailPesananData.get(i).getOrderNumber();
-
-                                    CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
-                                    checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            boolean checked = ((CheckBox) view).isChecked();
-                                            if (checked){
-                                                namaDetail = editTextName.getText().toString();
-                                                genderDetail = spinnerGender.getSelectedItem().toString();
-                                                seatDetail = spinnerSeat.getSelectedItem().toString();
-                                                departureDetail = editTextDeparture.getText().toString();
-                                                destinationDetail = editTextDestination.getText().toString();
-                                                phoneDetail = editTextPhone.getText().toString();
-
-                                                selectedStatus = spinnerStatus.getSelectedItem().toString();
-                                                switch (selectedStatus){
-                                                    case "Booking":
-                                                        statusDetail = String.valueOf(1);
-                                                        break;
-                                                    case "Cancelled":
-                                                        statusDetail = String.valueOf(5);
-                                                        break;
-                                                }
-
-                                                if (namaDetail.trim().equals("")){
-                                                    editTextName.setError("Nama wajib diisi");
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else if (genderDetail.trim().equals("")){
-                                                    Toast.makeText(EditPesananActivity.this, "Pilih jenis kelamin terlebih dahulu", Toast.LENGTH_SHORT).show();
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else if (seatDetail.trim().equals("")){
-                                                    Toast.makeText(EditPesananActivity.this, "Pilih seat terlebih dahulu", Toast.LENGTH_SHORT).show();
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else if (statusDetail.trim().equals("")){
-                                                    Toast.makeText(EditPesananActivity.this, "Pilih status terlebih dahulu", Toast.LENGTH_SHORT).show();
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else if (departureDetail.trim().equals("")){
-                                                    editTextDeparture.setError("Asal wajib diisi");
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else if (destinationDetail.trim().equals("")){
-                                                    editTextDestination.setError("Tujuan wajib diisi");
-                                                    ((CheckBox) view).setChecked(false);
-                                                } else{
-
-                                                    view.setEnabled(false);
-                                                    editTextName.setEnabled(false);
-                                                    spinnerGender.setEnabled(false);
-                                                    spinnerStatus.setEnabled(false);
-                                                    spinnerSeat.setEnabled(false);
-                                                    editTextDeparture.setEnabled(false);
-                                                    editTextDestination.setEnabled(false);
-                                                    editTextPhone.setEnabled(false);
-
-                                                    updateDetailPesanan(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
-
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<BookedSeat> call, Throwable t) {
-                            }
-                        });
-
+                            });
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<EditDetailPesanan> call, Throwable t) {
+                    public void onFailure(Call<BookedSeat> call, Throwable t) {
+                        System.out.println("Gagal Booked Seat");
+
                     }
                 });
 
             }
 
             @Override
-            public void onFailure(Call<IdPesanan> call, Throwable t) {
-
+            public void onFailure(Call<EditDetailPesanan> call, Throwable t) {
+                System.out.println("Gagal Edit Detail Pesanan");
             }
         });
     }
@@ -359,6 +373,7 @@ public class EditPesananActivity extends AppCompatActivity {
         for (int i = 0; i < Integer.valueOf(jumlahPenumpang); i++ ){
             View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger_edit, null, false);
             layoutList.addView(detailPassenger);
+            System.out.println("Udah sampai addView()");
         }
     }
 

@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.pemesanerte.R;
 import com.example.pemesanerte.adapter.DetailHistoryAdapter;
 import com.example.pemesanerte.api.ApiClient;
 import com.example.pemesanerte.api.ApiInterface;
+import com.example.pemesanerte.model.availableSeat.AvailableSeat;
 import com.example.pemesanerte.model.check.CheckData;
 //import com.example.pemesanerte.model.detailHistory.DetailHistoryOld;
 //import com.example.pemesanerte.model.detailHistory.DetailHistoryDataOld;
@@ -130,6 +132,9 @@ public class DetailOrderActivity extends AppCompatActivity {
                         checkData.setTujuan(historyData.getIdKotaTujuan());
                         checkData.setTanggal(historyData.getTanggal());
                         checkData.setJam(historyData.getJadwal());
+                        checkData.setJadwal(historyData.getJadwalFormatted());
+                        checkData.setId_pemesan(historyData.getIdPemesan());
+                        checkData.setPlat_mobil(historyData.getPlatMobil());
 
                         editPesanan.putExtra(EditPesananActivity.EXTRA_CHECK_DATA_EDIT, checkData);
                         startActivity(editPesanan);
@@ -144,55 +149,55 @@ public class DetailOrderActivity extends AppCompatActivity {
                         builder = new AlertDialog.Builder(DetailOrderActivity.this);
                         builder.setTitle("Add More Passenger(s)");
 
-//                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//                        Call<AvailableSeat> availableSeatCall = apiInterface.availableSeatResponse(idTrip);
-//                        availableSeatCall.enqueue(new Callback<AvailableSeat>() {
-//                            @Override
-//                            public void onResponse(Call<AvailableSeat> call, Response<AvailableSeat> response) {
-//                                if (response.body().isStatus()){
-//                                    builder.setMessage(response.body().getMessage());
-//                                    builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialogInterface, int i) {
-//                                            Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, idPesanan);
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, idTrip);
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdUsersPemesan());
-//                                            startActivity(goToTambahPesananIntent);
-//                                        }
-//                                    });
-//
-//                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialogInterface, int i) {
-//                                            dialogInterface.dismiss();
-//                                        }
-//                                    });
-//
-//                                    builder.show();
-//
-//                                }else{
-//                                    builder.setMessage(response.body().getMessage());
-//                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialogInterface, int i) {
-//                                        }
-//                                    });
-//
-//                                    builder.show();
-//                                }
-//                            }
+                        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                        Call<AvailableSeat> availableSeatCall = apiInterface.availableSeatResponse(jadwal, platMobil);
+                        availableSeatCall.enqueue(new Callback<AvailableSeat>() {
+                            @Override
+                            public void onResponse(Call<AvailableSeat> call, Response<AvailableSeat> response) {
+                                if (response.body().isStatus()){
+                                    builder.setMessage(response.body().getMessage());
+                                    builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent goToTambahPesananIntent = new Intent(DetailOrderActivity.this, TambahPesananActivity.class);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JUMLAH, String.valueOf(jumlahPenumpang));
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ASAL, historyData.getIdKotaAsal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, jadwal);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, platMobil);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdPemesan());
+                                            startActivity(goToTambahPesananIntent);
+                                        }
+                                    });
 
-//                            @Override
-//                            public void onFailure(Call<AvailableSeat> call, Throwable t) {
-//
-//                            }
-//                        });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    });
+
+                                    builder.show();
+
+                                }else{
+                                    builder.setMessage(response.body().getMessage());
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                        }
+                                    });
+
+                                    builder.show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<AvailableSeat> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
     }

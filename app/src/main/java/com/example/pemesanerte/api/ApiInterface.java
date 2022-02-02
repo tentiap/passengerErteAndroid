@@ -127,9 +127,9 @@ public interface ApiInterface {
 
     @GET("getDetailPesanan/{id_pemesan}/{jadwal}/{plat_mobil}")
     Call<EditDetailPesanan> getDetailPesananResponse(
+            @Path("id_pemesan") String id_pemesan,
             @Path("jadwal") String jadwal,
-            @Path("plat_mobil") String plat_mobil,
-            @Path("id_pemesan") String id_pemesan
+            @Path("plat_mobil") String plat_mobil
     );
 
     @GET("seat/{jadwal}/{plat_mobil}")
