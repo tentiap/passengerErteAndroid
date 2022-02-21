@@ -84,7 +84,7 @@ public class HistoryData implements Parcelable {
 		return jam[0]+":"+jam[1];
 	}
 
-	public String getJadwalFormatted(){
+	public String getJadwalOriginal(){
 		return jadwal;
 	}
 

@@ -36,9 +36,11 @@ public class TambahPesananActivity extends AppCompatActivity {
     public static final String EXTRA_TUJUAN = "extra_tujuan";
     public static final String EXTRA_TANGGAL = "extra_tanggal";
     public static final String EXTRA_JAM = "extra_jam";
-    public static final String EXTRA_ID_PESANAN = "extra_id_pesanan";
-    public static final String EXTRA_ID_TRIP = "extra_id_trip";
-    public static final String EXTRA_ID_USERS_PEMESAN = "extra_id_users_pemesan";
+    public static final String EXTRA_JADWAL = "extra_jadwal";
+    public static final String EXTRA_PLAT = "extra_plat";
+    //    public static final String EXTRA_ID_PESANAN = "extra_id_pesanan";
+//    public static final String EXTRA_ID_TRIP = "extra_id_trip";
+    public static final String EXTRA_ID_PEMESAN = "extra_id_pemesan";
     String jumlah, asal, tujuan, tanggal, jam, idPesanan, idTrip, idPemesan, platMobil, tambah, jadwal;
     Spinner spinnerAdd;
     TextView textViewFrom, textViewTo, textViewBookedSeat, textViewJadwal;
@@ -64,9 +66,11 @@ public class TambahPesananActivity extends AppCompatActivity {
         tujuan = getIntent().getStringExtra(EXTRA_TUJUAN);
         tanggal = getIntent().getStringExtra(EXTRA_TANGGAL);
         jam = getIntent().getStringExtra(EXTRA_JAM);
-        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
-        idTrip = getIntent().getStringExtra(EXTRA_ID_TRIP);
-        idPemesan = getIntent().getStringExtra(EXTRA_ID_USERS_PEMESAN);
+//        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
+//        idTrip = getIntent().getStringExtra(EXTRA_ID_TRIP);
+        jadwal = getIntent().getStringExtra(EXTRA_JADWAL);
+        platMobil = getIntent().getStringExtra(EXTRA_PLAT);
+        idPemesan = getIntent().getStringExtra(EXTRA_ID_PEMESAN);
 
         textViewFrom = findViewById(R.id.text_add_from);
         textViewFrom.setText(asal);
@@ -83,6 +87,7 @@ public class TambahPesananActivity extends AppCompatActivity {
         spinnerAdd = findViewById(R.id.spinner_add_jumlah_tambah);
         buttonCari = findViewById(R.id.btn_add_cari);
 
+        System.out.println("Jadwal: "+jadwal+", platMobil: "+platMobil);
         getData();
 
     }
@@ -111,6 +116,7 @@ public class TambahPesananActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             tambah = spinnerAdd.getSelectedItem().toString();
+                            System.out.println(tambah+jadwal+platMobil+idPemesan);
                             check(tambah, jadwal, platMobil, idPemesan);
                         }
                     });

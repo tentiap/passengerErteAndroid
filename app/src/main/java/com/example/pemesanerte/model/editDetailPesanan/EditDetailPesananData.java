@@ -167,16 +167,35 @@ public class EditDetailPesananData {
 
 	public String getStatus(){
 //		return status;
-		if (status == "1"){
-			return "Booking ";
-		}else if (status == "2"){
-			return "Picked Up";
-		}else if (status == "3"){
-			return "On Going";
-		}else if (status == "4"){
-			return "Arrived";
-		}else{
-			return "Cancelled";
+//		if (status == "1"){
+//			return "Booking ";
+//		}else if (status == "2"){
+//			return "Picked Up";
+//		}else if (status == "3"){
+//			return "On Going";
+//		}else if (status == "4"){
+//			return "Arrived";
+//		}else{
+//			return "Cancelled";
+//		}
+
+		switch (status){
+			case "1":
+				status = "Booking";
+				break;
+			case "2":
+				status = "Picked Up";
+				break;
+			case "3":
+				status = "On Going";
+				break;
+			case "4":
+				status = "Arrived";
+				break;
+			case "5":
+				status = "Cancelled";
+				break;
 		}
+		return status;
 	}
 }

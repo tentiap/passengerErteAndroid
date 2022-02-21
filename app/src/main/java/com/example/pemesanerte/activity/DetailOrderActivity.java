@@ -1,5 +1,6 @@
 package com.example.pemesanerte.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import retrofit2.Response;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -30,8 +32,16 @@ import com.example.pemesanerte.model.detailHistory.DetailHistoryData;
 import com.example.pemesanerte.model.history.HistoryData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+
 
 public class DetailOrderActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
@@ -58,7 +68,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
 //        idPesanan = historyData.getIdPesanan();
 //        idTrip = historyData.getIdTrip();
-        jadwal = historyData.getJadwalFormatted();
+        jadwal = historyData.getJadwalOriginal();
         idPemesan = historyData.getIdPemesan();
         platMobil = historyData.getPlatMobil();
 
@@ -97,24 +107,41 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         isAllFabsVisible = false;
 
+
+
         fb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isAllFabsVisible){
-                    floatingButtonEdit.show();
-                    floatingButtonAddPassenger.show();
-                    tvEdit.setVisibility(View.VISIBLE);
-                    tvAddMore.setVisibility(View.VISIBLE);
+                Date dateTime = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentDateTime = sdf.format(dateTime);
+////                Date currentDateTime = sdf.parse("2022-02-10 10:00:00");
+////                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+////                LocalDateTime date1 = LocalDateTime.parse(dateTime);
+//                Toast.makeText(DetailOrderActivity.this, "CurrentTime: "+currentDateTime, Toast.LENGTH_SHORT).show();
 
-                    isAllFabsVisible = true;
-                }else{
-                    floatingButtonEdit.hide();
-                    floatingButtonAddPassenger.hide();
-                    tvEdit.setVisibility(View.GONE);
-                    tvAddMore.setVisibility(View.GONE);
+                if (currentDateTime.compareTo(jadwal) < 0) {
+                    System.out.println("Selisihnya: "+currentDateTime.compareTo(jadwal));
+                    if (!isAllFabsVisible){
+                        floatingButtonEdit.show();
+                        floatingButtonAddPassenger.show();
+                        tvEdit.setVisibility(View.VISIBLE);
+                        tvAddMore.setVisibility(View.VISIBLE);
 
-                    isAllFabsVisible = false;
+                        isAllFabsVisible = true;
+                    }else{
+                        floatingButtonEdit.hide();
+                        floatingButtonAddPassenger.hide();
+                        tvEdit.setVisibility(View.GONE);
+                        tvAddMore.setVisibility(View.GONE);
+
+                        isAllFabsVisible = false;
+                    }
+                } else {
+                    System.out.println("Selisihnya: "+currentDateTime.compareTo(jadwal));
+                    Toast.makeText(DetailOrderActivity.this, "Trip sudah lewat, tidak bisa edit data", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -132,7 +159,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                         checkData.setTujuan(historyData.getIdKotaTujuan());
                         checkData.setTanggal(historyData.getTanggal());
                         checkData.setJam(historyData.getJadwal());
-                        checkData.setJadwal(historyData.getJadwalFormatted());
+                        checkData.setJadwal(historyData.getJadwalOriginal());
                         checkData.setId_pemesan(historyData.getIdPemesan());
                         checkData.setPlat_mobil(historyData.getPlatMobil());
 
@@ -165,9 +192,11 @@ public class DetailOrderActivity extends AppCompatActivity {
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TUJUAN, historyData.getIdKotaTujuan());
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_TANGGAL, historyData.getTanggal());
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, jadwal);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, platMobil);
-                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_USERS_PEMESAN, historyData.getIdPemesan());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JADWAL, historyData.getJadwalOriginal());
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_PLAT, historyData.getPlatMobil());
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, jadwal);
+//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, platMobil);
+                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PEMESAN, historyData.getIdPemesan());
                                             startActivity(goToTambahPesananIntent);
                                         }
                                     });

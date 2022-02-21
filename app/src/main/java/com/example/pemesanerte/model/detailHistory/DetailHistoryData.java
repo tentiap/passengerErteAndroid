@@ -212,16 +212,36 @@ public class DetailHistoryData {
 	}
 
 	public String getStatus(){
-		if (status == "1"){
-			return "Status: Booking ";
-		}else if (status == "2"){
-			return "Status: Picked Up";
-		}else if (status == "3"){
-			return "Status: On Going";
-		}else if (status == "4"){
-			return "Status: Arrived";
-		}else{
-			return "Status: Cancelled";
+//		if (status == "1"){
+//			return "Status: Booking ";
+//		}else if (status == "2"){
+//			return "Status: Picked Up";
+//		}else if (status == "3"){
+//			return "Status: On Going";
+//		}else if (status == "4"){
+//			return "Status: Arrived";
+//		}else{
+//			return "Status: Cancelled";
+//		}
+
+		switch (status){
+			case "1":
+				status = "Booking";
+				break;
+			case "2":
+				status = "Picked Up";
+				break;
+			case "3":
+				status = "On Going";
+				break;
+			case "4":
+				status = "Arrived";
+				break;
+			case "5":
+				status = "Cancelled";
+				break;
 		}
+		return status;
+
 	}
 }

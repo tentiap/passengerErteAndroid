@@ -227,7 +227,7 @@ public class EditPesananActivity extends AppCompatActivity {
                             Spinner spinnerStatus = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_status_edit);
                             spinnerStatus.setSelection(getIndexStatus(spinnerStatus, detailPesananData.get(i).getStatus()));
 
-                            Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
 
                             Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
                             TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
