@@ -121,11 +121,14 @@ public class CreateMultipleActivity extends AppCompatActivity {
     }
 
     private void checkData() {
+        System.out.println("==================================Function checkData()=====================================");
         if (checkBeforeDone == Integer.valueOf(jumlahPenumpang)){
+            Toast.makeText(CreateMultipleActivity.this, "Di Line 124", Toast.LENGTH_SHORT).show();
             buttonDone.setVisibility(View.VISIBLE);
             buttonDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Toast.makeText(CreateMultipleActivity.this, "Di Line 130", Toast.LENGTH_SHORT).show();
                     Intent goToMyOrder = new Intent(CreateMultipleActivity.this, MyOrderActivity.class);
                     startActivity(goToMyOrder);
                 }
@@ -155,6 +158,8 @@ public class CreateMultipleActivity extends AppCompatActivity {
 //    }
 
     private void addView() {
+        System.out.println("==================================Function addView()=====================================");
+
 
         for (int i = 0; i < Integer.valueOf(jumlahPenumpang); i++ ){
             View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
@@ -167,6 +172,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
     }
 
     private void getData() {
+        System.out.println("==================================Function getData()=====================================");
+
+        Toast.makeText(CreateMultipleActivity.this, "Di Line 172", Toast.LENGTH_SHORT).show();
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(jadwal, platMobil);
         bookedSeatCall.enqueue(new Callback<BookedSeat>() {
@@ -256,7 +264,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                         } else {
                                             inputSeats.add(seatDetail);
                                             Toast.makeText(CreateMultipleActivity.this, "Seat "+inputSeats+ " booked", Toast.LENGTH_SHORT).show();
-                                            saveData(jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+                                            saveData(idPemesan, jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
                                             view.setEnabled(false);
                                             editTextName.setEnabled(false);
@@ -277,22 +285,28 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
 
                 }else{
+                    System.out.println("==================================Else di Function getData()=====================================");
+
                     Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<BookedSeat> call, Throwable t) {
+                System.out.println("==================================Failure di Function getData()=====================================");
+
                 Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    private void saveData(String jadwal, String platMobil, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
+    private void saveData(String idPemesan, String jadwal, String platMobil, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
+        System.out.println("==================================Function saveData()=====================================");
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+        Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idPemesan, jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+        System.out.println("==================================idPemesan===================================== "+idPemesan);
         detailPesananCall.enqueue(new Callback<DetailPesanan>() {
             @Override
             public void onResponse(Call<DetailPesanan> call, Response<DetailPesanan> response) {
@@ -305,12 +319,15 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DetailPesanan> call, Throwable t) {
+                System.out.println("==================================Failure di saveData=====================================");
                 Toast.makeText(CreateMultipleActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void showListItem() {
+        System.out.println("==================================Function showListItem()=====================================");
+
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(jadwal, platMobil);
         bookedSeatCall.enqueue(new Callback<BookedSeat>() {
@@ -336,18 +353,23 @@ public class CreateMultipleActivity extends AppCompatActivity {
                     }
 
                 }else{
+                    System.out.println("==================================Gagal di showListItem=====================================");
+
                     Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<BookedSeat> call, Throwable t) {
+                System.out.println("==================================Failure checkListItem=====================================");
+
                 Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void onCheckboxClicked(View view) {
+        System.out.println("==================================Function onCheckboxClicked()=====================================");
 
         boolean checked = ((CheckBox) view).isChecked();
 

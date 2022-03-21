@@ -57,9 +57,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("createDetailPesanan")
     Call<DetailPesanan> detailPesananResponse(
+            @Field("id_pemesan") String id_pemesan,
             @Field("jadwal") String jadwal,
             @Field("plat_mobil") String plat_mobil,
-            @Field("id_pemesan") String id_pemesan,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,
