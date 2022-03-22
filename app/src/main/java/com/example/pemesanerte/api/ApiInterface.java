@@ -163,7 +163,7 @@ public interface ApiInterface {
             @Field("jadwal") String jadwal,
             @Field("plat_mobil") String plat_mobil,
             @Field("id_pemesan") String id_pemesan,
-            @Field("order_number") int order_number,
+//            @Field("order_number") int order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,

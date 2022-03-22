@@ -299,7 +299,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                             editTextDestination.setEnabled(false);
                                             editTextPhone.setEnabled(false);
 
-                                            updateDetailPesanan(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+                                            updateDetailPesanan(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
 
                                         }
                                     }
@@ -333,9 +333,9 @@ public class EditPesananActivity extends AppCompatActivity {
         return 0;
     }
 
-    private void updateDetailPesanan(String jadwal, String platMobil, String idPemesan, int orderNumber, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
+    private void updateDetailPesanan(String jadwal, String platMobil, String idPemesan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(jadwal, platMobil, idPemesan, orderNumber, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
         updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
             @Override
             public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
