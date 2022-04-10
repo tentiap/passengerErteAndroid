@@ -174,7 +174,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
     private void getData() {
         System.out.println("==================================Function getData()=====================================");
 
-        Toast.makeText(CreateMultipleActivity.this, "Di Line 172", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(CreateMultipleActivity.this, "Di Line 172", Toast.LENGTH_SHORT).show();
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(jadwal, platMobil);
         bookedSeatCall.enqueue(new Callback<BookedSeat>() {

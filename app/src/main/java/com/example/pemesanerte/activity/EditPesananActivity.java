@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -230,10 +231,13 @@ public class EditPesananActivity extends AppCompatActivity {
 //                            Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
 
                             Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
+//                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditPesananActivity.this, android.R.layout.simple_spinner_item, listSpinner);
+//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                            spinnerSeat.setAdapter(adapter);
                             TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
-//                            textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
+                            textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
                             spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
-                            spinnerSeat.setEnabled(false);
+//                            spinnerSeat.setEnabled(false);
 
                             EditText editTextDeparture = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_from_edit);
                             editTextDeparture.setText(detailPesananData.get(i).getDetailAsal());
@@ -245,7 +249,7 @@ public class EditPesananActivity extends AppCompatActivity {
                             editTextPhone.setText(detailPesananData.get(i).getNoHp());
 
                             //harusnya idDetailPesanan
-                            orderNumber = detailPesananData.get(i).getOrderNumber();
+//                            orderNumber = detailPesananData.get(i).getOrderNumber();
 
                             CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
                             checkBoxSubmit.setOnClickListener(new View.OnClickListener() {
@@ -294,7 +298,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                             editTextName.setEnabled(false);
                                             spinnerGender.setEnabled(false);
                                             spinnerStatus.setEnabled(false);
-//                                            spinnerSeat.setEnabled(false);
+                                            spinnerSeat.setEnabled(false);
                                             editTextDeparture.setEnabled(false);
                                             editTextDestination.setEnabled(false);
                                             editTextPhone.setEnabled(false);
