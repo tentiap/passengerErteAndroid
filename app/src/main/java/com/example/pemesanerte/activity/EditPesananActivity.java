@@ -48,7 +48,7 @@ public class EditPesananActivity extends AppCompatActivity {
     Button buttonDone;
     ExpandableCardView detailTrip;
     Spinner spinnerSeat;
-    String asal, tujuan, jumlahPenumpang, jadwal, idPemesan, platMobil, idPesanan;
+    String asal, tujuan, jumlahPenumpang, jadwal, idPemesan, platMobil, idPesanan, currentSeat;
     String namaDetail, genderDetail, seatDetail, destinationDetail, departureDetail, phoneDetail, statusDetail, selectedStatus;
     int orderNumber, checkBeforeDone;
 
@@ -238,6 +238,7 @@ public class EditPesananActivity extends AppCompatActivity {
                             textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
                             spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
 //                            spinnerSeat.setEnabled(false);
+                            currentSeat = detailPesananData.get(i).getIdSeat();
 
                             EditText editTextDeparture = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_from_edit);
                             editTextDeparture.setText(detailPesananData.get(i).getDetailAsal());
@@ -303,7 +304,7 @@ public class EditPesananActivity extends AppCompatActivity {
                                             editTextDestination.setEnabled(false);
                                             editTextPhone.setEnabled(false);
 
-                                            updateDetailPesanan(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+                                            updateDetailPesanan(jadwal, platMobil, idPemesan, currentSeat, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
 
                                         }
                                     }
@@ -337,9 +338,11 @@ public class EditPesananActivity extends AppCompatActivity {
         return 0;
     }
 
-    private void updateDetailPesanan(String jadwal, String platMobil, String idPemesan, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
+    private void updateDetailPesanan(String jadwal, String platMobil, String idPemesan, String currentSeat, String seatDetail, String namaDetail, String genderDetail,
+                                     String departureDetail, String destinationDetail, String phoneDetail, String statusDetail) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(jadwal, platMobil, idPemesan, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail, statusDetail);
+        Call<UpdateDetailPesanan> updateDetailPesananCall = apiInterface.updateDetailPesananResponse(jadwal, platMobil, idPemesan, currentSeat, seatDetail, namaDetail, genderDetail,
+                departureDetail, destinationDetail, phoneDetail, statusDetail);
         updateDetailPesananCall.enqueue(new Callback<UpdateDetailPesanan>() {
             @Override
             public void onResponse(Call<UpdateDetailPesanan> call, Response<UpdateDetailPesanan> response) {
