@@ -123,12 +123,12 @@ public class CreateMultipleActivity extends AppCompatActivity {
     private void checkData() {
         System.out.println("==================================Function checkData()=====================================");
         if (checkBeforeDone == Integer.valueOf(jumlahPenumpang)){
-            Toast.makeText(CreateMultipleActivity.this, "Di Line 124", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(CreateMultipleActivity.this, "Di Line 124", Toast.LENGTH_SHORT).show();
             buttonDone.setVisibility(View.VISIBLE);
             buttonDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(CreateMultipleActivity.this, "Di Line 130", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CreateMultipleActivity.this, "Di Line 130", Toast.LENGTH_SHORT).show();
                     Intent goToMyOrder = new Intent(CreateMultipleActivity.this, MyOrderActivity.class);
                     startActivity(goToMyOrder);
                 }
@@ -263,7 +263,7 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                             ((CheckBox) view).setChecked(false);
                                         } else {
                                             inputSeats.add(seatDetail);
-                                            Toast.makeText(CreateMultipleActivity.this, "Seat "+inputSeats+ " booked", Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(CreateMultipleActivity.this, "Seat "+inputSeats+ " booked", Toast.LENGTH_SHORT).show();
                                             saveData(idPemesan, jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
                                             view.setEnabled(false);
