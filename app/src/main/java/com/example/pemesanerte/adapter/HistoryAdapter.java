@@ -43,8 +43,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     @Override
     public void onBindViewHolder(@NonNull final HistoryHolder holder, int position) {
         HistoryData historyData = listHistory.get(position);
-
-//        holder.tvIdPesanan.setText(historyData.getIdPesanan());
         holder.tvAsal.setText(historyData.getIdKotaAsal());
         holder.tvTujuan.setText(historyData.getIdKotaTujuan());
         holder.tvJadwal.setText(historyData.getTanggal());
@@ -72,7 +70,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         public HistoryHolder(@NonNull View view) {
             super(view);
 
-//            tvIdPesanan = itemView.findViewById(R.id.tv_id_pesanan);
             tvAsal = itemView.findViewById(R.id.tv_item_asal);
             tvTujuan = itemView.findViewById(R.id.tv_item_tujuan);
             tvJadwal = itemView.findViewById(R.id.tv_item_jadwal);

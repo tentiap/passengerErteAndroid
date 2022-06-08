@@ -71,8 +71,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
         asal = checkData.getAsal();
         tujuan = checkData.getTujuan();
 
-//        getIdPesanan();
-
         switch (asal){
             case "Bukittinggi":
                 asal = "BKT";
@@ -123,12 +121,10 @@ public class CreateMultipleActivity extends AppCompatActivity {
     private void checkData() {
         System.out.println("==================================Function checkData()=====================================");
         if (checkBeforeDone == Integer.valueOf(jumlahPenumpang)){
-//            Toast.makeText(CreateMultipleActivity.this, "Di Line 124", Toast.LENGTH_SHORT).show();
             buttonDone.setVisibility(View.VISIBLE);
             buttonDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Toast.makeText(CreateMultipleActivity.this, "Di Line 130", Toast.LENGTH_SHORT).show();
                     Intent goToMyOrder = new Intent(CreateMultipleActivity.this, MyOrderActivity.class);
                     startActivity(goToMyOrder);
                 }
@@ -136,45 +132,18 @@ public class CreateMultipleActivity extends AppCompatActivity {
         }
     }
 
-//    private void getIdPesanan() {
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
-//        idPesananCall.enqueue(new Callback<IdPesanan>() {
-//            @Override
-//            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
-//                List<IdPesananData> data = response.body().getData();
-//
-//                for (int i = 0; i < data.size(); i++){
-//                    //harusnya idPesanan
-//                    idPesanan = data.get(i).getIdPemesan();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<IdPesanan> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-
     private void addView() {
         System.out.println("==================================Function addView()=====================================");
-
 
         for (int i = 0; i < Integer.valueOf(jumlahPenumpang); i++ ){
             View detailPassenger = getLayoutInflater().inflate(R.layout.detail_passenger, null, false);
             ExpandableCardView cardDetailPassenger = (ExpandableCardView)detailPassenger.findViewById(R.id.card_detail_passenger);
-
             layoutList.addView(detailPassenger);
-
         }
-
     }
 
     private void getData() {
         System.out.println("==================================Function getData()=====================================");
-
-//        Toast.makeText(CreateMultipleActivity.this, "Di Line 172", Toast.LENGTH_SHORT).show();
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<BookedSeat> bookedSeatCall = apiInterface.bookedSeatResponse(jadwal, platMobil);
         bookedSeatCall.enqueue(new Callback<BookedSeat>() {
@@ -263,7 +232,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                             ((CheckBox) view).setChecked(false);
                                         } else {
                                             inputSeats.add(seatDetail);
-//                                            Toast.makeText(CreateMultipleActivity.this, "Seat "+inputSeats+ " booked", Toast.LENGTH_SHORT).show();
                                             saveData(idPemesan, jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
 
                                             view.setEnabled(false);
@@ -279,14 +247,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
-
                     }
-
-
                 }else{
                     System.out.println("==================================Else di Function getData()=====================================");
-
                     Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -294,7 +257,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BookedSeat> call, Throwable t) {
                 System.out.println("==================================Failure di Function getData()=====================================");
-
                 Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
             }
         });
@@ -303,9 +265,9 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
     private void saveData(String idPemesan, String jadwal, String platMobil, String seatDetail, String namaDetail, String genderDetail, String departureDetail, String destinationDetail, String phoneDetail) {
         System.out.println("==================================Function saveData()=====================================");
-
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<DetailPesanan> detailPesananCall = apiInterface.detailPesananResponse(idPemesan, jadwal, platMobil, seatDetail, namaDetail, genderDetail, departureDetail, destinationDetail, phoneDetail);
+
         System.out.println("==================================idPemesan===================================== "+idPemesan);
         detailPesananCall.enqueue(new Callback<DetailPesanan>() {
             @Override
@@ -314,7 +276,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
                 Toast.makeText(CreateMultipleActivity.this, message, Toast.LENGTH_SHORT).show();
                 checkBeforeDone += 1;
                 checkData();
-
             }
 
             @Override
@@ -354,7 +315,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
 
                 }else{
                     System.out.println("==================================Gagal di showListItem=====================================");
-
                     Toast.makeText(CreateMultipleActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -362,7 +322,6 @@ public class CreateMultipleActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BookedSeat> call, Throwable t) {
                 System.out.println("==================================Failure checkListItem=====================================");
-
                 Toast.makeText(CreateMultipleActivity.this, "Cek koneksi internet", Toast.LENGTH_SHORT).show();
             }
         });

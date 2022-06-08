@@ -134,7 +134,6 @@ public interface ApiInterface {
 
     @GET("seat/{jadwal}/{plat_mobil}")
     Call<Seat> seatResponse(
-//            @Path("id_seat") String id_seat
             @Path("jadwal") String jadwal,
             @Path("plat_mobil") String plat_mobil
     );
@@ -164,7 +163,6 @@ public interface ApiInterface {
             @Field("plat_mobil") String plat_mobil,
             @Field("id_pemesan") String id_pemesan,
             @Field("current_seat") String current_seat,
-//            @Field("order_number") int order_number,
             @Field("id_seat") String id_seat,
             @Field("nama_penumpang") String nama_penumpang,
             @Field("jenis_kelamin") String jenis_kelamin,

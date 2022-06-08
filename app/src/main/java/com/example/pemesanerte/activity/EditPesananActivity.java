@@ -141,7 +141,6 @@ public class EditPesananActivity extends AppCompatActivity {
                 List<IdPesananData> data = response.body().getData();
 
                 for (int i = 0; i < data.size(); i++){
-                    //harusnya idPesanan
                     idPesanan = data.get(i).getIdPemesan();
                 }
 
@@ -155,28 +154,6 @@ public class EditPesananActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<IdPesanan> idPesananCall = apiInterface.idPesananResponse(jadwal, platMobil, idPemesan);
-//        idPesananCall.enqueue(new Callback<IdPesanan>() {
-//            @Override
-//            public void onResponse(Call<IdPesanan> call, Response<IdPesanan> response) {
-//
-//                List<IdPesananData> data = response.body().getData();
-//
-//                for (int i = 0; i < data.size(); i++){
-//                    //harusnya idPesanan
-//                    idPesanan = data.get(i).getIdPemesan();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<IdPesanan> call, Throwable t) {
-//                System.out.println("Gagal get Id");
-//            }
-//        });
-
         System.out.println("Id Pemesan: "+idPemesan+ " Jadwal: "+jadwal+ " Plat Mobil: "+platMobil);
 
         ApiInterface apiInterface1 = ApiClient.getClient().create(ApiInterface.class);
@@ -228,16 +205,10 @@ public class EditPesananActivity extends AppCompatActivity {
                             Spinner spinnerStatus = (Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_status_edit);
                             spinnerStatus.setSelection(getIndexStatus(spinnerStatus, detailPesananData.get(i).getStatus()));
 
-//                            Toast.makeText(EditPesananActivity.this, "Status si "+detailPesananData.get(i).getNamaPenumpang()+ " = "+detailPesananData.get(i).getStatus(), Toast.LENGTH_SHORT).show();
-
                             Spinner spinnerSeat =(Spinner)detailPassengerView.findViewById(R.id.spinner_multi_passenger_seat_edit);
-//                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditPesananActivity.this, android.R.layout.simple_spinner_item, listSpinner);
-//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            spinnerSeat.setAdapter(adapter);
                             TextView textViewSeatAvailable = (TextView)detailPassengerView.findViewById(R.id.tv_seat_edit);
                             textViewSeatAvailable.setText("Seat (Available seat: " +listSpinner+ ")");
                             spinnerSeat.setSelection(getIndexSeat(spinnerSeat, detailPesananData.get(i).getIdSeat()));
-//                            spinnerSeat.setEnabled(false);
                             currentSeat = detailPesananData.get(i).getIdSeat();
 
                             EditText editTextDeparture = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_from_edit);
@@ -248,9 +219,6 @@ public class EditPesananActivity extends AppCompatActivity {
 
                             EditText editTextPhone = (EditText)detailPassengerView.findViewById(R.id.multi_passenger_phone_edit);
                             editTextPhone.setText(detailPesananData.get(i).getNoHp());
-
-                            //harusnya idDetailPesanan
-//                            orderNumber = detailPesananData.get(i).getOrderNumber();
 
                             CheckBox checkBoxSubmit = (CheckBox)detailPassengerView.findViewById(R.id.checkbox_submit_edit);
                             checkBoxSubmit.setOnClickListener(new View.OnClickListener() {

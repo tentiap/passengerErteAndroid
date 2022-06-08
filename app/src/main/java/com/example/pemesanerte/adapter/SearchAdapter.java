@@ -30,7 +30,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         this.onItemClickCallback = onItemClickCallback;
     }
 
-
     @NonNull
     @Override
     public SearchHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -43,10 +42,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     public void onBindViewHolder(@NonNull final SearchHolder holder, int position) {
         SearchData searchData = listSearch.get(position);
 
-//        holder.tvIdSelectTrip.setText(searchDataOld.getIdTrip());
         holder.tvSelectJam.setText(searchData.getJadwal());
         holder.tvIdSelectMobil.setText(searchData.getPlatMobil());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

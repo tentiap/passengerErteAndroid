@@ -111,12 +111,6 @@ public class MyOrderActivity extends AppCompatActivity {
                             startActivity(detailHistoryIntent);
                         }
 
-//                        @Override
-//                        public void onItemClicked(HistoryData data) {
-//                            Intent detailHistoryIntent = new Intent(MyOrderActivity.this, DetailOrderActivity.class);
-//                            detailHistoryIntent.putExtra(DetailOrderActivity.EXTRA_HISTORY_DATA, data);
-//                            startActivity(detailHistoryIntent);
-//                        }
                     });
 
                 }else{

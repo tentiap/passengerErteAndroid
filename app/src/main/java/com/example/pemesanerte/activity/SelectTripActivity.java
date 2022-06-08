@@ -166,18 +166,8 @@ public class SelectTripActivity extends AppCompatActivity {
                             PlatMobil = data.getPlatMobil();
                             Jam = data.getJadwal();
                             String newJadwal = jadwal + " " + Jam;
-//                            Toast.makeText(SelectTripActivity.this, newJadwal, Toast.LENGTH_SHORT).show();
-//                            check(JumlahPenumpang, PlatMobil, Pemesan);
                             check(JumlahPenumpang, newJadwal, PlatMobil, Pemesan);
-//                            Toast.makeText(SelectTripActivity.this, "Jadwal " +jadwal, Toast.LENGTH_SHORT);
                         }
-
-//                        @Override
-//                        public void onItemClicked(Search data) {
-//                            IdTrip = data.getIdTrip();
-//                            Jam = data.getJadwal();
-//                            check(JumlahPenumpang, IdTrip, Pemesan);
-//                        }
                     });
                 }else{
                     String message = response.body().getMessage();
@@ -218,7 +208,6 @@ public class SelectTripActivity extends AppCompatActivity {
                         public void onResponse(Call<Pesanan> call, Response<Pesanan> response) {
                             Intent selectTripIntent = new Intent(SelectTripActivity.this, CreateMultipleActivity.class);
                             selectTripIntent.putExtra(CreateMultipleActivity.EXTRA_CHECK_DATA, checkData);
-//                            Toast.makeText(SelectTripActivity.this, "Jadwal " +newJadwal, Toast.LENGTH_SHORT).show();
                             startActivity(selectTripIntent);
                         }
 

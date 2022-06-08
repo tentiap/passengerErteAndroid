@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int years, int months, int dayS) {
                         tvJadwal.setText(years + "-" + (months + 1) + "-" + dayS );
                         final String month_name = monthName[months];
-//                        Tanggal = years + "-" + (months + 1) + "-" + dayS;
                         Tanggal = dayS+ " " +month_name+ " " +years;
                         System.out.println("Months: " +months+ " Days: " +dayS);
                         if (months + 1  < 10){

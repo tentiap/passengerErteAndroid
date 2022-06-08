@@ -66,8 +66,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_order);
 
         HistoryData historyData = getIntent().getParcelableExtra(EXTRA_HISTORY_DATA);
-//        idPesanan = historyData.getIdPesanan();
-//        idTrip = historyData.getIdTrip();
         jadwal = historyData.getJadwalOriginal();
         idPemesan = historyData.getIdPemesan();
         platMobil = historyData.getPlatMobil();
@@ -107,18 +105,12 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         isAllFabsVisible = false;
 
-
-
         fb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date dateTime = Calendar.getInstance().getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String currentDateTime = sdf.format(dateTime);
-////                Date currentDateTime = sdf.parse("2022-02-10 10:00:00");
-////                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
-////                LocalDateTime date1 = LocalDateTime.parse(dateTime);
-//                Toast.makeText(DetailOrderActivity.this, "CurrentTime: "+currentDateTime, Toast.LENGTH_SHORT).show();
 
                 if (currentDateTime.compareTo(jadwal) < 0) {
                     System.out.println("Selisihnya: "+currentDateTime.compareTo(jadwal));
@@ -151,10 +143,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent editPesanan = new Intent(DetailOrderActivity.this, EditPesananActivity.class);
                         CheckData checkData = new CheckData();
-//                        checkDataOld.setId_trip(idTrip);
-//                        checkData.setId_pemesan();
                         checkData.setJumlah_penumpang(String.valueOf(jumlahPenumpang));
-//                        checkDataOld.setId_users_pemesan(historyData.getIdUsersPemesan());
                         checkData.setAsal(historyData.getIdKotaAsal());
                         checkData.setTujuan(historyData.getIdKotaTujuan());
                         checkData.setTanggal(historyData.getTanggal());
@@ -194,8 +183,6 @@ public class DetailOrderActivity extends AppCompatActivity {
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JAM, historyData.getJadwal());
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_JADWAL, historyData.getJadwalOriginal());
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_PLAT, historyData.getPlatMobil());
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PESANAN, jadwal);
-//                                            goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_TRIP, platMobil);
                                             goToTambahPesananIntent.putExtra(TambahPesananActivity.EXTRA_ID_PEMESAN, historyData.getIdPemesan());
                                             startActivity(goToTambahPesananIntent);
                                         }

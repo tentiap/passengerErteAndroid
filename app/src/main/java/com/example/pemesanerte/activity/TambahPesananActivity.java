@@ -38,8 +38,6 @@ public class TambahPesananActivity extends AppCompatActivity {
     public static final String EXTRA_JAM = "extra_jam";
     public static final String EXTRA_JADWAL = "extra_jadwal";
     public static final String EXTRA_PLAT = "extra_plat";
-    //    public static final String EXTRA_ID_PESANAN = "extra_id_pesanan";
-//    public static final String EXTRA_ID_TRIP = "extra_id_trip";
     public static final String EXTRA_ID_PEMESAN = "extra_id_pemesan";
     String jumlah, asal, tujuan, tanggal, jam, idPesanan, idTrip, idPemesan, platMobil, tambah, jadwal;
     Spinner spinnerAdd;
@@ -66,8 +64,6 @@ public class TambahPesananActivity extends AppCompatActivity {
         tujuan = getIntent().getStringExtra(EXTRA_TUJUAN);
         tanggal = getIntent().getStringExtra(EXTRA_TANGGAL);
         jam = getIntent().getStringExtra(EXTRA_JAM);
-//        idPesanan = getIntent().getStringExtra(EXTRA_ID_PESANAN);
-//        idTrip = getIntent().getStringExtra(EXTRA_ID_TRIP);
         jadwal = getIntent().getStringExtra(EXTRA_JADWAL);
         platMobil = getIntent().getStringExtra(EXTRA_PLAT);
         idPemesan = getIntent().getStringExtra(EXTRA_ID_PEMESAN);
@@ -120,9 +116,6 @@ public class TambahPesananActivity extends AppCompatActivity {
                             check(tambah, jadwal, platMobil, idPemesan);
                         }
                     });
-
-
-
                 }
             }
 
